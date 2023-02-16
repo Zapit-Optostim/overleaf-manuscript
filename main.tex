@@ -17,14 +17,14 @@
 %% Abbreviated author list for the running footer
 \runningauthor{One et al.}
 
-\addbibresource{refs.bib}
+\addbibresource{references.bib}
 
 \begin{document}
 
 \maketitle
 
 \begin{abstract}
-Spatially targeted optostimulation is a powerful technique in systems neuroscience. Many studies have spatially targeted light in behaving mice by shining a small light spot at the brain through the exposed skull. Targeting was achieved using either manual positioning of a fibre optic or automatically positioning  light using movable mirrors. Despite the advantages of the latter approach, the technology remains hard to access because no easy to use tools have been built by the open hardware community. Here we present `Zapit', a compact galvo-based point stimulator with an associated easy to use, cross-platform, software interface. 
+Spatially targeted optostimulation is a powerful technique in systems neuroscience. Many studies have spatially targeted light in behaving mice by shining a small light spot at the brain through the exposed skull. Targeting was achieved using either manual positioning of a fibre optic or automatically positioning  light using movable mirrors. Despite the advantages of the latter approach, the technology remains hard to access because no easy to use tools have been built by the open hardware community. Here we present `Zapit', a compact galvo-based point stimulator an associated easy to use, cross-platform, software interface. 
 
 \keywords{Optogenetics, Neuroscience, Software Tool, Optics}
 \end{abstract}
@@ -36,14 +36,14 @@ Optogenetics uses light to control the activity of neurons by expression of ligh
 
 In small animals such as Drosophila [REF] where excellent genetic control is available, indiscriminately applied light affects only the chosen subpopulation of neurons expressing the transgene. In vertebrates, the transgene is usually expressed in a cell type of interest [REF], thus additional spatial specificity of the light delivery becomes necessary. Spatially discriminant light delivery in behaving rodents was initially achieved via a chronically implanted fibre in a freely moving animal [REFs]. Whilst this approach allows the animal to move around its environment, only a small, fixed, number of stimulation sites in sufficiently distant configuration (due to the physical size of implants) is possible. 
 
-To address the lack of flexibility when relying on implanted fibres, Guo et al (2014) arrived at a head-fixed solution to target any location on the cortical surface through intact skull rendered transparent. This can be done using a number of light delivery methods. One flexible, but slow, approach is to position a fibre over the desired location between trials either manually or programmatically with micro-drives (\cite{zatka_carandini_harris_2021}). There are other effective approaches for rapid programmatic photostimulation in head-fixed behavioural tasks: those based on galvanometric scan mirrors, digital micro-mirror devices (DMDs) or spatial lights modulators (SLM).
+To address the lack of flexibility when relying on implanted fibres, Guo et al (2014) arrived at a head-fixed solution to target any location on the cortical surface through intact skull rendered transparent. This can be done using a number of light delivery methods. One flexible, but slow, approach is to position a fibre over the desired location between trials either manually or programmatically with micro-drives (\cite{Zatka-Haas2021SensoryDecision}). There are other effective approaches for rapid programmatic photostimulation in head-fixed behavioural tasks: those based on galvanometric scan mirrors, digital micro-mirror devices (DMDs) or spatial lights modulators (SLM).
 
-DMD-based approaches, can activate arbitrarily-shaped areas by imaging a movable micro-mirror array onto the sample (\cite{chong_2020,kauvar_2020}).
+DMD-based approaches, can activate arbitrarily-shaped areas by imaging a movable micro-mirror array onto the sample (\cite{Chong2020ManipulatingPerception,Chong2020ManipulatingPerception}).
 However, since DMD devices will selectively deflect most of the produced light, a very powerful and expensive laser is needed to cover a large area, such as the whole mouse cortex. SLM-based solutions are notably useful in targeting 3-d volumes of neural tissue (REF), but their capabilities (and associated cost) far surpass the functionality needed to produce 2-d light patterns during wide-scale cortical stimulation. Deflection of light beam by galvanometric scanners (galvos) to the target location are a cost-effective, and easy to implement method for this kind of experiments.
 
-Galvos are composed of two mirrors mounted on servomotors and oriented orthogonally to one another. They are commonly used in confocal and multi-photon microscopy for raster-scanning a laser beam over the sample. Several studies have recently used galvos to position a focused photo-activation point onto the exposed skull (\cite{guo_2014,inagaki_2018,voitov_2022,pinto_tank_brody_2022,coen_sit_wells_carandini_harris_2021}). This approach to flexibly target multiple areas in a photostimulation session has become increasingly popular due to its relative low cost, versatility and capability of being simultaneously integrated with other experimental approaches such as imaging (REF). This fast programmable method allows for seamless transition from one configuration of stimulation to another, providing more control over experimental conditions. Relative to other solutions, it is also practical due to its compact size, simplicity of use and availability on the market. 
+Galvos are composed of two mirrors mounted on servomotors and oriented orthogonally to one another. They are commonly used in confocal and multi-photon microscopy for raster-scanning a laser beam over the sample. Several studies have recently used galvos to position a focused photo-activation point onto the exposed skull (\cite{Guo2014FlowMice,Inagaki2018Low-dimensionalCortex,Voitov2022CorticalMemory,Pinto2022MultipleCortex,Coen2021FrontalModalities}). This approach to flexibly target multiple areas in a photostimulation session has become increasingly popular due to its relative low cost, versatility and capability of being simultaneously integrated with other experimental approaches such as imaging (REF). This fast programmable method allows for seamless transition from one configuration of stimulation to another, providing more control over experimental conditions. Relative to other solutions, it is also practical due to its compact size, simplicity of use and availability on the market. 
 
-The last decade has seen widespread adoption of open source hardware tools in neuroscience, such as Open-Ephys (\cite{siegle_2017}), the `Pulse-Pal' pulse generator (\cite{sanders_kepecs_2014}), the `Stimjim` programmable electrical stimulator (\cite{cermak_2019}), as well as countless designs for light-sheet and multi-photon microscopes. 
+The last decade has seen widespread adoption of open source hardware tools in neuroscience, such as Open-Ephys (\cite{siegle_2017}), the `Pulse-Pal' pulse generator (\cite{Sanders2014ABehavior}), the `Stimjim` programmable electrical stimulator (\cite{Cermak2019Stimjim:Stimulation}), as well as countless designs for light-sheet and multi-photon microscopes. 
 However, there exists no good open source project for programmable photo-stimulation in head-fixed behaving mice.
 In this paper we present what we hope is a solution to this problem: the `Zapit' photostimulation system. 
 
@@ -65,7 +65,7 @@ An optional blue LED masking light runs in synchrony with the laser.
 
 \subsection{Hardware Design}
 This section explains how the hardware achieves the above. 
-We implemented a hardware design most similar to that used in \citet{pinto_tank_brody_2022}.
+We implemented a hardware design most similar to that used in \citet{Pinto2022MultipleCortex}.
 A fibre-coupled blue laser is fed into an XY galvo scan block, the beam exits and is pointed down to the animal via a dichroic fold mirror.
 A 100~mm lens focuses the beam onto the sample.
 Theoretical laser spot size is xx~$\mu m$.
