@@ -1,0 +1,111 @@
+\section{Results}
+
+
+\subsection{Operating principle}
+The galvos point a focused spot of light on the brain. 
+In any given trial the spot either sits on one point and flashes on and off at 40~Hz or it goes back and forth between two spots in a 50/50 duty cycle illuminating each at 40~Hz. 
+The location(s) of the beam in each stimulus condition is defined in stereotaxic coordinates.
+Intensity is about 4~mW at the skull surface.
+There is a ramp down in intensity at trial end. 
+Explain why. 
+An optional blue LED masking light runs in synchrony with the laser.
+
+\subsection{Hardware Design}
+This section explains how the hardware achieves the above. 
+We implemented a hardware design most similar to that used in \citet{Pinto2022MultipleCortex}.
+A fibre-coupled blue laser is fed into an XY galvo scan block, the beam exits and is pointed down to the animal via a dichroic fold mirror.
+A 100~mm lens focuses the beam onto the sample.
+Theoretical laser spot size is xx~$\mu m$.
+This lens doubles as an objective, as it images the sample and any excited green fluorescence onto a camera via a 50~mm tube lens (Fig~\ref{fig:hardware01})
+The galvo waveforms include gentle ramps to make them near inaudible, but nonetheless we have built a sealed enclosure around the scanners.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.6\textwidth]{example-image}
+\caption{A. Optical path schematic. B. Maybe a Zemax diagram. C. Photo of the system. D. Photo of the system.}
+\label{fig:hardware01}
+\end{figure}
+
+\subsection{Software Design}
+Explain how the software achieves the above.
+A GUI allows specifying of points in stereotaxic coords and hence creation of settings files with respect to the Allen Atlas (Fig.~\ref{fig:software01}). 
+Describe where this came from: the cortex lab and is that used by IBL.
+Another GUI is used to calibrate the scanners such that they are able to point to locations in the image defined by the user. 
+A second step defines the position of the skull in the FoV and hence previously specified stereotaxic coords can be overlaid onto the sample. 
+The GUI has tools to allow visual confirmation of the scan and sample calibration steps (Fig.~\ref{fig:software02}).  
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.6\textwidth]{example-image}
+\caption{Screenshot of stim config editor}
+\label{fig:software01}
+\end{figure}
+
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.6\textwidth]{example-image}
+\caption{A. Screenshot of scanner calibration process. 
+B. Screenshot of sample calibration process.}
+\label{fig:software02}
+\end{figure}
+
+\subsection{Calibration}
+The user initiates an automatic calibration procedure that maps the galvo control signals to pixel locations in the image. 
+A simple two-click interface allows the user to map stereotaxic coordinates onto the image space. 
+
+\subsection{Running Experiments}
+Once the system is calibrated and a stimulus configuration file is loaded, it becomes possible to run an experiment.
+There is an API available in MATLAB. 
+The \texttt{sendSamples} command defines which stimulus will be presented next. 
+By default the system queues the stimulus and waits for a TTL trigger before presenting it.
+The \texttt{stopOptostim} command stops the stimulus whilst ramping down laser power over a user-defined time period.
+If an `experiment directory' is defined in Zapit, \texttt{sendSamples} will write there a log file listing each stimulus presentation.
+Control trials are possible where the galvos move and the masking light is on but the laser is off.
+
+\lstinputlisting[language=MATLAB]{code_snippets/basic_api_example.m}
+
+\subsection{Control via Python}
+The `zapit-Python-Bridge' (installed via PyPI) provides access to the MATLAB API via shared memory. 
+The user must start Zapit in MATLAB and conducted the scanner and sample calibration steps. 
+All subsequent operations can be done via Python with commands that resemble those used in MATLAB.
+For example:
+
+\lstinputlisting[language=Python]{code_snippets/one_stim_example.py}
+
+Zapit must remain running in MATLAB throughout. 
+
+
+\subsection{Other languages}
+Users wishing to use a different programming language must re-implement the \texttt{sendSamples} and \texttt{stopOptoStim} commands. 
+This is straightforward and We provide minimal examples in the main Zapit repository to assist with this. 
+
+
+
+\subsection{Validation}
+\subsubsection{Scanner calibration accuracy}
+Accuracy with which beam points to target in microns.
+How the hell do we measure this? Using the camera? 
+But then how accurate is our estimate of where the beam actually went? 
+I guess we can show many points indicating where the beam went over many trials. 
+That will show up bias.
+But spread around the target location could be due to pointing errors or it could be due to errors in locating the beam. 
+We can correlate with the galvo feedback waveforms and so know the error.
+(Fig.~\ref{fig:validation01}A).
+
+\subsubsection{Repeatability and Stability}
+Have it run, say, 1000 trials of two locations quite far apart and record the command waveforms, galvo feedback, and beam intensity (Fig.~\ref{fig:validation01}B). 
+Overlay these and show consistency over long periods of time and many trials. 
+Feedback signals show us that the beam has arrived at the target location before being switched back on. 
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.6\textwidth]{example-image}
+\caption{A. Scanner accuarcy
+B. Repeatability and stability.}
+\label{fig:validation01}
+\end{figure}
+
+
+\subsubsection{Suitability}
+Measure laser power over the FOV and confirm it is the same everywhere (IT IS).

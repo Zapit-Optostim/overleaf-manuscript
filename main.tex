@@ -1,5 +1,7 @@
 \documentclass{preprint-raac}
 
+%%
+% Preamble: title and author details
 \title{Zapit: A General-Purpose Photostimulation System For Neuroscience}
 
 \author[1]{Author One}
@@ -23,134 +25,34 @@
 
 \maketitle
 
+
+%%
+% Abstract and keywords
 \begin{abstract}
-Spatially targeted optostimulation is a powerful technique in systems neuroscience. Many studies have spatially targeted light in behaving mice by shining a small light spot at the brain through the exposed skull. Targeting was achieved using either manual positioning of a fibre optic or automatically positioning  light using movable mirrors. Despite the advantages of the latter approach, the technology remains hard to access because no easy to use tools have been built by the open hardware community. Here we present `Zapit', a compact galvo-based point stimulator an associated easy to use, cross-platform, software interface. 
+Spatially targeted optostimulation is a powerful technique in systems neuroscience.
+Many studies have spatially targeted light in behaving mice by shining a small light spot at the brain through the exposed skull.
+Targeting was achieved using either manual positioning of a fibre optic or automatically positioning  light using movable mirrors. 
+Despite the advantages of the latter approach, the technology remains hard to access because no easy to use tools have been built by the open hardware community.
+Here we present `Zapit', a compact galvo-based point stimulator an associated easy to use, cross-platform, software interface. 
 
 \keywords{Optogenetics, Neuroscience, Software Tool, Optics}
 \end{abstract}
 
-\section{Introduction}
-\label{sec:introduction}
+%% 
+% Intro, Results, and Discussion in separate files
+\input{introduction.tex}
+\input{results.tex}
+\input{discussion.tex}
 
-Optogenetics uses light to control the activity of neurons by expression of light-sensitive proteins genetically expressed in cells of interest [REF]. The technique has been used very extensively in systems neuroscience to help dissect the relationship between neural activity and behaviour [REF review paper]. Since its invention, it has become the preferred experimental tool due to its high temporal precision and genetically-constrained impact of modulation [REF].
-
-In small animals such as Drosophila [REF] where excellent genetic control is available, indiscriminately applied light affects only the chosen subpopulation of neurons expressing the transgene. In vertebrates, the transgene is usually expressed in a cell type of interest [REF], thus additional spatial specificity of the light delivery becomes necessary. Spatially discriminant light delivery in behaving rodents was initially achieved via a chronically implanted fibre in a freely moving animal [REFs]. Whilst this approach allows the animal to move around its environment, only a small, fixed, number of stimulation sites in sufficiently distant configuration (due to the physical size of implants) is possible. 
-
-To address the lack of flexibility when relying on implanted fibres, Guo et al (2014) arrived at a head-fixed solution to target any location on the cortical surface through intact skull rendered transparent. This can be done using a number of light delivery methods. One flexible, but slow, approach is to position a fibre over the desired location between trials either manually or programmatically with micro-drives (\cite{Zatka-Haas2021SensoryDecision}). There are other effective approaches for rapid programmatic photostimulation in head-fixed behavioural tasks: those based on galvanometric scan mirrors, digital micro-mirror devices (DMDs) or spatial lights modulators (SLM).
-
-DMD-based approaches, can activate arbitrarily-shaped areas by imaging a movable micro-mirror array onto the sample (\cite{Chong2020ManipulatingPerception,Chong2020ManipulatingPerception}).
-However, since DMD devices will selectively deflect most of the produced light, a very powerful and expensive laser is needed to cover a large area, such as the whole mouse cortex. SLM-based solutions are notably useful in targeting 3-d volumes of neural tissue (REF), but their capabilities (and associated cost) far surpass the functionality needed to produce 2-d light patterns during wide-scale cortical stimulation. Deflection of light beam by galvanometric scanners (galvos) to the target location are a cost-effective, and easy to implement method for this kind of experiments.
-
-Galvos are composed of two mirrors mounted on servomotors and oriented orthogonally to one another. They are commonly used in confocal and multi-photon microscopy for raster-scanning a laser beam over the sample. Several studies have recently used galvos to position a focused photo-activation point onto the exposed skull (\cite{Guo2014FlowMice,Inagaki2018Low-dimensionalCortex,Voitov2022CorticalMemory,Pinto2022MultipleCortex,Coen2021FrontalModalities}). This approach to flexibly target multiple areas in a photostimulation session has become increasingly popular due to its relative low cost, versatility and capability of being simultaneously integrated with other experimental approaches such as imaging (REF). This fast programmable method allows for seamless transition from one configuration of stimulation to another, providing more control over experimental conditions. Relative to other solutions, it is also practical due to its compact size, simplicity of use and availability on the market. 
-
-The last decade has seen widespread adoption of open source hardware tools in neuroscience, such as Open-Ephys (\cite{siegle_2017}), the `Pulse-Pal' pulse generator (\cite{Sanders2014ABehavior}), the `Stimjim` programmable electrical stimulator (\cite{Cermak2019Stimjim:Stimulation}), as well as countless designs for light-sheet and multi-photon microscopes. 
-However, there exists no good open source project for programmable photo-stimulation in head-fixed behaving mice.
-In this paper we present what we hope is a solution to this problem: the `Zapit' photostimulation system. 
-
-‘Zapit’ is the combination of an open-source galvo-based hardware design and an associated
-software ecosystem for calibration and stimulus delivery. The hardware was designed with the intention of making it as compact as possible so it can fit into tight behavioural enclosures. Relative low cost and short lead times make it a more accessible method to e.g. DMD methods. The accompanying software allows for fast and easy integration into behavioural task codes of various structures, and flexibility regarding inactivation protocols, from single points to multiple areas targeted bilaterally.
-
-
-\section{Results}
-
-
-\subsection{Operating principle}
-The galvos point a focused spot of light on the brain. 
-In any given trial the spot either sits on one point and flashes on and off at 40~Hz or it goes back and forth between two spots in a 50/50 duty cycle illuminating each at 40~Hz. 
-The location(s) of the beam in each stimulus condition is defined in stereotaxic coordinates.
-Intensity is about 4~mW at the skull surface.
-There is a ramp down in intensity at trial end. 
-Explain why. 
-An optional blue LED masking light runs in synchrony with the laser.
-
-\subsection{Hardware Design}
-This section explains how the hardware achieves the above. 
-We implemented a hardware design most similar to that used in \citet{Pinto2022MultipleCortex}.
-A fibre-coupled blue laser is fed into an XY galvo scan block, the beam exits and is pointed down to the animal via a dichroic fold mirror.
-A 100~mm lens focuses the beam onto the sample.
-Theoretical laser spot size is xx~$\mu m$.
-This lens doubles as an objective, as it images the sample and any excited green fluorescence onto a camera via a 50~mm tube lens (Fig~\ref{fig:hardware01})
-The galvo waveforms include gentle ramps to make them near inaudible, but nonetheless we have built a sealed enclosure around the scanners.
-
-\begin{figure}[h]
-\centering
-\includegraphics[width=0.6\textwidth]{example-image}
-\caption{A. Optical path schematic. B. Maybe a Zemax diagram. C. Photo of the system. D. Photo of the system.}
-\label{fig:hardware01}
-\end{figure}
-
-\subsection{Software Design}
-Explain how the software achieves the above.
-A GUI allows specifying of points in stereotaxic coords and hence creation of settings files with respect to the Allen Atlas (Fig.~\ref{fig:software01}). 
-Describe where this came from: the cortex lab and is that used by IBL.
-Another GUI is used to calibrate the scanners such that they are able to point to locations in the image defined by the user. 
-A second step defines the position of the skull in the FoV and hence previously specified stereotaxic coords can be overlaid onto the sample. 
-The GUI has tools to allow visual confirmation of the scan and sample calibration steps (Fig.~\ref{fig:software02}).  
-
-\begin{figure}[h]
-\centering
-\includegraphics[width=0.6\textwidth]{example-image}
-\caption{Screenshot of stim config editor}
-\label{fig:software01}
-\end{figure}
-
-
-\begin{figure}[h]
-\centering
-\includegraphics[width=0.6\textwidth]{example-image}
-\caption{A. Screenshot of scanner calibration process. 
-B. Screenshot of sample calibration process.}
-\label{fig:software02}
-\end{figure}
-
-\subsection{Running Experiments}
-How the API works: \texttt{sendSamples} and \texttt{stopOptostim}.
-If an experiment directory is defined in Zapit, \texttt{sendSamples} will write there a log file listing each stimulus presentation.
-Control trials are possible where the galvos move and the masking light is on but the laser is off.
-Maybe include a table of API commands that are used during experiments or some example code. 
-
-Briefly describe the Python bridge.
-Briefly describe how waveforms can be saved to disk and the minimal example classes used as templates.
-We include, for example, a Bonsai implementation of the wrapper. 
-Is there another programming language we should include this for?
-
-\subsection{Validation}
-\subsubsection{Scanner calibration accuracy}
-Accuracy with which beam points to target in microns.
-How the hell do we measure this? Using the camera? But then how accurate is our estimate of where the beam actually went? I guess we can show many points indicating where the beam went over many trials. That will show up bias. But spread around the target location could be due to pointing errors or it could be due to errors in locating the beam. 
-We can correlate with the galvo feedback waveforms and so know the error.
-(Fig.~\ref{fig:validation01}A).
-
-\subsubsection{Repeatability and Stability}
-Have it run, say, 1000 trials of two locations quite far apart and record the command waveforms, galvo feedback, and beam intensity (Fig.~\ref{fig:validation01}B). 
-Overlay these and show consistency over long periods of time and many trials. 
-Feedback signals show us that the beam has arrived at the target location before being switched back on. 
-
-\begin{figure}[h]
-\centering
-\includegraphics[width=0.6\textwidth]{example-image}
-\caption{A. Scanner accuarcy
-B. Repeatability and stability.}
-\label{fig:validation01}
-\end{figure}
-
-
-\subsubsection{Suitability}
-Measure laser power over the FOV and confirm it is the same everywhere.
-
-\section{Discussion}
-Should we discuss further the question of DMM vs galvo stim?
-There is nothing wrong with saying that the DMM 
-
-
-
-\paragraph*{Acknowledgments.} 
+%% 
+% Close
+\paragraph*{Acknowledgments} 
 We thank Andy Peters for providing us with a MATLAB script for displaying a top-down view of the Allen Atlas in stereotaxic coordinates.
 We thank the mechanical workshop at the SWC, in particular Simon Townsend, for building the custom enclosure. 
-Also Graeme.
+Graeme McPhillips at the SWC Electronics Core Facility provided advice on construction of the control electronics enclosure. 
 
-\paragraph*{Data Availability Statement.} A statement about how to access data, code and other materials allowing users to understand, verify and replicate findings — e.g. Replication data and code can be found in Harvard Dataverse: \url{https://doi.org/link}.
-
+\paragraph*{Data Availability Statement.} All code is freely available on GitHub. 
+Data available on request.
 
 
 \printbibliography

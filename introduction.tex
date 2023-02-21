@@ -1,0 +1,31 @@
+\section{Introduction}
+\label{sec:introduction}
+
+Optogenetics uses light to control the activity of neurons by expression of light-sensitive proteins genetically expressed in cells of interest [REF]. 
+The technique has been used very extensively in systems neuroscience to help dissect the relationship between neural activity and behaviour [REF review paper]. 
+Since its invention, it has become the preferred experimental tool due to its high temporal precision and genetically-constrained impact of modulation [REF].
+
+In small animals such as Drosophila [REF], where excellent genetic control is available, indiscriminately applied light affects only the chosen subpopulation of neurons expressing the transgene.
+In vertebrates, the transgene is typically expressed in a cell \textit{type} of interest (\cite{Zhao2011CellFunction}), thus additional spatial specificity of the light delivery becomes necessary.
+Spatially discriminant light delivery in behaving rodents was initially achieved via a chronically implanted fibre in a freely moving animal [REFs].
+Whilst this approach allows the animal to move around its environment, only a small, fixed, number of stimulation sites in sufficiently distant configuration (due to the physical size of implants) is possible.
+More recently, wireless implants housing a micro-LED have been used to deliver light in one location to freely moving mice (\cite{Ausra2021WirelessAnimals}) .
+
+A more flexible approach becomes possible in head-fixed animals, since here the photostimulation location can easily be targeted by programmatically moving the light source during an experiment. 
+Whilst this can be achieved with a fibre optic and motorized micro-drives (\cite{Zatka-Haas2021SensoryDecision}), a faster approach is to scan a focused laser beam over the exposed skull using galvanometric scan mirrors (galvos).
+Galvos are composed of two mirrors mounted on servomotors and oriented orthogonally to one another. 
+They are commonly used in confocal and multi-photon microscopy for raster-scanning a laser beam over the sample. 
+Several studies have recently used galvos to position a focused photo-activation point onto the exposed skull (\cite{Guo2014FlowMice,Li2016RobustPlanning,Inagaki2018Low-dimensionalCortex, Keller2020FeedbackCortex,Voitov2022CorticalMemory,Pinto2019Task-DependentRegions,Coen2021FrontalModalities,Pinto2022MultipleCortex}).
+For example, \cite{Guo2014FlowMice} used channelrhodopsin-2 (ChR2) to inbibit neural activity in order to study a whisker-based tactile task with a memory component. 
+This approach has become increasingly popular due to its relatively low cost, speed, and potentially compact size. 
+
+The last decade has seen widespread adoption of open source hardware tools in neuroscience, such as Open-Ephys (\cite{Siegle2017OpenElectrophysiology}), the `Pulse-Pal' pulse generator (\cite{Sanders2014ABehavior}), the `Stimjim` programmable electrical stimulator (\cite{Cermak2019Stimjim:Stimulation}), as well as countless designs for light-sheet and multi-photon microscopes. 
+However, there exists no good open source solution for programmable photo-stimulation in head-fixed behaving mice.
+We hope `Zapit', presented in this paper, fills this gap.
+
+‘Zapit’ is the combination of an open-source galvo-based hardware design and an associated
+software ecosystem for calibration and stimulus delivery. 
+The hardware was designed with the intention of making it as compact as possible so it can fit into tight behavioural enclosures. 
+Relative low cost and short lead times ensure it remains accessible.
+Our system is flexible regarding inactivation protocols, from single points to multiple areas targeted bilaterally.
+We demonstrate how Zapit allows for fast and easy integration of targeted photostimulation into a variety of behavioural tasks.

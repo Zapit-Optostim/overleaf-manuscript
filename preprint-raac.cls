@@ -23,6 +23,7 @@
 \RequirePackage[absolute]{textpos}
 \RequirePackage[right]{lineno}
 \RequirePackage{amsmath}
+\RequirePackage{listings} % Added by RAAC
 
 \def\@journalname{bioRxiv}
 \def\@keywordsname{Keywords}
@@ -36,6 +37,36 @@
 \definecolor{PANDarkBlue}{RGB}{19,126,194}
 \definecolor{PANMaroon}{RGB}{105,27,46}
 \definecolor{PANDarkGray}{RGB}{153,153,153}
+
+%%
+% Begin defining code style
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=none,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+
+\lstset{style=mystyle}
+%% end
+
 
 \RequirePackage{microtype}
 \newif\ifxetexorluatex
