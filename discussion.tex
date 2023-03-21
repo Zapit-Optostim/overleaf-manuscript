@@ -14,9 +14,24 @@
     
     They have ephys to demonstrate how many spikes are silenced at a given distance from an electrode. They have devoted a reasonable amount of space to characterising the inhibition.\\ 
     
+    Heindorf 2018 & Code: Labview not public (?) I know it's not designed for general use. \textbf{Hardware:} 473 nm laser (Shanghai Laser \& Optics Century, BL473H-200) sinusoidally modulated at 40 Hz. Laser was directed at either two locations per hemisphereat 5 mW time averaged power per location (10 mW per hemisphere), or one location at 1 mW or 2 mW time averaged power per location/hemisphere. Full-width half maximum of the laser beam was 0.8 mm (pale blue dashed circle in Figure S1A) and power dropped to 1/e at a radius of 0.5 mm. Photostimulation was performed through a cranial window. We used a galvo-galvo scan head to either cycle between the target locations or between two blank locations on the head-bar during times of no stimulation. For stimulation, the laser cycled between each of the two (four) target locations for the duration of the stimulus with a dwell time of 40 ms (20 ms) per location.\\ 
+    
     Inagaki, 2018  & \textbf{Code:} ? \textbf{Hardware:}  Photostimulated for 1.2~s, including the 200 ms ramp, starting at the beginning of the sample or delay epoch. 40~Hz sinusoidal temporal profile (1.5~mW average power) and a 200~ms linear ramp during laser offset. We used scanning Galvo mirrors to inactivate different locations of the cortex.\\
 
-    Keller, 2020 & \textbf{Code:} LabVIEW; not provided. \textbf{Hardware:} Pinhole to collimate the beam (?) then 300~mm achromat. 200~$\mu m$ spot. Thor Galvos. `[HVAs] were consecutively scanned in a circular manner with a dwell time of $\leq$ 1~ms per area (resulting in a frequency of 125~Hz for the whole cycle.' Spot size is roughly half the width of an HVA so it can just be passed over them with little actual scanning taking place.\\ 
+    \hline
+    \end{tabular}
+    \caption{Brief summary of existing galvo-based solutions A}
+    \label{tab:system_summary A}
+\end{table}
+
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{c|p{100mm}}
+        Paper & Software and Hardware  \\
+    \hline
+    
+    Keller A, 2020 & \textbf{Code:} LabVIEW; not provided. \textbf{Hardware:} Pinhole to collimate the beam (?) then 300~mm achromat. 200~$\mu m$ spot. Thor Galvos. `[HVAs] were consecutively scanned in a circular manner with a dwell time of $\leq$ 1~ms per area (resulting in a frequency of 125~Hz for the whole cycle.' Spot size is roughly half the width of an HVA so it can just be passed over them with little actual scanning taking place.\\ 
 
     Coen, 2022 & \textbf{Code:} MATLAB. Basic system is available but not linked to in manuscript. \textbf{Hardware:} Through the skull. Thor galvos. 40~Hz sine wave, 462~nm, 3~mW. No information on optics. Scanner enclosure, etc.\\ 
         
@@ -24,17 +39,16 @@
     
     Voitov, 2022 & \textbf{Code:} LabVIEW. No code provided. \textbf{Hardware:} Seems to copy Guo. The laser light was pulsed at 50~Hz, with a 50\% duty cycle. The laser power: 3~mW average (6~mW peak power) for the first 400~ms. Then 200~ms rampdown. Masking light with same dynamics as photostim. \\ 
 
-    
-    
     \hline
     \end{tabular}
-    \caption{Brief summary of existing galvo-based solutions}
-    \label{tab:system_summary}
+    \caption{Brief summary of existing galvo-based solutions B}
+    \label{tab:system_summary B}
 \end{table}
-
 \subsection{Comparison to other approaches}
 
-There are other effective approaches for rapid programmatic photostimulation in head-fixed behavioural tasks: those based on , digital micro-mirror devices (DMDs) or spatial lights modulators (SLM).
-
-DMD-based approaches can activate arbitrarily-shaped areas by imaging a movable micro-mirror array onto the sample (\cite{Chong2020ManipulatingPerception}).
-However, since DMD devices will selectively deflect most of the produced light, a very powerful and expensive laser is needed to cover a large area, such as the whole mouse cortex. SLM-based solutions are notably useful in targeting neural tissue with cellular resolution (REF), but their capabilities (and associated cost) far exceed the functionality needed to produce light patterns during wide-scale cortical stimulation. Deflection of a beam using scanner mirrors is cost-effective and easy to implement.
+There are other effective approaches for rapid programmatic photostimulation in head-fixed behavioural tasks: those based on digital micro-mirror devices (DMDs) or spatial lights modulators (SLM).
+These approaches are capable of activating extended, arbitrarily-shaped areas  (\cite{Chong2020ManipulatingPerception}).
+DMD-based approaches provide the fastest pattern-switching time but are very wasteful of light and so require a roughly 4 W laser to cover an area the size of mouse dorsal cortex. 
+Whilst SLM-based solutions are more light efficient, devices with high resolution are very expensive and are slower than DMDs.
+Whilst scanner-based systems restrict photostimulation to a small number of points, this scenario is sufficient to enable a wide variety of interesting experiments. 
+Scanner-based approaches provide the most cost-effect and compact solution. 

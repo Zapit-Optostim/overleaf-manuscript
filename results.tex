@@ -1,23 +1,48 @@
 \section{Results}
 
-
 \subsection{Operating principle}
-The galvos point a focused spot of light on the brain. 
-In any given trial the spot either sits on one point and flashes on and off at 40~Hz or it goes back and forth between two spots in a 50/50 duty cycle illuminating each at 40~Hz. 
+Zapit is best thought of as a software-based solution for galvo-based photo-stimulation. 
+Whilst we provide hardware designs (see below), there is no fixed design that is required to work with the software.
+A variety of hardware designs can work and Zapit is flexible enough to take this into account. 
+
+Here we implemented a hardware design similar to that used in \citet{Pinto2022MultipleCortex}.
+A 470~nm laser is fed into an XY galvo scan block then is pointed down to the animal via a dichroic fold mirror.
+A 100~mm achromatic lens focuses the beam onto the sample.
+This lens doubles as an objective: imaging the sample and any excited green fluorescence onto a camera via a 50~mm tube lens (Fig.~\ref{fig:operating_principle_01}A).
+The galvo waveforms are shaped to make them near inaudible, but nonetheless we designed a sealed enclosure for the scanners (Fig.~\ref{fig:operating_principle_01}B).
+
+The Zapit software comprises of a user-friendly GUI for performing the two critical alignment steps. 
+\textbf{1.} Aligning the scanners with the camera, enabling the beam to point accurately to any desired location in the image. 
+\textbf{2.} Mapping stereotaxic coordinates onto the exposed skull.  
+Calibration takes about a minute and, once calibrated, the system will place the beam in any desired location defined by stereotaxic coordinates. 
+
+Once calibrated, a simple API allows the user to integrate stimulation into an experimental paradigm. 
+The system currently supports stimulation of either one or two points in a given trial (extending it to more points is planned for the near future). 
+In any given trial the laser spot either sits on one point and flashes on and off at 40~Hz or it goes back and forth between two spots in a 50/50 duty cycle illuminating each at 40~Hz. 
 The location(s) of the beam in each stimulus condition is defined in stereotaxic coordinates.
-Intensity is about 4~mW at the skull surface.
-There is a ramp down in intensity at trial end. 
-Explain why. 
+There is a ramp down in intensity at trial end to avoid rebound effects. 
 An optional blue LED masking light runs in synchrony with the laser.
 
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.325\textwidth]{Figures/Operating_Principles/Zapit_operating_principle_light_path.jpg}
+\includegraphics[width=0.325\textwidth]{Figures/Operating_Principles/Zapit_example_system_photo.jpg}
+\caption{\textbf{A}. Optical path schematic.
+A laser beam (blue) is directed using a pair of scan mirrors then focused through a lens and onto the skull surface via  dichroic mirror. 
+The lens is located 1f from the scanners so that it behaves telecentrically. 
+The dichroic allows the sample to be imaged on a camera via a tube lens
+The beam location on the skull surface is visible due to autofluorescence. 
+\textbf{B}. A photographed of an assembled system in a custom-built aluminum enclosure.}
+\label{fig:operating_principle_01}
+\end{figure}
+
+
 \subsection{Hardware Design}
-This section explains how the hardware achieves the above. 
-We implemented a hardware design most similar to that used in \citet{Pinto2022MultipleCortex}.
-A fibre-coupled blue laser is fed into an XY galvo scan block, the beam exits and is pointed down to the animal via a dichroic fold mirror.
-A 100~mm lens focuses the beam onto the sample.
+
+Details on the enclosure. 
+Details on the Thorlabs CAD model.
 Theoretical laser spot size is xx~$\mu m$.
-This lens doubles as an objective, as it images the sample and any excited green fluorescence onto a camera via a 50~mm tube lens (Fig~\ref{fig:hardware01})
-The galvo waveforms include gentle ramps to make them near inaudible, but nonetheless we have built a sealed enclosure around the scanners.
+PSF: theory. predicted. 
 
 \begin{figure}[h]
 \centering
@@ -50,7 +75,9 @@ B. Screenshot of sample calibration process.}
 \label{fig:software02}
 \end{figure}
 
+
 \subsection{Calibration}
+
 The user initiates an automatic calibration procedure that maps the galvo control signals to pixel locations in the image. 
 A simple two-click interface allows the user to map stereotaxic coordinates onto the image space. 
 
