@@ -19,7 +19,7 @@ Calibration takes about a minute and, once calibrated, the system will place the
 Once calibrated, a simple API allows the user to integrate stimulation into an experimental paradigm. 
 The system currently supports stimulation of either one or two points in a given trial (extending it to more points is planned for the near future). 
 In any given trial the laser spot either sits on one point and flashes on and off at 40~Hz or it goes back and forth between two spots in a 50/50 duty cycle illuminating each at 40~Hz. 
-The location(s) of the beam in each stimulus condition is defined in stereotaxic coordinates.
+All beam locations are defined in stereotaxic coordinates.
 There is a ramp down in intensity at trial end to avoid rebound effects. 
 An optional blue LED masking light runs in synchrony with the laser.
 
@@ -38,18 +38,38 @@ The beam location on the skull surface is visible due to autofluorescence.
 
 
 \subsection{Hardware Design}
+We used ScannerMax Saturn 5 scanners as these perform well and are readily available. 
+We powered the scanners using two XXX PSUs.
+Images were acquired using a USB-3 Basler acA1920-40um. 
+The objective is a XXX and the tube lens is a XXX.
+Dichroic (XXXX) GFP emission filter XXX.
 
-Details on the enclosure. 
-Details on the Thorlabs CAD model.
-Theoretical laser spot size is xx~$\mu m$.
-PSF: theory. predicted. 
+We designed a custom sealed enclosure for the scanners, optics, and camera. 
+This ensured the smallest footprint possible and minimises noise from the scanners. 
+A fold mirror placed before the camera keeps the system compact. 
+
+The beam can either be fed in using turning mirors or it can be fibre coupled. 
+We fibre-coupled the beam using a XXX fibre and two XXX colimators. 
+Fibre-coupling efficiency was XX percent and also increased beam diameter from 0.8 mm to xx mm. 
+
+We estimated the theoretical laser spot size using Zemax as having a PSF with a FWHM of 70~$\mu m$.
+This value is estimated using a 150~mm achromat and a 0.8 mm laser beam.
+We measured PSF as 91~$\mu m$ (Fig.~\ref{fig:hardware01}).
+A larger input beam diameter or a shorter focal length objective would increase excitation NA and so decrease FWHM. 
+TODO -- size of PSF in Z, PSF off axis, PSF with and without fibre. 
+
+The stimulation hardware can also be constructed using off the shelf parts from ThorLabs. 
+A variety of designs can work and we provide and example (Fig. XXX; URL).
+
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=0.6\textwidth]{example-image}
-\caption{A. Optical path schematic. B. Maybe a Zemax diagram. C. Photo of the system. D. Photo of the system.}
+\includegraphics[width=0.6\textwidth]{Figures/PSF/f150mm_Obis_Direct/psf.png}
+\caption{A. Theoretical and measured X/Y PSF based on a 150~mm tube lens and a 0.8~mm beam.}
 \label{fig:hardware01}
 \end{figure}
+
+
 
 \subsection{Software Design}
 Explain how the software achieves the above.
