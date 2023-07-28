@@ -1,0 +1,75 @@
+\section{Methods}
+
+\subsection{Wavelength Validation Experiments}
+
+\subsubsection{Subjects}
+All experiments were performed on 15-20 weeks old C57BL/6 or B6.129P2-Pvalbtm1(cre)Arbr/J (PV-Cre) male mice in accordance with the UK Home Office regulations (Animal (Scientific Procedures) Act 1986), approved by the Animal Welfare and Ethical Review Body (AWERB; Sainsbury Wellcome Centre for Neural Circuits and Behavior) and in compliance with ARRIVE guidelines.
+
+\subsubsection{Surgical procedures}
+Mice were anesthetized under isoflurane (2\%-5\%), carprofen or meloxicam was administered (5mg/kg or 1-2 mg/kg, respectively; s.c.) and eyes were protected with eye gel Lubrithal (Dechra).
+Mice were then fixed to a stereotaxic frame and their body temperature maintained at 37-38 °C. They were implanted with a head plate fixed to the skull using Histoacryl (Braun Medical) and C\&B Metabond (Sun Medical). 
+Additionally, we added a layer of black dental cement (Kemdent) on top of the Metabond.
+For the implantation of the optical fiber, a craniotomy of $\sim$1~mm radius was drilled over the region of interest using a 0.3~mm burr dental drill (Osada Electric).  The optical cannula (Newdoon 200 microns, 1.5 mm, NA 0.37) was then inserted 550 um from the pial surface into the cortex and fixed to the skull using light-cured resin dental cement Relyx Unicem 2 (3M).
+The skull was then covered with C&B Metabond and subsequently covered with black cement. Animals were allowed to recover for at least 48 hr.
+The implantation of the optical fiber above the intact skull followed the same procedure, but omitting the drilling of a craniotomy.
+On the day of extracellular recording (after habituation to head-fixation that typically took 2-3 sessions of 30 minutes each), animals were anesthetized under isoflurane (2\%-5\%), their whiskers trimmed (to 2 to 5~mm long) and a small craniotomy (1 x 1 mm) was drilled over the brain region of interest using a 0.3~mm burr dental drill. The craniotomy was sealed with silicon Kwik-Cast (World Precision Instruments) and the animals were allowed to recover for at least 2 hr prior to recording.
+
+\subsubsection{Experimental setup}
+The visual stimulus consisted of two laser projectors (60 fps; MP-CL1A, Sony) projecting on two rear-projection screens.
+The two rear-projection screens were positioned in front of the animal, 5 cm from each eye at a 90 degree angle to each other (visual field covered: ~75 of elevation and ~270 azimuth).
+In ambient light experimental conditions, isoluminant gray or drifting gratings (Spatial Frequency = 0.02 cpd; Temporal Frequency = 2 Hz) were presented on the rear-projection screens using the Psychophysics Toolbox (\cite{Brainard1997TheToolbox.}).
+In addition, an LED strip surrounding the experimental setup (Goove) was turned on. In complete darkness conditions, the screens and LED strip were turned OFF and two small light shields were positioned in front of the animal’s eyes.
+In both light and dark conditions, a light shield was positioned at the base of the optical fiber.
+A Faraday cage was built around the experimental apparatus to provide both electrical noise isolation and pitch darkness.
+
+\subsubsection{Extracellular recordings}
+The silicon probe (IMEC, Belgium) was first coated with DiI (Molecular Probes, Thermo Fisher Scientific).
+The probe was then positioned perpendicular to the brain surface and the tip inserted 2000~µm from the pial surface using micro-manipulators (Luigs and Neumann).
+The probe was allowed to settle for approximately 30 minutes before recordings. The reference electrode consisted of a Ag/AgCl wire positioned close (<2~mm) to the craniotomy.
+The craniotomy, as well as the reference wire, were covered by Agar 3\% prepared in cortex buffer (NaCl 125~mM, KCl 5~mM, Glucose 10~mM, HEPES~10 mM, CaCl2 2~mM, MgSO4 2~mM, pH~7.4). 
+The Agar was then submerged by the cortex buffer.
+Neuropixels Phase 3A probes were connected to a dedicated FPGA card (KC705, Xilinx). 
+SpikeGLX v20180525-phase3A (\texttt{github.com/billkarsh/SpikeGLX}) were used to acquire data. Data were filtered at 300~Hz during or after acquisition.
+
+
+\subsubsection{Laser stimulation}
+An optical cord (Newdoon MM200/220, NA 0.37) was used to provide the laser stimulation (637~nm: Thorlabs S4FC637; 594~nm: Coherent Obis 594~nm LS 40~mW Laser, Fiber Pigtail, FC; 473~nm: Thorlabs S4FC473).
+In pitch darkness and ambient light with gray screens, 40 laser stimulations were presented in 5 blocks of 8 stimulations. 
+Within each block, each laser stimulation lasted 2~s and was separated by 2~s.  
+Each block was separated by 54~s.
+In ambient light experimental conditions with drifting gratings, 80 laser stimulations were presented in 10 blocks of 8 stimulations. Within each block, each laser stimulation started 1 second after the onset of drifting gratings, and lasted for 2~s separated by 2~s. Each block was separated by 54~s.
+
+\subsubsection{Probe localisation}
+Following silicon probe recordings, animals were deeply anesthetized and transcardially perfused with cold phosphate buffer (PB, 0.1 M) followed by 4\% paraformaldehyde (PFA) in PB (0.1 M) and brains left overnight in 4\% PFA at 4 °C. 
+Brains were then embedded in 4\% agar and imaged using serial two-photon tomography (\cite{Mayerich2008Knife-edgeBrain,Ragan2012SerialImaging,Winnubst2019ReconstructionBrain.}), using  BakingTray (\cite{Campbell2020BakingTray}), a custom wrapper around ScanImage (Vidrio Technologies, \cite{Pologruto2003ScanImage:Microscopes.}).
+Images were acquired as tiles with 5-7~µm axial sampling and 2.27 x 2.27~µm pixels, and stitched using StitchIt (\texttt{https://github.com/SainsburyWellcomeCentre/StitchIt}, \cite{Han2018TheCortex.}).
+Images were then registered to the Allen Mouse Brain Common Coordinate Framework version 3 (CCFv3, 25~µm resolution; \cite{Wang2020TheAtlas}) using brainreg (\cite{Tyson2022AccurateImages,Niedworok2016AMAPData}).⁠
+The atlas data were provided by the BrainGlobe Atlas API (\cite{Claudi2020BrainGlobeAtlases}).
+Probe tracks were confirmed by DiI fluorescence and were traced using brainreg-segment (\cite{Tyson2022AccurateImages}).
+
+To refine the localisation of the probe, we used electrophysiological information. 
+In primary visual cortex (VISp) recordings, we determined the middle of layer 5 using the depth profile of the high-frequency LFP power (\cite{Senzai2019Layer-SpecificMouse}).
+For each non-reference channel on the probe, the average power in the frequency range 500~Hz-5~kHz was computed (MATLAB, The MathWorks Inc., \texttt{bandpower} function). 
+Each bank of electrodes (4 for Neuropixels Phase 3A) was separated, and the power profile was linearly interpolated at 1~µm resolution along the bank before being smoothed with a 100~µm sliding window.
+The profiles along each bank were averaged and the location, in the cortex, of the peak in this depth profile was chosen as the middle of layer 5.
+To determine cortical depth in VISp of isolated single units when pooling across animals, we first determined the layer in which the unit occurred.
+We then calculated the relative depth of the unit in that layer in that animal (value between 0 and 1).
+The boundaries of each layer were then averaged across mice and the unit was positioned within its layer at the relative depth determined from the previous step.
+
+\subsubsection{Spike sorting and analysis}
+Spike sorting and unit quality control were performed using a fork of the \texttt{ecephys\_spike\_sorting pipeline} 
+(\cite{Siegle2017OpenElectrophysiology}) modified for SpikeGLX data 
+(\texttt{github.com/jenniferColonell/ecephys\_spike\_sorting}; for Neuropixels Phase 3A recordings commit \texttt{55ff943892577cee497e28dd6a201f4f101b0777}; Velez-Fort et al., 2023).
+Raw data acquired with SpikeGLX were filtered with CatGT (\texttt{billkarsh.github.io/SpikeGLX/\#catgt}) and Kilosort2 was run.
+For single unit analysis only clusters deemed “good” were considered (\texttt{github.com/MouseLand/Kilosort}; commit \texttt{2a399268d6e1710f482aed5924ba90d52718452a}).
+Double counted spikes were removed (\cite{Siegle2017OpenElectrophysiology}) and finally, waveform and quality metrics were computed. 
+Only clusters of spikes that had an ISI violation metric (\cite{Hill2011QualitySignals}) less than 0.15, amplitude cutoff metric (\cite{Siegle2017OpenElectrophysiology}) less than 0.1, maximum drift less than 80~µm, and isolation distance (\cite{Schmitzer-Torbert2005QuantitativeRecordings}) greater than 20 were considered putative single-units and examined for further manual curation.  
+All units (wide- and narrow-spiking units) were pulled for further analysis.
+
+Firing rates during baseline and laser stimulation periods were calculated on a trial-by-trial basis.
+Spike trains were convolved with a 5 millisecond-wide Gaussian window, to get a continuous spike rate.
+For each laser stimulation, 2 windows of interest of 200~ms each were taken into consideration: immediately before (baseline) and immediately after laser stimulation onset.
+The mean of the spike rate trace during baseline and laser stimulation windows was then taken.
+A single unit was considered significantly modulated by laser stimulation, if the p-value from a Wilcoxon signed-rank test performed on baseline and stimulus firing rates was less than 0.05.
+At a neuronal population level, 2 windows of interest of 100 ms each were taken into consideration: a baseline window immediately before laser stimulation and a laser stimulation window that started at the respective average onset latencies for 637, 594, and 473~nm recorded in ambient darkness.
+A population of neurons were deemed significantly modulated by laser stimulation if the p-value from a Wilcoxon signed-rank test performed on baseline and stimulus firing rates was less than 0.05.

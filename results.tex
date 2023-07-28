@@ -2,13 +2,13 @@
 
 \subsection{Operating principle}
 Zapit is best thought of as a software-based solution for galvo-based photo-stimulation. 
-Whilst we provide hardware designs (see below), there is no fixed design that is required to work with the software.
-A variety of hardware designs can work and Zapit is flexible enough to take this into account. 
+Whilst we provide a compact hardware design (see below), there is no fixed design that is required to work with the software.
+This opens up the technique to research groups who do not have access to a machining workship.
 
-Here we implemented a hardware design similar to that used in \citet{Pinto2022MultipleCortex}.
-A 470~nm laser is fed into an XY galvo scan block then is pointed down to the animal via a dichroic fold mirror.
-A 100~mm achromatic lens focuses the beam onto the sample.
-This lens doubles as an objective: imaging the sample and any excited green fluorescence onto a camera via a 50~mm tube lens (Fig.~\ref{fig:operating_principle_01}A).
+We implemented a hardware design similar to that used in \citet{Pinto2022MultipleCortex}.
+A 470~nm laser is fed into an XY galvo scanner then is pointed down to the animal via a dichroic fold mirror.
+A f=100~mm scan lens focuses the beam onto the sample.
+This lens doubles as an objective: imaging the sample and any excited green fluorescence onto a camera via a f=75~mm tube lens (Fig.~\ref{fig:operating_principle_01}A).
 The galvo waveforms are shaped to make them near inaudible, but nonetheless we designed a sealed enclosure for the scanners (Fig.~\ref{fig:operating_principle_01}B).
 
 The Zapit software comprises of a user-friendly GUI for performing the two critical alignment steps. 
@@ -38,19 +38,19 @@ The beam location on the skull surface is visible due to autofluorescence.
 
 
 \subsection{Hardware Design}
-We used ScannerMax Saturn 5 scanners as these perform well and are readily available. 
-We powered the scanners using two XXX PSUs.
+We used ScannerMax Saturn 5 scanners as these perform well and are readily available from Edmund Optics (Saturn 5B Dual Axis Galvanometer Scanner; Edmund Optics). 
+We powered the scanners using two 24 V PSUs (Mean Well Switching Power Supply, 24~V DC, 4.2~A; RS Components).
 Images were acquired using a USB-3 Basler acA1920-40um. 
-The objective is a XXX and the tube lens is a XXX.
-Dichroic (XXXX) GFP emission filter XXX.
+The objective is an f=100~mm Pl\"{o}ssl composed of two ThorLabs AC254-200-A achromats.
+The tube lens is an f=75~mm Pl\"{o}ssl composed of two ThorLabs AC254-150-A achromats.
+We used a ThorLabs MF252-39 dichroic and MD498 emission filter before the camera. 
 
 We designed a custom sealed enclosure for the scanners, optics, and camera. 
 This ensured the smallest footprint possible and minimises noise from the scanners. 
 A fold mirror placed before the camera keeps the system compact. 
 
-The beam can either be fed in using turning mirors or it can be fibre coupled. 
-We fibre-coupled the beam using a XXX fibre and two XXX colimators. 
-Fibre-coupling efficiency was XX percent and also increased beam diameter from 0.8 mm to xx mm. 
+We fed the beam directly into the scan head by mounting a Coherent Obis laser at the entry window using a 90 degree cage-mounted fold mirror.
+Fibre-coupling is also possible but this results in light loss.
 
 We estimated the theoretical laser spot size using Zemax as having a PSF with a FWHM of 70~$\mu m$.
 This value is estimated using a 150~mm achromat and a 0.8 mm laser beam.
@@ -59,7 +59,6 @@ A larger input beam diameter or a shorter focal length objective would increase 
 TODO -- size of PSF in Z, PSF off axis, PSF with and without fibre. 
 
 The stimulation hardware can also be constructed using off the shelf parts from ThorLabs. 
-A variety of designs can work and we provide and example (Fig. XXX; URL).
 
 
 \begin{figure}[h]
@@ -124,12 +123,9 @@ Zapit must remain running in MATLAB throughout.
 
 
 \subsection{Other languages}
-Users wishing to use a different programming language must re-implement the \texttt{sendSamples} and \texttt{stopOptoStim} commands. 
-This is straightforward and We provide minimal examples in the main Zapit repository to assist with this. 
+To allow the use of other programming languages we propose two methods. The first method requires the user to re-implement the \texttt{sendSamples} and \texttt{stopOptoStim} commands. This is straightforward and we provide minimal examples in the main Zapit repository to assist with this. Alternatively, Zapit may be launched with a TCP/IP server that allows for inter-process communication.  Not only does this allow for other processes running in any language to communicate with Zapit, but it also allows for Zapit to be remotely controlled from a different machine.  We define a messaging protocol (some document in the appendix?  Or just in the readme of the relevant GitHub repo?) and implement this in Bonsai, Python and MATLAB.  We additionally provide minimal examples in those three languages for how commands are generated and how replies from Zapit are interpreted.
 
-
-
-\subsection{Validation}
+\subsection{Accuracy and Repeatability}
 \subsubsection{Scanner calibration accuracy}
 Accuracy with which beam points to target in microns.
 How the hell do we measure this? Using the camera? 
@@ -153,6 +149,37 @@ B. Repeatability and stability.}
 \label{fig:validation01}
 \end{figure}
 
+State somewhere that laser power does not vary over the FOV.
 
-\subsubsection{Suitability}
-Measure laser power over the FOV and confirm it is the same everywhere (IT IS).
+
+\subsection{Selecting a photostimulation wavelength}
+We first tested whether laser stimulation of a visual cortical brain region at power intensities (1-8 mW) and wavelengths (637, 594, and 473~nm) regularly used for \textit{in vivo} optogenetic experiments (\cite{Fenno2011TheOptogenetics}) had an effect on neuronal activity in the absence of genetically-expressed opsins (\cite{Danskin2015OptogeneticsArtifact}). 
+For this, we either implanted a small-diameter optic fiber in deep layers of the primary visual cortex or held the optic fiber above the intact skull (n = 4 and 1 mice, respectively) and performed translaminar Neuropixels recordings in the contralateral visual cortex of head-fixed awake mice in ambient darkness (Figure ~\ref{fig:wavelength_choice}A). 
+Importantly, to avoid external stimulation of the retina, the skull was covered with black cement, the ferrule sleeve was shielded with blackout material and two light-shields were positioned 2mm from each eye (\cite{Araragi2022Carbon-mixedStimulation}).
+We found that at a population level, visual cortical neurons significantly increased their firing rate upon laser stimulation alone, with either 637~nm at $\sim$8~mW, 594~nm at $\sim$7~mW or 473~nm at $\sim$2~mW (637~nm firing rate baseline = 2.28 ± 0.28~Hz versus firing rate laser ON = 5.20 ± 0.55~Hz, n = 249; 594~nm firing rate baseline = 4.73 ± 0.70 Hz versus firing rate laser ON = 6.79 ± 1.10 Hz, n = 58; 473~nm firing rate baseline = 2.85 ± 0.35 Hz versus firing rate laser ON = 4.70 ± 0.61 Hz, n = 162; p < 0.05, Wilcoxon sign-rank test; Figure~\ref{fig:wavelength_choice}B). 
+Placing the optic fiber above the intact skull did not preempt the laser-evoked increase in neuronal activity (637~nm firing rate baseline = 2.22 ± 0.36 Hz versus firing rate laser ON = 3.70 ± 0.63 Hz; 473~nm firing rate baseline = 2.63 ± 0.43 Hz versus firing rate laser ON = 4.01 ± 0.62 Hz, n = 118; p < 0.05, Wilcoxon sign-rank test). 
+Overall, the laser-evoked increase in neuronal activity was consistently observed across animals and was strongest when using 637~nm illumination: 40\% (101/249) of units recorded responded to the 637~nm laser stimulation, 33\% (19/58) to 594~nm and 27\% (43/162) to 473~nm (p < 0.05, Wilcoxon sign-rank test; Figure~\ref{fig:wavelength_choice}C). 
+Interestingly, the onset latencies of the neuronal responses to 637~nm laser stimulation were significantly faster compared to 594 and 473~nm (latency 637~nm = 80.20 ± 3.65~ms versus latency 594~nm = 110.70 ± 9.32~ms and latency 473~nm = 102.70 ± 6.14~ms, n = 249, 58, 162, respectively; p < 0.05, Kruskal-Wallis test with Tukey-Kramer multiple comparison corrections; Figure~\ref{fig:wavelength_choice}D).
+These results suggest that less scattering light (red) excites the retina internally more efficiently than does orange and blue light, but also that it is highly unlikely that the retina is stimulated externally due to light leakage from the head implant and/or optical fiber.  
+
+To test whether external illumination prompted light adaptation of the retina and, therefore, a decrease in the retina's internal stimulation (\cite{Danskin2015OptogeneticsArtifact}), we positioned two monitors in front of the animal and displayed either full-field gray iso-illumination or drifting gratings during laser stimulation.
+At a population level,  we found no increase in neuronal activity upon laser stimulation when using 594 and 473~nm wavelengths (594~nm firing rate baseline = 3.95 ± 0.48 Hz versus firing rate laser ON = 4.14 ± 49 Hz; 473~nm firing rate baseline = 2.47 ± 0.20 Hz versus firing rate laser ON = 2.40 ± 0.20 Hz, n = 58 and 240, respectively; p > 0.05, Wilcoxon sign-rank test; Figure~\ref{fig:wavelength_choice} E,F). We also found that the proportion of cells that were activated by laser stimulation greatly decreased (594~nm ambient darkness: 33\% or 19/58 versus ambient light: 5\% or 3/58; 473~nm ambient darkness: 26\% or 43/162 versus ambient light: 4\% or 10/240; p < 0.01, Fisher exact test; Figure~\ref{fig:wavelength_choice} E and F).
+However, we found that the increase in neuronal activity at the population level persisted in ambient light conditions when using the 637~nm laser (637~nm firing rate baseline = 3.41 ± 0.34 Hz versus firing rate laser ON = 6.62 ± 0.61~Hz, n = 218; p < 0.05, Wilcoxon sign-rank test) and the fraction of activated cells was comparable to the one observed under ambient darkness (ambient darkness: 40\% or 101/249, ambient light: 44\% or 96/218, p > 0.05, Fisher exact test; Figure~\ref{fig:wavelength_choice} E and F). 
+
+Taken together, these results show that in ambient darkness, optical-fiber stimulation of an area of the brain internally activates the mouse retina and subsequently the visual cortex, while it displays wavelength-specific adaptation under ambient light conditions. 
+This highlights the importance of choosing the correct wavelength when using Zapit and, crucially, to perform the control experiments necessary to exclude laser-evoked increases in neuronal activity unrelated to opsin expression.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.9\textwidth]{Figures/Wavelength_Choice/figure_SW_MVF_SW_v2.eps}
+\caption{\textbf{Optical-fiber illumination in the brain strongly activates the mouse visual cortex in ambient darkness and shows wavelength-specific adaptation under ambient light conditions.}
+(A) Schematic of the recording setup. Red (673~nm), orange (594~nm) or blue (473~nm) laser was delivered via an optical fiber implanted in the primary visual cortex (VISp, left hemisphere) of awake head-fixed mice. Translaminar Neuropixels recordings were performed on the contralateral VISp in complete darkness or under light conditions (monitors and ambient lights ON). 
+(B) Raster plots of spikes of individual units in response to 40 repetitions of 1 second of red (top), orange (middle) or blue (bottom) laser stimulation and corresponding PSTH representing the firing rate averaged across 40 trials. Recordings were performed in complete darkness (laser power: $\sim$8, $\sim$7, and $\sim$2~mW). 
+(C) Top: Average spike density functions for all units aligned to the onset (dotted line) of red, orange or blue laser stimulation (n = 249 cells, n = 3 mice; n = 58 cells, n = 1 mouse; n = 162 cells, n = 2 mice). Grey shaded area indicates SEM.  Bottom: Percentage of excited (black) and suppressed (gray) units for red, orange and blue laser stimulations. 
+(D) Top: Average normalized spike density functions). Bottom: Violin plots displaying onset latencies of red, orange and blue laser-evoked responses. 
+(E) Raster plots of spikes of individual units in response to 40 or 80 repetitions (40 displayed) of 1 second of red (top), orange (middle) or blue (bottom) laser stimulation and corresponding PSTH representing the firing rate averaged across the trials. Recordings were performed under light conditions (monitors and ambient lights ON). 
+(F) Top: Average spike density functions for all units aligned to the onset (dotted line) of red, orange or blue laser stimulation (laser power: $\sim$8, $\sim$7 and $\sim$2~mW). Grey shaded area indicates SEM.  Bottom: Percentage of excited (black) and suppressed (gray) units for red, orange and blue laser stimulations  (n = 218 cells, n = 3 mice; n = 58 cells, n = 1 mouse; n = 120 cells, n = 2 mice).}
+\label{fig:wavelength_choice}
+\end{figure}
+
+\clearpage

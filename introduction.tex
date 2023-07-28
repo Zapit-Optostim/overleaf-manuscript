@@ -1,18 +1,16 @@
 \section{Introduction}
 \label{sec:introduction}
 
- 
-With an increasing interest in systems neuroscience came improvements in methods of observing neuronal activity across multiple regions. Advances in techniques such as wide-field imaging (refs) and ephys recordings (refs) necessitated development of effective and flexible techniques of causal investigation on a matching scale.
-Since its invention, optogenetics has become the preferred experimental tool for manipulating neural activity in systems neuroscience due to its high temporal precision and genetically-constrained impact of modulation [REF]. 
+Optogenetics has become the preferred experimental tool for manipulating neural activity in systems neuroscience due to its high temporal precision and genetically-constrained impact of modulation [REF]. 
 Initially, light delivery was achieved via chronically implanted fibres (refs).
-Whilst this approach allows the animal to move around its environment, only a small, fixed, number of stimulation sites in sufficiently distant configuration (due to the physical size of implants) is possible. 
-Tapered fibres are one way to solve this problem, as they allow for targeting multiple regions along the fibre length (REF). 
-In mice it is feasible to perform targeted photo-stimulation of dorsal cortex through the intact skull. 
-This idea made it possible to address questions posed by an increasing number of studies describing patterns of wide-field Ca\textsuperscript{++} activity (). 
+Whilst this approach allows the animal to move around its environment, the size and fixed nature of the implants restricts the approach to a predetermined and small number of sites. 
+Tapered fibres provide some flexibility, as they allow for targeting multiple regions along the fibre length by altering the angle of light entering the fibre (\cite{Pisanello2018TailoringFibers}), but this approach works on small scales only. 
 
-Optogenetic photostimulation through the exposed skull in head-fixed animals allows for flexibly targeted, programmatic, stimulation.
-The method can be as simple as a fibre optic mounted on motorized micro-drives (\cite{Zatka-Haas2021SensoryDecision}) or as elaborate as imaging a digital micromirror array onto the exposed cortex [Allen, 2017, other refs].
-A particularly fruitful approach has been to use  galvanometric scan mirror (galvos) to target a focussed laser beam (\cite{Guo2014FlowMice,Li2016RobustPlanning,Heindorf2018MouseFeedback,Inagaki2018Low-dimensionalCortex, Keller2020FeedbackCortex,Voitov2022CorticalMemory,Pinto2019Task-DependentRegions,Coen2021FrontalModalities,Pinto2022MultipleCortex}). 
+
+In mice it is feasible to image the dorsal brain surface through a cleared intact skill (\cite{Steinzeig2017ChronicMice}). 
+This sort of chronic optical access allows for flexible optogenetic photostimulation without the need for permanently mounted fibres. 
+The method can be as simple as a fibre optic mounted on motorized micro-drives (\cite{Zatka-Haas2021SensoryDecision}) or as elaborate as imaging a digital micro-mirror array (\cite{Allen2017ApplicationSignaling}) onto the exposed cortex [REFS].
+Another simple and approach utilizes galvanometric scan mirror (galvos) to target a focused laser beam (\cite{Guo2014FlowMice,Li2016RobustPlanning,Heindorf2018MouseFeedback,Inagaki2018Low-dimensionalCortex, Keller2020FeedbackCortex,Voitov2022CorticalMemory,Pinto2019Task-DependentRegions,Coen2021FrontalModalities,Pinto2022MultipleCortex}). 
 Whilst the galvo approach is both powerful and relatively affordable, there remains no well packaged open source solution for implementing it.
 
 The last decade has seen widespread adoption of open source hardware tools in neuroscience, such as Open-Ephys (\cite{Siegle2017OpenElectrophysiology}), the `Pulse-Pal' pulse generator (\cite{Sanders2014ABehavior}), the `Stimjim` programmable electrical stimulator (\cite{Cermak2019Stimjim:Stimulation}), as well as countless designs for light-sheet and multi-photon microscopes. 
@@ -20,8 +18,10 @@ Surprisingly there exists no equivalent project for random access photostimulati
 Anyone wishing to implement such a system needs to build it from the ground up, which is time consuming and requires as solid understanding of optics, data acquisition, and programming.
 Here we present `Zapit', an open source galvo-based photostimulator, which we hope fills this gap, by providing a standarized, affordable and easily accessible version of this useful method.
 
-‘Zapit’ is the combination of an open-source galvo-based hardware design and an associated software ecosystem for calibration and stimulus delivery. 
+Zapit is the combination of an open-source galvo-based hardware design and an associated software ecosystem for calibration and stimulus delivery. 
 The hardware was designed with the intention of making it as compact as possible so it can fit into tight behavioural enclosures. 
 Relative low cost and short lead times ensure it remains accessible.
-Our system is flexible regarding inactivation protocols, from single points to multiple areas targeted bilaterally. 
+Our system is flexible regarding photostimulation protocols, from single points to multiple areas targeted bilaterally. 
 We demonstrate how Zapit allows for fast and easy integration of targeted photostimulation into a variety of behavioural tasks.
+
+[MORE ON THE EXPERIMENTS THAT WE WILL CARRY OUT]
