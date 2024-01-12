@@ -3,7 +3,7 @@
 \subsection{Operating principle}
 Zapit is best thought of as a software-based solution for galvo-based photo-stimulation. 
 Whilst we provide a compact hardware design (see below), there is no fixed design that is required to work with the software.
-This opens up the technique to research groups who do not have access to a machining workship.
+This opens up the technique to research groups who do not have access to a machining workshop.
 
 We implemented a hardware design similar to that used in \citet{Pinto2022MultipleCortex}.
 A 470~nm laser is fed into an XY galvo scanner then is pointed down to the animal via a dichroic fold mirror.
@@ -81,7 +81,7 @@ The GUI has tools to allow visual confirmation of the scan and sample calibratio
 \begin{figure}[h]
 \centering
 \includegraphics[width=0.6\textwidth]{example-image}
-\caption{Screenshot of stim config editor}
+\caption{[PLACEHOLDER] Screenshot of stim config editor}
 \label{fig:software01}
 \end{figure}
 
@@ -89,7 +89,7 @@ The GUI has tools to allow visual confirmation of the scan and sample calibratio
 \begin{figure}[h]
 \centering
 \includegraphics[width=0.6\textwidth]{example-image}
-\caption{A. Screenshot of scanner calibration process. 
+\caption{[PLACEHOLDER] A. Screenshot of scanner calibration process. 
 B. Screenshot of sample calibration process.}
 \label{fig:software02}
 \end{figure}
@@ -102,28 +102,33 @@ A simple two-click interface allows the user to map stereotaxic coordinates onto
 
 \subsection{Running Experiments}
 Once the system is calibrated and a stimulus configuration file is loaded, it becomes possible to run an experiment.
-There is an API available in MATLAB. 
+There is an API available in MATLAB and this can be controlled externally (see below). 
 The \texttt{sendSamples} command defines which stimulus will be presented next. 
-By default the system queues the stimulus and waits for a TTL trigger before presenting it.
-The \texttt{stopOptostim} command stops the stimulus whilst ramping down laser power over a user-defined time period.
+By default the system queues the stimulus and waits for a TTL trigger before presenting it, however stimuli can also be presented `immediately' as the command is run.
+Stimuli may either run continuously until they are stopped with a software command or they can be defined to run for a precise period of time.
+In both cases laser power is ramped down gradually over a user-defined time period upon stimulation completion.
+Fixed-duration stimuli can also be programmed to begin with a precise delay following the TTL trigger.  
 If an `experiment directory' is defined in Zapit, \texttt{sendSamples} will write there a log file listing each stimulus presentation.
 Control trials are possible where the galvos move and the masking light is on but the laser is off.
 
 \lstinputlisting[language=MATLAB]{code_snippets/basic_api_example.m}
 
-\subsection{Control via Python}
-The `zapit-Python-Bridge' (installed via PyPI) provides access to the MATLAB API via shared memory. 
-The user must start Zapit in MATLAB and conducted the scanner and sample calibration steps. 
-All subsequent operations can be done via Python with commands that resemble those used in MATLAB.
+\subsection{External Control of Zapit}
+Once calibrated, Zapit can be controlled locally or remotely via its TCP/IP server and client applications running in a different programming language or different instance of MATLAB.
+Our \texttt{zapit\_tcp\_bridge} package contains Zapit clients for MATLAB, Python, and Bonsai. 
+There is detailed documentation on the message protocol, allowing users to easily write clients in the language of their choice. 
+The following code snippet shows how a running Zapit instance can be controlled via a MATLAB instance running on a different PC on the same network.
+\lstinputlisting[language=MATLAB]{code_snippets/basic_tcp_example.m}
+
+In addition to TCP/IP, control via Python is also possible using the `zapit-Python-Bridge' (installed via PyPI) which provides access to the Zapit MATLAB API via shared memory. 
 For example:
 
 \lstinputlisting[language=Python]{code_snippets/one_stim_example.py}
 
-Zapit must remain running in MATLAB throughout. 
 
 
-\subsection{Other languages}
-To allow the use of other programming languages we propose two methods. The first method requires the user to re-implement the \texttt{sendSamples} and \texttt{stopOptoStim} commands. This is straightforward and we provide minimal examples in the main Zapit repository to assist with this. Alternatively, Zapit may be launched with a TCP/IP server that allows for inter-process communication.  Not only does this allow for other processes running in any language to communicate with Zapit, but it also allows for Zapit to be remotely controlled from a different machine.  We define a messaging protocol (some document in the appendix?  Or just in the readme of the relevant GitHub repo?) and implement this in Bonsai, Python and MATLAB.  We additionally provide minimal examples in those three languages for how commands are generated and how replies from Zapit are interpreted.
+
+
 
 \subsection{Accuracy and Repeatability}
 \subsubsection{Scanner calibration accuracy}
@@ -144,7 +149,7 @@ Feedback signals show us that the beam has arrived at the target location before
 \begin{figure}[h]
 \centering
 \includegraphics[width=0.6\textwidth]{example-image}
-\caption{A. Scanner accuarcy
+\caption{[PLACEHOLDER] A. Scanner accuarcy
 B. Repeatability and stability.}
 \label{fig:validation01}
 \end{figure}
