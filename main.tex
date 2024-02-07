@@ -2,36 +2,51 @@
 
 % Define directories which contain figures
 \usepackage{graphicx} 
-\graphicspath{{Figures/}} 
+\graphicspath{
+            {Figures/}
+            {Figures/PSF}
+            {Figures/Software_Screenshots}
+            {Figures/Operating_Principles}
+            {Figures/Stability_and_Repeatability}
+            {Figures/ML_Exp_Verification}
+            } 
 
+% For the author contributions grid
+\PassOptionsToPackage{svgnames}{xcolor}
+\usepackage{tikz} 
+\usetikzlibrary{calc,intersections}
+% fonts: you can uncomment this if you want to use pdflatex instead of xelatex (see options in Menu)
+%\usepackage{fontspec} 
+%\setmainfont{NewComputerModernSans08}
 
 %%
 % Preamble: title and author details
-\title{Zapit: A General-Purpose Photostimulation System For Neuroscience}
+\title{Zapit: An Open Source Photostimulation System For Neuroscience}
 
-\author[1]{M. Skr\k{e}towska}
-\author[2]{M. Lohse }
-\author[2]{O. M. Gauld}
-\author[2]{P. Vincent}
-\author[2]{Q. Pajot-Moric}
-\author[2]{M. V\'{e}lez-Fort}
-\author[2]{S. Weiler}
-\author[2]{S. Townsend}
-\author[2]{T. D. Mrsic-Flogel}
-\author[2]{C. A. Duan}
-\author[2]{A. Akrami}
-\author[2]{T. W. Margrie}
-\author[2,3]{R. A. A. Campbell}
 
-\affil[1]{Uinversity of Cambridge}
-\affil[2]{Sainsbury Wellcome Centre, UCL}
+\author[1,4]{M. Lohse }
+\author[1,4]{O. M. Gauld}
+\author[1,2,4]{M. Skr\k{e}towska}
+\author[1]{P. Vincent}
+\author[1]{Q. Pajot-Moric}
+%\author[1]{M. V\'{e}lez-Fort}
+%\author[1]{S. Weiler}
+\author[1]{S. Townsend}
+%\author[1]{T. W. Margrie}
+\author[1]{C. A. Duan}
+\author[1]{A. Akrami}
+\author[1]{T. D. Mrsic-Flogel}
+\author[1,3]{R. A. A. Campbell}
+
+\affil[1]{Sainsbury Wellcome Centre, UCL}
+\affil[2]{University of Cambridge}
 \affil[3]{Email: \url{rob.campbell@ucl.ac.uk}}
-
+\affil[4]{These authors contributed equally}
 %% Corresponding author
 \corrauthor{R. A. A. Campbell}
 
 %% Abbreviated author list for the running footer
-\runningauthor{Skr\k{e}towska et al.}
+\runningauthor{Lohse, Gauld, Skr\k{e}towska et al.}
 
 \addbibresource{references.bib}
 
@@ -43,13 +58,21 @@
 %%
 % Abstract and keywords
 \begin{abstract}
-Spatially targeted optostimulation is a powerful technique in systems neuroscience.
-Many studies have spatially targeted light in behaving mice by shining a small light spot at the brain through the exposed skull.
-Targeting was achieved using either manual positioning of a fibre optic or automatically positioning  light using movable mirrors. 
-Despite the advantages of the latter approach, the technology remains hard to access because no easy to use tools have been built by the open hardware community.
-Here we present `Zapit', a compact galvo-based point stimulator an associated easy to use, cross-platform, software interface. 
+Optogenetic tools are indispensable for understanding the causal neural mechanisms giving rise to animal behaviour. 
+While optogenetic actuators provide millisecond-precision control over genetically defined neural populations, successful optogenetics experiments also critically depend on associated optical hardware for targeted light delivery. 
+% Optic-fibres are suitable for certain experiments, yet fibre implantation can be invasive and limits flexibility of spatial targeting. 
+% Precise spatiotemporal control over light delivery is essential as behavioural tasks can engage distributed neural circuits with complex dynamics. 
 
-\keywords{Optogenetics, Neuroscience, Software Tool, Optics}
+% To address this, galvonometer-based laser-scanning optogenetic systems have been used to allow flexible inactivation of distributed cortical areas, through the intact skull and without the need of optic fibers. 
+% These approaches centre on controlling hardware to steer a small laser-spot to user-defined locations on the dorsal surface of the cortex of mice, which selectively activates or inhibits neurons in the local illuminated region. 
+% While experimentally powerful, bespoke laser-scanning photostimulation systems can be technically challenging and expensive to build, and at present no open source solution is available. 
+Implanted optical fibres are 
+In contrast, galvonometer-based laser-scanning optogenetic systems facilitate far greater flexibility for targeting distributed cortical areas. Yet no open source systems are available at present, and building such bespoke photostimulation systems can be technically challenging and expensive to build.
+
+Here we present Zapit, a complete open source hardware and cross-platform software system for spatio-temporally precise laser-scanning optogenetics experiments in head-fixed mice. 
+We provide step-by-step instructions on how to build, calibrate and design experiments using the Zapit system, and present quantification of optical system performance, as well as results from proof-of-principle cortical photoinhibition experiments in awake behaving mice.
+
+\keywords{Optogenetics, Neuroscience, Software Tool, Optics, Open Source}
 \end{abstract}
 
 %% 
@@ -58,14 +81,18 @@ Here we present `Zapit', a compact galvo-based point stimulator an associated ea
 \input{results.tex}
 \input{discussion.tex}
 \input{methods}
+\input{contributions.tex}
 
 %% 
 % Close
 \paragraph*{Acknowledgments}
-We thank Andy Peters for providing us with a MATLAB script for displaying a top-down view of the Allen Atlas in stereotaxic coordinates.
+We thank Andy Peters for providing us with a MATLAB script for displaying a top-down view of the Allen Atlas in stereotaxic coordinates, and inspiring us with the Neuropixels Trajectory Explorer (\href{10.5281/zenodo.7043459}{10.5281/zenodo.7043459}).
+Dale Elgar from \href{https://www.cosys.org.uk/}{COSYS Ltd.} did most of the enclosure design. 
 Graeme McPhillips at the SWC Electronics Core Facility provided advice on construction of the control electronics enclosure. 
 
-\paragraph*{Data Availability Statement.} All code is freely available on GitHub. 
+
+\paragraph*{Data Availability Statement}
+This project is developed entirely in the open: all code is available at \href{https://github.com/Zapit-Optostim}{github.com/Zapit-Optostim}.
 Data available on request.
 
 

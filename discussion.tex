@@ -1,54 +1,85 @@
 \section{Discussion}
 
-\subsection{Comparison to other scanner based solutions}
+\subsection{Zapit is a complete and ready to use solution}
+The development of Zapit began because we required a scanner-based optogenetics system for an in-house project. 
+In reviewing the literature, we found the approach has been implemented numerous times (\cite{Guo2014FlowMice,Li2016RobustPlanning,Heindorf2018MouseFeedback,Inagaki2018Low-dimensionalCortex,Pinto2019Task-DependentRegions,Keller2020FeedbackCortex,Esmaeili2021RapidResponse,Voitov2022CorticalMemory,Pinto2022MultipleCortex,Coen2023MouseDecisions}) but no complete open-source solution is available. 
+Pinto \& colleagues made available well-written and usable code (\href{https://github.com/BrainCOGS/laserGalvoControl}{laserGalvoControl}), but it was not sufficiently general purpose. 
+There was also no commercially available solution: the only option being the \href{https://www.mightexbio.com/polygon/}{Mightex Polygon}, which was overspecified for our needs since we desired only point stimulation. 
+We conducted pilot experiments of the galvo approach using a simplified version of the system presented here. 
+Zapit developed out of this solution once it became clear how useful it was.
 
-\begin{table}[h]
-    \centering
-    \begin{tabular}{c|p{100mm}}
-        Paper & Software and Hardware  \\
-    \hline
-    
-    Guo, 2014 & \textbf{Code:} RTLinux. No code provided. \textbf{Hardware:} Somewhat complicated: 200~mW laser separate AOM, relay optics. 0.5–5 ms step time for step size 0.57–35 mm. 40~Hz sinusoid with 100~ms rampdown. They report time-averaged powers.  Photostimulation locations were chosen randomly but never twice in succession. Clear skull cap: 50\% transmission. Thor Galvos.\\ 
+Zapit is a complete solution for head-fixed scanner-based optogenetics. 
+The provided \href{https://github.com/Zapit-Optostim/zapit_CAD}{CAD models for the enclosure} are easy to machine and it is straightforward, even for a beginner, to build a system around this base. 
+Our \href{https://github.com/Zapit-Optostim/zapit}{software} is well-organised, well-documented, and tested. 
+There \href{https://zapit.gitbook.io/user-guide/}{ample on-line documentation} for software install and usage. 
+Zapit is now being used by multiple labs within the Sainsbury Wellcome Centre, so we commit to maintaining the project in the long term, responding to GitHub issues, and implementing updates. 
+Furthermore, we are happy to directly assist new users in setting up the system.
 
-    Li, 2016 & \textbf{Code:} RTLinux. No code provided. \textbf{Hardware:} Same setup as Guo. We used a 40~Hz photostimulus with a sinusoidal temporal profile (1,5~mW average power). They do multiple positions. When they do this it is 1 step every 5 ms s (step time: <0.2~ms; dwell time:>4.8~ms). Peak power was adjusted depending on the number of cortical locations to achieve 1.5~mW average power per location. They do not say, however, what is the modulation frequency at a given point, but they have 8 points max in Fig. 2. 
-    
-    They have ephys to demonstrate how many spikes are silenced at a given distance from an electrode. They have devoted a reasonable amount of space to characterising the inhibition.\\ 
-    
-    Heindorf 2018 & Code: Labview not public (?) I know it's not designed for general use. \textbf{Hardware:} 473 nm laser (Shanghai Laser \& Optics Century, BL473H-200) sinusoidally modulated at 40 Hz. Laser was directed at either two locations per hemisphereat 5 mW time averaged power per location (10 mW per hemisphere), or one location at 1 mW or 2 mW time averaged power per location/hemisphere. Full-width half maximum of the laser beam was 0.8 mm (pale blue dashed circle in Figure S1A) and power dropped to 1/e at a radius of 0.5 mm. Photostimulation was performed through a cranial window. We used a galvo-galvo scan head to either cycle between the target locations or between two blank locations on the head-bar during times of no stimulation. For stimulation, the laser cycled between each of the two (four) target locations for the duration of the stimulus with a dwell time of 40 ms (20 ms) per location.\\ 
-    
-    Inagaki, 2018  & \textbf{Code:} ? \textbf{Hardware:}  Photostimulated for 1.2~s, including the 200 ms ramp, starting at the beginning of the sample or delay epoch. 40~Hz sinusoidal temporal profile (1.5~mW average power) and a 200~ms linear ramp during laser offset. We used scanning Galvo mirrors to inactivate different locations of the cortex.\\
-
-    \hline
-    \end{tabular}
-    \caption{Brief summary of existing galvo-based solutions A}
-    \label{tab:system_summary A}
-\end{table}
+We have designed Zapit to be easy to use for regular users and we hope it is sufficiently well organized to encourage power users to adopt and extend it rather than re-invent the wheel. 
+We are not aware of any significant caveats to the system, beyond the obvious constraints imposed by  sequential, point-based stimulation. 
+In the interest of transparency, the software's GitHub page maintains \href{https://github.com/Zapit-Optostim/zapit/issues?q=is%3Aissue+is%3Aopen+label%3A%22Known+obvious+issue%22}{a list of known obvious issues with the software}. 
 
 
-\begin{table}[h]
-    \centering
-    \begin{tabular}{c|p{100mm}}
-        Paper & Software and Hardware  \\
-    \hline
-    
-    Keller A, 2020 & \textbf{Code:} LabVIEW; not provided. \textbf{Hardware:} Pinhole to collimate the beam (?) then 300~mm achromat. 200~$\mu m$ spot. Thor Galvos. `[HVAs] were consecutively scanned in a circular manner with a dwell time of $\leq$ 1~ms per area (resulting in a frequency of 125~Hz for the whole cycle.' Spot size is roughly half the width of an HVA so it can just be passed over them with little actual scanning taking place.\\ 
-
-    Coen, 2022 & \textbf{Code:} MATLAB. Basic system is available but not linked to in manuscript. \textbf{Hardware:} Through the skull. Thor galvos. 40~Hz sine wave, 462~nm, 3~mW. No information on optics. Scanner enclosure, etc.\\ 
-        
-    Pinto, 2019 and 2022 & \textbf{Code:} MATLAB. Good quality code provided but not general purposed. Opto PC is a slave to another that handles the behavioral experiment \textbf{Hardware:}  CamTech scanners. 40~Hz square wave with an 80\% duty cycle and a power of 6 mW measured at the level of the skull.  This corresponds to an inactivation spread of about 2~mm. Spread depends on power. f = 160~mm, LINOS f-Theta scan lens. and a pellicle beamsplitter (CM1-BP108, Thorlabs) before reaching the cortical surface. The beamsplitter directed 8\% of the light to a camera (grasshopper3, Point Grey), allowing remote visualization of beam location.     The beam had a Gaussian profile with a diameter of 65~$\mu m$ measured as full width at half height. The system had a position accuracy of about 15~$\mu m$ (measured as the standard deviation of the distribution of the differences between target and actual beam location for 70 X-Y combinations). For bilateral inactivation, the galvanometers alternated between the two hemispheres at 200~Hz (20 mm travel time: about 250~$\mu s$).  \\ 
-    
-    Voitov, 2022 & \textbf{Code:} LabVIEW. No code provided. \textbf{Hardware:} Seems to copy Guo. The laser light was pulsed at 50~Hz, with a 50\% duty cycle. The laser power: 3~mW average (6~mW peak power) for the first 400~ms. Then 200~ms rampdown. Masking light with same dynamics as photostim. \\ 
-
-    \hline
-    \end{tabular}
-    \caption{Brief summary of existing galvo-based solutions B}
-    \label{tab:system_summary B}
-\end{table}
 \subsection{Comparison to other approaches}
-
 There are other effective approaches for rapid programmatic photostimulation in head-fixed behavioural tasks: those based on digital micro-mirror devices (DMDs) or spatial lights modulators (SLM).
 These approaches are capable of activating extended, arbitrarily-shaped areas  (\cite{Chong2020ManipulatingPerception}).
-DMD-based approaches provide the fastest pattern-switching time but are very wasteful of light and so require a roughly 4 W laser to cover an area the size of mouse dorsal cortex. 
+DMD-based solutions, such as the \href{https://www.mightexbio.com/polygon/}{Mightex Polygon}, provide the fastest pattern-switching time but are very wasteful of light and so require a roughly 4~W laser to cover an area the size of mouse dorsal cortex. 
 Whilst SLM-based solutions are more light efficient, devices with high resolution are very expensive and are slower than DMDs.
 Whilst scanner-based systems restrict photostimulation to a small number of points, this scenario is sufficient to enable a wide variety of interesting experiments. 
-Scanner-based approaches provide the most cost-effect and compact solution. 
+Scanner-based approaches provide the most cost-effective and compact solution. 
+
+Zapit is not designed for subcortical stimulation, and tapered fibres provide a powerful option for multi-area subcortical targetting along the dorsoventral axis,  as they allow for targeting multiple regions along the fibre length by altering the angle of light entering the fibre (\cite{Pisanello2018TailoringFibers}), but this approach is not appropriate for stimulating along the X/Y axis of dorsal cortex.
+
+
+\subsection{Experimental considerations when using Zapit}
+
+\subsubsection{Clear skull cap preparation} 
+In order to clear the skull, a transparent glue or `bone' cement (we use Super-Bond C and B) must be applied to the surface of the skull. 
+We have not found it necessary to thin the skull of our mice, but simply apply a thin layer (about 200-300~$\mu m$) of transparent bone cement. 
+Unsurprisingly, we have anecdotally observed that when bone cement is thick (0.5-1~mm), then we only see robust behavioural effects at high light powers (4 mW). 
+Additionally, if the cement is too thin it can crack in a long term preparation. \cite{Guo2014FlowMice} indicate around a 50\% loss of light power as the laser passes through bone cement and skull. 
+
+
+\subsubsection{Light power selection}
+The light powers used for optogenetic stimulation vary considerably between studies - even studies stimulating the same region with the same opsin. 
+Although every experimental setup will be different and have different experimental constraints, we recommend that when using Zapit, to start at 1-5 - 2 mW average light power as a default (when using VGAT-ChR2 mice). 
+Behavioural effects can scale with light power (Figure~\ref{fig:ALM_behav_verification}F and \ref{fig:Scanning_setup_exp_verification_fig}C), and at 2mW we consistently see strong behavioural effects when stimulating sensory areas like V1 (Figure~\ref{fig:Scanning_setup_exp_verification_fig}), or frontal areas like ALM (Figure~\ref{fig:ALM_behav_verification}) when using Zapit. 
+In testing Zapit, we have found anecdotal evidence that when using 2~mW stimulation, we can observe completely distinct behavioural affects in areas 1~mm apart. 
+Furthermore, at 2~mW average light power with a 91 micrometer X/Y PSF, and with an expected light loss of around 50\% as the light traverses the skull and bone cement, heating of the neural tissue as a result of the light stimulation will be minimal - even at long term stimulation (\cite{Stujenske2015ModelingOptogenetics}).
+When using transgenic lines expressing opsins brain wide (such as in VGAT-ChR2-eYFP mice), we note that stimulation with 4~mW or above should be used with caution, as it in some cases may cause off-target behavioural effects indicating either that the light scatters widely along cortex (\cite{Li2019SpatiotemporalCircuits}), or that light affects structures below cortex (\cite{Babl2019TheInterneurons}). 
+
+\subsubsection{Masking of laser stimulation trials}
+Masking the mouse's ability to see when the laser is stimulating is paramount for the interpretation of the effects on behaviour caused by Zapit stimulation. 
+We recommend masking the laser by providing a color-matched light stimulation from LEDs above the mouse's head on every trial which matches the stimulation profile of the laser (e.g., 40~Hz sinusoid) together with keeping the box in which the mouse performs the task well-lid with an white LED strip. 
+Together, this masking approach appears to entirely mask the ability of the mouse to see the laser stimulation with blue light. 
+Extra caution should be taken when using longer wavelengths such as yellow or red light, as the longer wavelength more easily travels through the brain tissue and hits the back of the retina, and can in certain cases be more difficult to fully mask (\cite{Danskin2015OptogeneticsArtifact}). 
+
+\subsection{Good practice: measures to report when using Zapit}
+We encourage people who use Zapit (and similar setups) to report a minimal set of standardised parameters to aid replication, comparability and consistency across experiments and laboratories:
+
+\begin{itemize}
+    \item Average light power
+    \item Peak light power
+    \item Stimulation frequency and profile (e.g. 40~Hz sinusoid), and duty cycle.
+    \item Number of concurrent stimulation sites (i.e., number of stimulation sites effectively silenced simultaneously: single site bilaterally inactivated would be 2 in this case).
+    \item Laser stimulation duration
+    \item Laser ramp down duration (and whether this period is included in the  light duration, or follows it)
+    \item Whether or not masking light was used, and if so the parameters (i.e. color, frequency, etc.)
+    \item Percentage of trials with stimulation per area, per light power, and total number of trials with stimulation.
+\end{itemize}
+
+\subsection{Future Plans}
+In the immediate future we plan to spend more time validating the system and fleshing out existing features. 
+For example we will further develop the stimulus config generator GUI to allow patterns of multiple points to be more easily created for a single trial, as currently this ability is rudimentary. 
+Zapit has the capability to generate eletrophysiology-friendly waveforms shaped to reduce the photoelectric effect. These waveforms have not yet been tested. We will test them and conduct electrophysiology-based validation experiments. 
+In the longer term we are considering the following enhancements to the system:
+
+\begin{itemize}
+    \item The ability to perform near-real-time closed loop stimulation, as this feature is available with the \href{https://github.com/BrainCOGS/laserGalvoControl}{laserGalvoControl} project (\cite{Pinto2019Task-DependentRegions}). 
+    \item Software tools to make it easier to re-position the head in the same location as previous sessions.
+    \item Linking atlas generation to the \href{https://brainglobe.info/}{brainglobe} ecosystem and allowing different mouse atlases or even atlases from different species.
+\end{itemize}
+\noindent
+We hope Zapit is a tool that will grow and find uses outside of our institute and specialtities. 
+
+\clearpage

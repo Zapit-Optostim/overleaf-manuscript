@@ -1,6 +1,5 @@
 function runThroughAllStimPoints
     % Present stimulus at each location for one second
-    %
 
     % Get the API object from the base workspace
     hZP = zapit.utils.getObject;
