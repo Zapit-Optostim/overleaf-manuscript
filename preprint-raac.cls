@@ -122,9 +122,9 @@
 
 \newcommand{\more@metadata}{%
   \emph{\bfseries \@journalname\ (\the\year)}\par
-  \textcolor{PANDarkBlue}{\bfseries DOI: }10.1017/pan.xxxx.xx\par
+  %\textcolor{PANDarkBlue}{\bfseries DOI: }10.1017/pan.xxxx.xx\par
   \textcolor{PANDarkBlue}{\bfseries\@corrauthorname}\\\@corrauthor\par
-  \textcopyright\space The Author(s) \the\year.
+  \textcopyright\space The Authors \the\year.
   Published on bioRxiv.
 }
 \newcommand{\@cover@logo}{%

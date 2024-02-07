@@ -2,27 +2,32 @@
 \label{sec:introduction}
 
 Optogenetics has become the preferred experimental tool for manipulating neural activity in systems neuroscience due to its high temporal precision, reversibility, and both genetically and spatially constrained impact of modulation (\cite{Li2019SpatiotemporalCircuits,Emiliani2022OptogeneticsSystems.}).
-Currently, light delivery for activation of optogenetic actuators is predominantly achieved via chronically implanted fibres (e.g. \cite{Mayrhofer2019DistinctTransformation,Babl2019TheInterneurons,Lohse2021SubcorticalMice,Duan2021ATask,Emiliani2022OptogeneticsSystems.}) - or by implanting a window over the cortical site (e.g. \cite{Schneider2018AMovement,Liu2016Cortico-fugalBehaviour}).
-Whilst the fiber based approach allows for manipulation of neural activity in both head-fixed and freely moving behavioural paradigms, the size and fixed nature of implants restricts the approach to a predetermined and small number of sites. 
+Currently, light delivery for activation of optogenetic actuators is predominantly achieved either via chronically implanted fibres (e.g. \cite{Mayrhofer2019DistinctTransformation,Babl2019TheInterneurons,Lohse2021SubcorticalMice,Duan2021ATask,Emiliani2022OptogeneticsSystems.}), or by implanting a window over the cortical site (e.g. \cite{Schneider2018AMovement,Liu2016Cortico-fugalBehaviour}).
+Whilst fiber optics allow for manipulation of neural activity in both head-fixed and freely moving behavioural paradigms, the size and fixed nature of implants restricts the approach to a predetermined and small number of sites. 
  
-In mice the skull is thin enough (i.e., $\sim$250~$\mu m$; \cite{Ghanbari2019Craniobot:Microsurgeries}) that light passes easily through it, and it is feasible to image the dorsal brain surface through the intact skull (\cite{Steinzeig2017ChronicMice,Guo2014FlowMice}) of a head-fixed animal. 
+In mice, the skull is thin enough (i.e., $\sim$250~$\mu m$; \cite{Ghanbari2019Craniobot:Microsurgeries}) that light passes easily through it, and it is feasible to image the dorsal brain surface through the intact skull (\cite{Steinzeig2017ChronicMice,Guo2014FlowMice}) of a head-fixed animal. 
 Similarly, this optical access through the skull allows for flexible, random access, optogenetic photostimulation across the dorsal cortical surface without the constraints imposed by permanently implanted fibres. 
 
 Various approaches have been employed for light delivery through the intact skull. 
 A fibre optic can be mounted on a motorized micro-drive (\cite{Zatka-Haas2021SensoryDecision}), a digital micro-mirror device (DMD, \cite{Allen2017ApplicationSignaling}) can be imaged on to the exposed brain (e.g. \cite{Chong2020ManipulatingPerception}) to activate extended regions and generate arbitrary illumination patterns, or a pair of galvanometric scan mirror (galvos) can direct a focused laser beam (\cite{Guo2014FlowMice,Li2016RobustPlanning,Heindorf2018MouseFeedback,Inagaki2018Low-dimensionalCortex,Pinto2019Task-DependentRegions,Keller2020FeedbackCortex,Esmaeili2021RapidResponse,Voitov2022CorticalMemory,Pinto2022MultipleCortex,Coen2023MouseDecisions}). 
-Of these solutions, the galvo-based option offers the best efficiency and utility/affordability trade-off: scanners are much faster than motorized drives and the required laser power is much lower than a DMD because only a single spot is stimulated at any one time and power loss is minimised. 
+
+Of these solutions, the galvo-based option offers the best efficiency and utility/affordability trade-off: scanners are much faster than motorized drives and the required laser power is much lower than a DMD because only a single spot is stimulated at any one time, minimising power loss. 
 The high speed of the scanners means multiple points can be stimulated in close succession, allowing for effective silencing of multiple areas simultaneously. 
 Although several groups have implemented the galvo-based technique, there remains no commercial or accessible open source solution for implementing it.
 
 The last decade has seen widespread adoption of open source hardware tools in neuroscience, such as `Open-Ephys' (\cite{Siegle2017OpenElectrophysiology}), the `Pulse-Pal' pulse generator (\cite{Sanders2014ABehavior}), the `Stimjim' programmable electrical stimulator (\cite{Cermak2019Stimjim:Stimulation}), as well as countless designs for light-sheet and multi-photon microscopes. 
-Surprisingly there exists no equivalent project for random access photostimulation in head-fixed animals.
+Surprisingly, there exists no equivalent project for random access photostimulation in head-fixed animals.
 Anyone wishing to implement such a system needs to build it from the ground up, which is time consuming and requires knowledge of of optics, data acquisition, and programming.
 
 Here we present `Zapit', an open source galvo-based photostimulator, which provides a standardized, affordable, and easily accessible version of this powerful experimental tool.
-Zapit is the combination of an open source galvo-based hardware design and associated software tools for calibration and stimulus delivery, which is used and maintained by community of developers and experimentalists. 
+Zapit is the combination of an open source galvo-based hardware design and software tools for calibration and stimulus delivery, which are used and maintained by community of developers and experimentalists. 
 Our hardware design is compact and is easy to work with.
 All the parts we recommend have short lead times and are easy to work with, to ensure the system remains accessible. 
 Total construction cost is about 15,000 GBP for a system built with a high-end laser.
 Users who wish to implement their own hardware design can still use our MATLAB software, which handles calibration, stimulus design, and stimulus delivery. 
 We have also implemented a TCP/IP communications interface to allow control of stimulus delivery from external applications, enabling users to run their experiments in the programming language of their choice. 
 We demonstrate how Zapit allows for fast and easy integration of targeted photostimulation of cortex in a set of proof of principle behavioural experiments.
+
+% Here we present \textit{Zapit}, a fully open source galvo-based photostimulation system.
+% \textit{Zapit} is the combination of a compact hardware design comprising easily acquired and affordable  parts (around 15,000GBP for a system built with high-end lasers), and software tools for calibration and stimulus delivery which are maintained by a community of developers and experimentalists. 
+% We demonstrate how Zapit allows for fast and easy integration of targeted photostimulation of cortex in a set of proof of principle behavioural experiments.

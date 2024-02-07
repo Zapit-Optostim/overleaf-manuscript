@@ -58,18 +58,25 @@
 %%
 % Abstract and keywords
 \begin{abstract}
+
+% Optogenetic tools are indispensable for understanding the causal neural mechanisms giving rise to animal behaviour. 
+% While optogenetic actuators can accommodate millisecond-precision control over genetically defined neural populations, successful optogenetics experiments also critically depend on associated optical hardware for precise spatiotemporal targeting of light delivery. 
+
+% Optical fibres are suitable for certain experiments, but fibre implantation can be invasive and limits flexibility of spatial targeting. In contrast, galvonometer-based laser-scanning optogenetic systems facilitate far greater flexibility for targeting distributed cortical areas. Yet no open source systems are available at present, and building such bespoke photostimulation systems can be technically challenging and expensive.
+
+% Here we present Zapit, a complete open source hardware and cross-platform software system for spatio-temporally precise laser-scanning optogenetics in head-fixed mice. 
+% We provide step-by-step instructions on how to build, calibrate and design experiments using the Zapit system, and present quantification of optical system performance, as well as results from proof-of-principle cortical photoinhibition experiments in awake behaving mice.
+
 Optogenetic tools are indispensable for understanding the causal neural mechanisms giving rise to animal behaviour. 
 While optogenetic actuators provide millisecond-precision control over genetically defined neural populations, successful optogenetics experiments also critically depend on associated optical hardware for targeted light delivery. 
-% Optic-fibres are suitable for certain experiments, yet fibre implantation can be invasive and limits flexibility of spatial targeting. 
-% Precise spatiotemporal control over light delivery is essential as behavioural tasks can engage distributed neural circuits with complex dynamics. 
+Optic-fibres are suitable for certain experiments, however fibre implantation can be invasive and limits flexibility of spatial targeting. 
+Precise spatiotemporal control over light delivery is essential as behavioural tasks can engage distributed neural circuits with complex dynamics. 
 
-% To address this, galvonometer-based laser-scanning optogenetic systems have been used to allow flexible inactivation of distributed cortical areas, through the intact skull and without the need of optic fibers. 
-% These approaches centre on controlling hardware to steer a small laser-spot to user-defined locations on the dorsal surface of the cortex of mice, which selectively activates or inhibits neurons in the local illuminated region. 
-% While experimentally powerful, bespoke laser-scanning photostimulation systems can be technically challenging and expensive to build, and at present no open source solution is available. 
-Implanted optical fibres are 
-In contrast, galvonometer-based laser-scanning optogenetic systems facilitate far greater flexibility for targeting distributed cortical areas. Yet no open source systems are available at present, and building such bespoke photostimulation systems can be technically challenging and expensive to build.
+To address this, galvonometer-based laser-scanning optogenetic systems have been used to allow flexible inactivation of distributed cortical areas, through the intact skull and without the need of optic fibers. 
+These approaches centre on controlling hardware to steer a small laser-spot to user-defined locations on the dorsal surface of the cortex of mice, which selectively activates or inhibits neurons in the local illuminated region. 
+While experimentally powerful, bespoke laser-scanning photostimulation systems can be technically challenging and expensive to build, and at present no open source solution is available. 
 
-Here we present Zapit, a complete open source hardware and cross-platform software system for spatio-temporally precise laser-scanning optogenetics experiments in head-fixed mice. 
+Here we present ‘Zapit’, a complete open source hardware and cross-platform software system for spatio-temporally precise laser-scanning optogenetics experiments in head-fixed mice. 
 We provide step-by-step instructions on how to build, calibrate and design experiments using the Zapit system, and present quantification of optical system performance, as well as results from proof-of-principle cortical photoinhibition experiments in awake behaving mice.
 
 \keywords{Optogenetics, Neuroscience, Software Tool, Optics, Open Source}
@@ -89,6 +96,7 @@ We provide step-by-step instructions on how to build, calibrate and design exper
 We thank Andy Peters for providing us with a MATLAB script for displaying a top-down view of the Allen Atlas in stereotaxic coordinates, and inspiring us with the Neuropixels Trajectory Explorer (\href{10.5281/zenodo.7043459}{10.5281/zenodo.7043459}).
 Dale Elgar from \href{https://www.cosys.org.uk/}{COSYS Ltd.} did most of the enclosure design. 
 Graeme McPhillips at the SWC Electronics Core Facility provided advice on construction of the control electronics enclosure. 
+We thank Morio Hamada for providing feedback on the manuscript. 
 
 
 \paragraph*{Data Availability Statement}

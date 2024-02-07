@@ -6,17 +6,16 @@ Whilst we provide a compact hardware design (see below), the software is flexibl
 This opens up the technique to research groups who do not have access to a machining workshop.
 
 We implemented a hardware design similar to that used in \citet{Pinto2022MultipleCortex}.
-A 470~nm laser is fed into an XY galvo scanner then is pointed down to the animal via a dichroic fold mirror.
+A 470~nm laser is fed into an XY galvo scanner, and is then pointed down to the animal via a dichroic fold mirror.
 A f=100~mm scan lens focuses the beam onto the sample.
-This lens doubles as an objective: imaging the sample and any excited green fluorescence onto a camera via a tube lens (Fig.~\ref{fig:operating_principle_01}A).
+This lens doubles as an objective, imaging the sample and any excited green fluorescence onto a camera via a tube lens (Fig.~\ref{fig:operating_principle_01}A).
 The galvo waveforms are shaped to minimise opto-mechanical noise, but nonetheless we designed a sealed enclosure for the scanners (Fig.~\ref{fig:operating_principle_01}B).
 
-The Zapit software comprises a user-friendly GUI for performing the two critical alignment steps (Fig.~\ref{fig:operating_principle_01}C). 
-\textbf{1.} Aligning the scanners with the camera, enabling the beam to point accurately to any desired location in the image. 
-\textbf{2.} Mapping stereotaxic coordinates onto the exposed skull.  
-Calibration takes about a minute and, once calibrated, the system will place the beam in any desired location defined by stereotaxic coordinates. 
+The Zapit software comprises a user-friendly GUI for performing the two critical alignment steps (Fig.~\ref{fig:operating_principle_01}C): 
+\textbf{1}, Aligning the scanners with the camera, enabling the beam to point accurately to any desired location in the image, and  \textbf{2}, mapping stereotaxic coordinates onto the exposed skull.  
+Calibration takes about a minute, and once calibrated, the system will place the beam in any desired location defined by stereotaxic coordinates. 
 
-Once calibrated, a simple API allows the user to integrate stimulation into an experimental paradigm. 
+A simple API allows the user to integrate stimulation into an experimental paradigm. 
 The system supports stimulation of one or more points in a given trial; points are stimulated sequentially. 
 In a trial with a single stimulation location, the laser is parked in one place and flashed on and off at 40~Hz with a 50\% duty cycle. 
 In a trial with two locations, the beam cycles between them at 40~Hz such that each point experiences a 50\% duty cycle. 
@@ -42,7 +41,7 @@ Stimuli can be integrated into experimental paradigms easily using the MATLAB AP
 
 
 \subsection{Hardware Design}
-For flexible and efficient stimulus control we implemented ScannerMax Saturn 5 scanners into the system, as these perform well and are commercially available (Saturn 5B Dual Axis Galvanometer Scanner; Edmund Optics). 
+We used ScannerMax Saturn 5 (available from Edmund Optics) for directing the beam. 
 Images were acquired using a USB-3 Basler acA1920-40um. 
 We experimented with a few different lens combinations but eventually settled on an f=100~mm Pl\"{o}ssl objective composed of two ThorLabs AC254-200-A (f=200~mm) achromats.
 A Pl\"{o}ssl is a compound lens composed of two identical achromatic doublets arranged such that their positive (convex) surfaces are near touching. 
@@ -63,7 +62,7 @@ We wanted to avoid this, as the minuscule NA of our current arrangement makes mi
 
 \clearpage
 
-We estimated the theoretical laser spot size in Zemax as having a PSF with a FWHM of 70~$\mu m$.
+We modelled the system in Zemax and estimated the theoretical laser spot as having a PSF with a FWHM of 70~$\mu m$.
 This value is estimated using an f=150~mm objective, slightly longer than the 100~mm we eventually settled on, and a 0.8 mm diameter laser beam.
 We measured the PSF full width half max as 91~$\mu m$ (Fig.~\ref{fig:hardware01}).
 A larger input beam diameter or a shorter focal length objective would increase excitation NA and so decrease FWHM. 
@@ -89,7 +88,8 @@ The size and shape of the beam is very similar across all positions, showing the
 
 \subsection{Software Design: calibration}
 Calibration is a simple two-step procedure. 
-First the laser is aligned to the camera image by scanning the beam over a grid of points and conducting an affine transform between the intended and observed beam locations 
+First, the laser is aligned to the camera image. 
+This is achieved by by scanning the beam over a grid of points and then conducting an affine transform between the intended and observed beam locations 
 This is an automated procedure, initiated by a button-click in a user-friendly GUI (Fig.~\ref{fig:scanner_calib_01}A). 
 
 \begin{figure}[h]
@@ -111,7 +111,7 @@ The user can then load in target points defined in coordinate space, and confirm
 The user then defines the position of the skull in the FoV using two landmarks, such as bregma and bregma +3~mm AP. 
 The two coordinates are marked onto the skull during the clear skull cap and head plate surgery.
 Whilst clicking these coordinates, a brain outline is dynamically positioned, scaled, and rotated, providing instant feedback on the calibration (Fig.~\ref{fig:scanner_calib_01}B). 
-This process assumes the skull is parallel to the objective, which should be ensured during the implant of the head plate (see Methods) 
+This process assumes the skull is parallel to the objective, which should be ensured during head plate implantation (see Methods) 
 
 \subsection{Software Design: defining stimulus locations}
 Locations to be stimulated are defined in stereotaxic space and stored in a human-readable stimulus configuration file, which can be generated using a GUI (Fig.~\ref{fig:stim_config_editor_01}A) or via direct editing of the text file (YAML).
@@ -135,21 +135,37 @@ All squares with the same number are associated with a single trial and will be 
 
 
 \subsection{Running Experiments in MATLAB}
-Once the system is calibrated and a stimulus configuration file is loaded, it becomes possible to integrate photostimulation into an experiment.
-This is achieved using Zapit's MATLAB API, which allows presentation of precisely timed photo-stimuli.  
-By default the system queues the photo-stimulus with the \texttt{sendSamples} command and waits for the NI DAQ to receive a TTL trigger before presenting it. We confirmed this enables reliable and low latency (\textasciitilde 0.75 ms) presentation of photostimulation (Fig.~\ref{fig:HardwareTriggering_01}A).  Stimuli can also be presented with a fixed delay (Fig.~\ref{fig:HardwareTriggering_01}B) which allows for precise stimulus alignment with different temporal epochs during a behavioural task.
-Stimuli can also either run continuously until they are stopped with another software command or they can be defined to run for a precise period of time.
-In all cases, laser power is ramped down gradually over a user-defined time period upon stimulation completion (Fig.~\ref{fig:HardwareTriggering_01}).
+Once the system is calibrated and a stimulus configuration file is loaded, Zapit's MATLAB API can be used to deliver precisely timed photo-stimulation.  
+Different experiments require stimuli to be presented in different ways or place specific demands on stimulus timing. 
+We accommodate a variety of different approaches, all of which work via Zapit's \texttt{sendSamples} function.
+
+When photo-stimulus duration is not known in advance, we send the waveforms that will produce the next stimulus to the NI DAQ, and either begin stimulation right away or defer it until a TTL trigger is received.
+The latter allows for precise timing of stimulus onset. 
+Once started, the stimulus continues indefinitely until a software command is issued to stop it. 
+Photo-stimulation ends with a gradual ramp-down in power (e.g. over a 250~ms time period).
 This avoids large rebounds in activity, which are common following cessation of photoinhibition with light-sensitive opsins.
-If an `experiment directory' is defined in Zapit, \texttt{sendSamples} will write a log file there listing each stimulus presentation.
-Control trials are possible where the galvos move and the optional masking light is on but the photostimulation laser is off. The following minimal example shows how to present all available stimuli sequentially.
+
+The preceding approach is effective in some cases, but in others a precise stimulation duration is called for. 
+In such cases, stimulus duration is defined in advance and, as before, the stimuli can be either software or hardware triggered.
+Fig.~\ref{fig:HardwareTriggering_01}A demonstrates the timing precision of hardware-triggered, fixed-duration, stimuli.
+Onset jitter is of the order of 0.75~ms with respect to the TTL trigger pulse.
+Fixed-duration stimuli can also be presented with a fixed delay following the TTL pulse (Fig.~\ref{fig:HardwareTriggering_01}B), allowing for precise stimulus alignment with different temporal epochs of a behavioural task.
+
+Zapit has the capability to write a log file listing each stimulus presentation, so the order of events can be reconstructed \textit{post-hoc}.
+This is particularly useful in scenarios where the user asked Zapit to produce randomly chosen stimuli. 
+Finally, control trials are possible where the galvos move and the optional masking light is on, but the photostimulation laser is off. 
+The following minimal code example shows how to present all available stimuli sequentially.
 \lstinputlisting[language=MATLAB]{code_snippets/basic_api_example.m}
 
 
 \begin{figure}[h]
 \centering
 \includegraphics[width=.8\textwidth]{Figures/Stability_and_Repeatability/Triggering.png}
-\caption{\textbf{Temporally precise photostimulation triggering. A}. Low latency and reliable hardware-triggered photostimulation. A photodiode was positioned at the sample plane to measure photostimulation light (black traces). Optogenetic stimulation (800 ms + 250 ms rampdown, 40 Hz) was triggered using a 100 ms hardware trigger (red traces) across trials. Photodiode and hardware trigger channels were recorded at 5 kS/s using an oscilloscope (PicoScope), and data for each trial were aligned to the hardware trigger onset. The inset on the right shows a close-up overlay of hardware (red) and photodiode (black) traces aligned to the hardware trigger onset for 80 trial repetitions. 
+\caption{\textbf{Temporally precise photostimulation triggering. A}. 
+Low latency and reliable hardware-triggered photostimulation. 
+A photodiode was positioned at the sample plane to measure photostimulation light (black traces). Optogenetic stimulation (800 ms + 250 ms rampdown, 40 Hz) was triggered using a 100 ms hardware trigger (red traces) across trials. 
+Photodiode and hardware trigger channels were recorded at 5 kS/s using an oscilloscope (PicoScope), and data for each trial were aligned to the hardware trigger onset. 
+The inset on the right shows a close-up overlay of hardware (red) and photodiode (black) traces aligned to the hardware trigger onset for 80 trial repetitions. 
 \textbf{B} Same as A, but showing the photodiode response on trials where a 1000 ms onset delay was added to the stimulation design }
 \label{fig:HardwareTriggering_01}
 \end{figure}
@@ -165,7 +181,7 @@ There is \href{https://github.com/Zapit-Optostim/zapit-tcp-bridge/blob/main/Mess
 The following code snippet shows how a running Zapit instance can be controlled via a MATLAB instance running on a different PC on the same network.
 Equivalent code exists for Python. 
 \lstinputlisting[language=MATLAB]{code_snippets/basic_tcp_example.m}
-
+\noindent
 In addition to TCP/IP, control via Python can also be achieved using the `zapit-Python-Bridge' (installed via pip), which provides access to the local Zapit MATLAB API instance via shared memory. 
 For example:
 \lstinputlisting[language=Python]{code_snippets/one_stim_example.py}
@@ -174,13 +190,10 @@ For example:
 \subsection{Beam Positioning Accuracy}
 In trials where $\ge$2 points are stimulated, the beam must be disabled (blanked) whilst it is traveling between locations (Fig.~\ref{fig:beam_pos_01}A).
 When the beam is left on, there is the possibility of off-target stimulation (Fig.~\ref{fig:beam_pos_01}B).
-We implemented blanking and power control using the built-in modulation facility of our Coherent Obis laser. For simplicity we enforced a fixed motion time of approximately 0.5~ms between any pair of positions. 
+We implemented blanking and power control using the built-in modulation facility of our Coherent Obis laser. For simplicity, we enforced a fixed motion time of approximately 0.5~ms between any pair of positions. 
 Figures~\ref{fig:beam_pos_01}C \& D show that the beam is disabled during this period. 
-The scanner position feedback trace from a single trial is shown in blue. 
-The laser is pointed at a 1~cm diameter photodiode and the orange trace represents the signal from this sensor. 
-When the orange trace is low the laser is off. 
-The blanking period of the laser is perfectly timed to correspond with the motion epoch. 
-The inset panel in Fig~\ref{fig:beam_pos_01}C shows 100 overlaid trials to demonstrate reliability.
+The blanking period of the laser was manually tuned to perfectly correspond with the motion epoch. 
+This timing was completely reliable across trials. 
 
 \begin{figure}[h]
 \centering
@@ -193,7 +206,8 @@ Leaving the beam on during the whole stimulation cycle risks activating off-targ
 The lines between points in this image are due to the beam travelling between points.
 \textbf{C \& D} show in more detail that the beam is disabled during motion. 
 The scanner position feedback trace from a single trial is shown in blue. 
-The orange trace represents a signal from a photo-sensor: low indicates the laser is off. 
+The laser is pointed at a 1~cm diameter photodiode and the orange trace represents the signal from this sensor.
+When the orange trace is low the laser is off. 
 The inset panel in \textbf{C} shows 100 overlaid trials to demonstrate reliability.}
 \label{fig:beam_pos_01}
 \end{figure}
@@ -212,10 +226,11 @@ Following task learning, we programmed Zapit to inactivate left or right ALM whi
 Photoinhibition was delivered on a third of trials and randomised across left and right hemispheres within the same session. 
 The optogenetic stimulus was time locked to the onset of the sensory cue and lasted until the beginning of the response window (Fig.~\ref{fig:ALM_behav_verification}B,D). 
 
-On control trials behavioural discrimination showed clear adherence to the signed lateralised difference in whisker-stimulation rate. 
-Mice performed with high choice accuracy when the stimulus difference was large and at chance when the stimulation rate was matched bilaterally (Fig.~\ref{fig:ALM_behav_verification}E "Laser OFF"). 
+On control trials, behavioural discrimination showed clear adherence to the signed lateralised difference in whisker-stimulation rate. 
+Mice performed with high choice accuracy when the stimulus difference was large, and at chance level when the stimulation rate was matched bilaterally (Fig.~\ref{fig:ALM_behav_verification}E "Laser OFF"). 
 However, behavioural decisions were markedly biased on ALM photoinhibition trials. Unilateral photoinhibition biased choices towards the ipsilateral lickport (Fig.~\ref{fig:ALM_behav_verification}E), consistent with suppression of contralateral motor processing (\cite{Guo2014FlowMice}). 
-We then performed additional experiments to characterise the relationship between laser power, unilateral ALM inactivation and behavioural performance. Increasing laser power resulted in incremental decreases in performance on contralateral whisker stimulation trials (Fig.~\ref{fig:ALM_behav_verification}F). 
+% We then performed additional experiments to characterise the relationship between laser power, unilateral ALM inactivation, and behavioural performance. 
+Increasing laser power resulted in incremental decreases in performance on contralateral whisker stimulation trials (Fig.~\ref{fig:ALM_behav_verification}F). 
 Our results therefore demonstrate that the Zapit system can be used for flexible, targeted optogenetic manipulations of cortex and can produce reliable and specific effects in awake behaving mice contingent on both perturbation location and stimulus strength. 
 
 \begin{figure}[h]
@@ -252,14 +267,14 @@ Data show the mean and error bars show 95\% CI across sessions.}
 
 \subsection{Experimental verification of Zapit: Bilateral multi-site and multi-power stimulation in a visual decision making task}
 We next tested the performance of Zapit using bilateral stimulation for multiple sites and multiple light powers in the same session. 
-We trained mice on a visual change detection task and tested the effect of stimulating an area expected to influence visual guided behaviour: primary visual cortex (V1), and a control area not expected to influence visual guided behaviour: primary somatosensory cortex (S1). In the same session we stimulated each of these areas 7\% of the trials with either 2 mW or 4 mW laser power. 
+We trained mice on a visual change detection task and tested the effect of stimulating primary visual cortex (V1), an area expected to influence visual guided behaviour, as well as a control area not expected to influence visual guided behaviour: primary somatosensory cortex (S1). In the same session we stimulated each of these areas 7\% of the trials with either 2 mW or 4 mW laser power. 
 
 Mice were trained to be stationary on a running wheel while observing a drifting grating stimulus, whose speed fluctuated noisily every 50 ms around a geometric mean temporal frequency (TF) of 1Hz (STD = 0.25 octaves), and to report a sustained increase in its speed by licking a central reward spout. 
 The mice were motivated to react promptly upon detecting a change by limiting the time in which the reward was accessible to 2.15 seconds . 
-Since changes in speed were often ambiguous, their timing unpredictable and the change magnitude randomised, mice had to continuously track the visual stimulus for a prolonged duration (3-15.5 s) prior to the change (Fig.~\ref{fig:Scanning_setup_exp_verification_fig}A).
+Since changes in speed were often ambiguous, their timing unpredictable, and the change magnitude randomised, mice had to continuously track the visual stimulus for a prolonged duration (3-15.5 s) prior to the change (Fig.~\ref{fig:Scanning_setup_exp_verification_fig}A).
 
-On laser trials, Zapit began bilateral stimulation 250 ms prior to stimulus onset, and lasted until the end of the stimulus (whether ended by a mouse action, or after the respond window expired), and subsequently ramped down over 250 ms (Fig.~\ref{fig:Scanning_setup_exp_verification_fig}A). 
-Throughout, the laser fluctuated according to a bilateral 40 Hz square pulse pattern with a 50\% duty cycle. 
+On trials with photoinhibition, Zapit began bilateral stimulation 250 ms prior to stimulus onset, and lasted until the end of the stimulus (whether ended by a mouse action, or expiration of the response window), and subsequently ramped down over 250 ms (Fig.~\ref{fig:Scanning_setup_exp_verification_fig}A). 
+Throughout the trial, the laser fluctuated according to a bilateral 40 Hz square pulse pattern with a 50\% duty cycle. 
 We also presented a blue LED masking light on every trial to avoid mice being able to see the laser on laser trials. 
 This masking light had the same stimulation profile (i.e., 40 Hz pulses) as the laser stimulation on opto-stimulation trials.
 
@@ -279,6 +294,13 @@ A blue LED masking light matching the stimulation profile of the laser was prese
 
 \clearpage
 
-As expected, we found that silencing V1 created a robust deficit in visual detection of changes in temporal frequency which scaled with increase in light power (Fig.~\ref{fig:Scanning_setup_exp_verification_fig}B,C). At the same time, we did not find that stimulation of S1 had any effect on the mice's ability to detect the visual changes at 2 mW (Fig.~\ref{fig:Scanning_setup_exp_verification_fig}B,C). As shown by the example mouse, clear separation of S1 at 4 mW can be achieved (Fig.~\ref{fig:Scanning_setup_exp_verification_fig}B). However, when stimulating S1 with 4mW laser power, we did see a slight but non-significant flattening of the psychometric curve in the average across mice, possibly indicating that the the light stimulation in some cases may have been affecting higher-order visual areas around 1.5 mm caudal to the stimulation target in S1 when light powers were high (Fig.~\ref{fig:Scanning_setup_exp_verification_fig}C). 
+As expected, we found that silencing V1 created a robust deficit in detection of changes in temporal frequency, which scaled with increasing light power (Fig.~\ref{fig:Scanning_setup_exp_verification_fig}B,C). 
+In contrast, we did not find that stimulation of S1 had any effect on the mice's ability to detect the visual changes at 2 mW (Fig.~\ref{fig:Scanning_setup_exp_verification_fig}B,C). As shown by the example mouse, clear separation of S1 at 4 mW can be achieved (Fig.~\ref{fig:Scanning_setup_exp_verification_fig}B). However, when stimulating S1 with 4mW laser power, we did see a slight but non-significant flattening of the psychometric curve in the average across mice, possibly indicating that the the light stimulation in some cases may have been affecting higher-order visual areas around 1.5 mm caudal to the stimulation target in S1 when light powers were high (Fig.~\ref{fig:Scanning_setup_exp_verification_fig}C). 
 
-This demonstrates that Zapit can effectively modulate activity at multiple cortical areas at multiple light powers in the same session to directly compare effects of silencing distinct areas bilaterally in the same sessions. 
+% The above paragraph was a bit tricky to follow - maybe example below is a little clearer
+% As expected, we observed robust deficits in animals' abilities to detect change ins in temporal frequency caused by V1 silencing, which scaled with increasing light power (Fig.~\ref{fig:Scanning_setup_exp_verification_fig}B,C).
+% In contrast, there were no significant effects of S1 silencing with a 2mW laser on behaviour(Fig.~\ref{fig:Scanning_setup_exp_verification_fig}B,C). 
+% We did observe a slight but non-significant flattening of the psychometric curve when stimulating S1 with a 4mW laser however, possibly indicating that the light stimulation may in some cases have affected higher-order visual areas around 1.5 mm caudal to the stimulation target in S1 when light powers were high (Fig.~\ref{fig:Scanning_setup_exp_verification_fig}C). 
+
+
+This demonstrates that Zapit can effectively modulate activity at multiple cortical areas at multiple light powers in the same session, permitting direct comparison between the effects of silencing distinct areas bilaterally. 

@@ -11,7 +11,7 @@ function runThroughAllStimPoints
     for ii = 1:length(hZP.stimConfig.stimLocations)
         % Does not wait for a hardware trigger: starts right away
         hZP.sendSamples('conditionNum',ii,'hardwareTriggered',false) 
-        pause(1)
+        pause(1) % Software timing only
         hZP.stopOptoStim
         pause(0.3) % To allow the ramp-down to happen
     end
