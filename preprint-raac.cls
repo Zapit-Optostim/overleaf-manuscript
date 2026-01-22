@@ -23,12 +23,14 @@
 \RequirePackage[absolute]{textpos}
 \RequirePackage[right]{lineno}
 \RequirePackage{amsmath}
-\RequirePackage{listings} % Added by RAAC
+\RequirePackage{listings}% Added by RAAC
+
+
 
 \def\@journalname{bioRxiv}
 \def\@keywordsname{Keywords}
 \def\@authornotename{Author's notes}
-\def\@corrauthorname{Corresponding author}
+\def\@corrauthorname{Corresponding authors}
 \def\@editorname{Edited by}
 \def\@runningauthor{}
 \def\@corrauthor{}
@@ -114,7 +116,7 @@
 \newcommand{\corrauthor}[1]{\def\@corrauthor{#1}}
 
 
-\renewcommand{\Authfont}{\Large\bfseries}
+\renewcommand{\Authfont}{\large\bfseries}
 \renewcommand{\Affilfont}{\small\itshape\mdseries}
 \renewcommand\AB@authnote[1]{\textsuperscript{#1}}
 \renewcommand\AB@affilnote[1]{\textsuperscript{#1}}

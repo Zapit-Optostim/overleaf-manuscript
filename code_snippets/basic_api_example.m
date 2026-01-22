@@ -1,8 +1,7 @@
 function runThroughAllStimPoints
     % Present stimulus at each location for one second
 
-    % Get the API object from the base workspace
-    hZP = zapit.utils.getObject;
+    hZP = zapit.utils.getObject; % Get API object from base workspace
 
     if hZP.isReadyToStim == false
         return
@@ -15,5 +14,4 @@ function runThroughAllStimPoints
         hZP.stopOptoStim
         pause(0.3) % To allow the ramp-down to happen
     end
-
 end % runThroughAllStimPoints

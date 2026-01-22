@@ -2,6 +2,7 @@
 
 % Define directories which contain figures
 \usepackage{graphicx} 
+\usepackage{marvosym}
 \graphicspath{
             {Figures/}
             {Figures/PSF}
@@ -19,34 +20,42 @@
 %\usepackage{fontspec} 
 %\setmainfont{NewComputerModernSans08}
 
+\usepackage{orcidlink}
+
 %%
 % Preamble: title and author details
-\title{Zapit: An Open Source Photostimulation System For Neuroscience}
+\title{Zapit: Open Source Random-Access Photostimulation For Neuroscience}
 
 
-\author[1,4]{M. Lohse }
-\author[1,4]{O. M. Gauld}
-\author[1,2,4]{M. Skr\k{e}towska}
-\author[1]{P. Vincent}
-\author[1]{Q. Pajot-Moric}
-%\author[1]{M. V\'{e}lez-Fort}
-%\author[1]{S. Weiler}
-\author[1]{S. Townsend}
-%\author[1]{T. W. Margrie}
-\author[1]{C. A. Duan}
-\author[1]{A. Akrami}
-\author[1]{T. D. Mrsic-Flogel}
-\author[1,3]{R. A. A. Campbell}
+\author[*1]{Michael Lohse\orcidlink{0000-0001-8864-0704}}
+\author[*1]{Oliver M Gauld\orcidlink{0000-0002-3317-2250}}
+\author[*1,2]{Maja T Skr\k{e}towska\orcidlink{0009-0003-7524-5221}}
+\author[*3]{Ainiah Masood\orcidlink{0009-0001-1957-6531}}
+\author[1]{Chaofei Bao\orcidlink{0000-0002-8794-8712}}
+\author[1]{Jingjie Li\orcidlink{0000-0002-1605-0518}}
+\author[3]{Gerion Nabbefeld\orcidlink{0009-0008-5416-6352}}
+\author[1]{Quentin Pajot-Moric\orcidlink{0000-0002-2371-2137}}
+\author[1]{Simon Townsend\orcidlink{0009-0005-5135-5957}}
+\author[1]{Peter Vincent\orcidlink{0000-0002-2641-1874}}
+\author[1]{Nikolaos Zervogiannis \orcidlink{0009-0009-4702-8071}}
+\author[1]{Athena Akrami\orcidlink{0000-0001-5711-0903}}
+\author[1]{Chunyu A Duan\orcidlink{0000-0002-3095-8653}}
+\author[1]{Jeffrey C Erlich\orcidlink{0000-0001-9073-7986}}
+\author[1]{Thomas D Mrsic-Flogel\orcidlink{0000-0002-8947-408X}}
+\author[$\ddagger$3\Letter]{Philip Coen\orcidlink{0000-0003-1495-1061}}
+\author[$\ddagger$1\Letter]{Robert AA Campbell\orcidlink{0000-0002-8330-4477}}
 
 \affil[1]{Sainsbury Wellcome Centre, UCL}
 \affil[2]{University of Cambridge}
-\affil[3]{Email: \url{rob.campbell@ucl.ac.uk}}
-\affil[4]{These authors contributed equally}
+\affil[3]{Department of Cell and Developmental Biology, UCL}
+\affil[*]{These authors contributed equally}
+\affil[$\ddagger$]{These authors contributed equally}
 %% Corresponding author
-\corrauthor{R. A. A. Campbell}
+\corrauthor{P Coen \url{p.coen@ucl.ac.uk} \\
+RAA Campbell \url{rob.campbell@ucl.ac.uk}}
 
 %% Abbreviated author list for the running footer
-\runningauthor{Lohse, Gauld, Skr\k{e}towska et al.}
+\runningauthor{Lohse, Gauld, Skr\k{e}towska, Masood et al.}
 
 \addbibresource{references.bib}
 
@@ -58,26 +67,7 @@
 %%
 % Abstract and keywords
 \begin{abstract}
-
-% Optogenetic tools are indispensable for understanding the causal neural mechanisms giving rise to animal behaviour. 
-% While optogenetic actuators can accommodate millisecond-precision control over genetically defined neural populations, successful optogenetics experiments also critically depend on associated optical hardware for precise spatiotemporal targeting of light delivery. 
-
-% Optical fibres are suitable for certain experiments, but fibre implantation can be invasive and limits flexibility of spatial targeting. In contrast, galvonometer-based laser-scanning optogenetic systems facilitate far greater flexibility for targeting distributed cortical areas. Yet no open source systems are available at present, and building such bespoke photostimulation systems can be technically challenging and expensive.
-
-% Here we present Zapit, a complete open source hardware and cross-platform software system for spatio-temporally precise laser-scanning optogenetics in head-fixed mice. 
-% We provide step-by-step instructions on how to build, calibrate and design experiments using the Zapit system, and present quantification of optical system performance, as well as results from proof-of-principle cortical photoinhibition experiments in awake behaving mice.
-
-Optogenetic tools are indispensable for understanding the causal neural mechanisms giving rise to animal behaviour. 
-While optogenetic actuators provide millisecond-precision control over genetically defined neural populations, successful optogenetics experiments also critically depend on associated optical hardware for targeted light delivery. 
-Optic-fibres are suitable for certain experiments, however fibre implantation can be invasive and limits flexibility of spatial targeting. 
-Precise spatiotemporal control over light delivery is essential as behavioural tasks can engage distributed neural circuits with complex dynamics. 
-
-To address this, galvonometer-based laser-scanning optogenetic systems have been used to allow flexible inactivation of distributed cortical areas, through the intact skull and without the need of optic fibers. 
-These approaches centre on controlling hardware to steer a small laser-spot to user-defined locations on the dorsal surface of the cortex of mice, which selectively activates or inhibits neurons in the local illuminated region. 
-While experimentally powerful, bespoke laser-scanning photostimulation systems can be technically challenging and expensive to build, and at present no open source solution is available. 
-
-Here we present ‘Zapit’, a complete open source hardware and cross-platform software system for spatio-temporally precise laser-scanning optogenetics experiments in head-fixed mice. 
-We provide step-by-step instructions on how to build, calibrate and design experiments using the Zapit system, and present quantification of optical system performance, as well as results from proof-of-principle cortical photoinhibition experiments in awake behaving mice.
+Optogenetic tools are indispensable for understanding the causal neural mechanisms underlying animal behaviour. While optogenetic actuators provide millisecond-precision control over genetically defined neural populations, successful optogenetic experiments also critically depend on associated hardware and software for targeted light delivery.  Optic-fibres are suitable for certain experiments, however fiber implantation can be invasive and limits flexibility of spatial targeting. In contrast, random-access laser-scanning optogenetic systems provide far greater flexibility for targeting distributed cortical areas. However, these systems can be technically challenging to build, and at present no open source solution is available. Here we present ‘Zapit’, a complete open source platform for spatio-temporally precise random-access laser-scanning optogenetic experiments in head-fixed mice. We describe the system, quantify its performance, and show results from proof of principle cortical photoinhibition experiments in behaving mice.
 
 \keywords{Optogenetics, Neuroscience, Software Tool, Optics, Open Source}
 \end{abstract}
@@ -90,19 +80,26 @@ We provide step-by-step instructions on how to build, calibrate and design exper
 \input{methods}
 \input{contributions.tex}
 
+
 %% 
 % Close
 \paragraph*{Acknowledgments}
 We thank Andy Peters for providing us with a MATLAB script for displaying a top-down view of the Allen Atlas in stereotaxic coordinates, and inspiring us with the Neuropixels Trajectory Explorer (\href{10.5281/zenodo.7043459}{10.5281/zenodo.7043459}).
-Dale Elgar from \href{https://www.cosys.org.uk/}{COSYS Ltd.} did most of the enclosure design. 
-Graeme McPhillips at the SWC Electronics Core Facility provided advice on construction of the control electronics enclosure. 
-We thank Morio Hamada for providing feedback on the manuscript. 
+We thank Charu Reddy and Matteo Carandini for sharing resources to fascilitate development, and Michael Krumin for valuable conversations.
+Dale Elgar from \href{https://www.cosys.org.uk/}{COSYS Ltd.} did most of the custom enclosure design. 
+Graeme McPhillips at the SWC Electronics Core Facility provided advice on construction of the electronics enclosure. 
+We thank Morio Hamada and Ivan Voitov for providing feedback on the manuscript. 
 
+This work was supported by Wellcome awards to T.D.M.F. (217211/Z/19/Z), M.L. (224121/Z/21/Z), and PC  (225992/Z/22/Z). A.D. was supported by UKRI grant EP/Y008804/1. 
+The Advanced Microscopy Facility and individual labs were also supported by the Sainsbury Wellcome Centre’s core provided by Wellcome (219627/Z/19/Z) and the Gatsby Charitable Foundation (GAT3755).
 
 \paragraph*{Data Availability Statement}
 This project is developed entirely in the open: all code is available at \href{https://github.com/Zapit-Optostim}{github.com/Zapit-Optostim}.
 Data available on request.
 
-
+\clearpage
 \printbibliography
+
+\input{supp}
+
 \end{document}
