@@ -24,7 +24,7 @@
 \RequirePackage[right]{lineno}
 \RequirePackage{amsmath}
 \RequirePackage{listings}% Added by RAAC
-
+\usepackage{float}
 
 
 \def\@journalname{bioRxiv}

@@ -1,7 +1,11 @@
 \section{Methods}
 
-We have a $594~nm$, $100~mW$ Coherent Obis laser used with a Chroma ZT473/594rpc-UF dichroic (custom-made) and zet488/594m emission filters. These dual-band filters have been tested with both $450~nm$ $100~mW$ Oxxius and $594~nm$ Obis lasers individually, resulting in successful visualization of the laser beam. Users can choose to select single band emission filters for their experimental purposes.
+\subsection{Recording and data acquisition for hardware characterization}
+Laser power output for all lasers was recorded using a Thorlabs Power Meter PM100D, and acquired with the associated Thorlabs Optical Power Meter Utility software. Samples for photostimulation reliability with the Obis 473~nm laser (Figure~\ref{fig:HardwareTriggering_01}) were recorded at 100~kS/s using an oscilloscope (PicoScope). Samples for photostimulation reliability for all other lasers were recorded at 100~kS/s using a NI-DAQ USB-6453 and acquired with LabVIEW software. In both cases, laser output was recorded using a photodiode from a programmed 800~ms stimulation period, following a 200~ms rampdown. 
+For users without a LabVIEW licence who wish to acquire similar data we \href{https://github.com/Zapit-Optostim/zapit/blob/main/development/recordWaveforms/waveformRecorder.m}{provide example code} (derived from our \href{https://github.com/SWC-Advanced-Microscopy/MATLAB_DAQmx_examples}{MATLAB DAQmx examples package}) showing how to do so using NI DAQmx via MATLAB.
 
+\subsection{Zapit configuration for experiments}
+We used a 473~nm, 75~mW Obis laser with a Thorlabs MD498 dichroic filter and an MF525-39 emission filter, and the system was housed in a custom enclosure. Zapit was controlled and data were acquired with an NI-DAQ USB-6363. 
 
 \subsection{Mice}
 All experiments were performed under the UK Animals (Scientific Procedures) Act of 1986 (PPL: PD867676F) following local ethical approval by the Sainsbury Wellcome Centre Animal Welfare Ethical Review Body. 
@@ -21,19 +25,19 @@ Bilateral somatosensory (whisker) stimuli were delivered using compressed air di
 Air-puff stimulation was delivered in the dorsoventral axis. 
 The air pressure (2~bar) was maintained using a pressure regulator (703-6113; RS Components). 
 Left/right air flow was gated using two solenoid values (EV-2-12; The West Group). 
-Air puff stimuli consisted of trains of regularly spaced pulse sequences (0 - 10 Hz). 
-Each pulse duration was 20 ms and stimuli were presented for 1 s. 
+Air puff stimuli consisted of trains of regularly spaced pulse sequences (0 - 10~Hz). 
+Each pulse duration was 20~ms and stimuli were presented for 1~s. 
 The task (stimulus design, trial timing, lick detection, reward delivery etc.) was controlled using the MATLAB implementation of Bpod (Sanworks). 
 
 Mice were trained through operant conditioning to associate lateralised whisker stimulation with lateralised reward (e.g. stimulus left = lick left). 
 Water rewards (3~$\mu l$) were delivered to the target lickport on correct trials using a gravity fed water reservoir system, with left/right spout tubing gated via two solenoid pinch valves (161P011; NResearch).
-Mice were first trained on 10 Hz unilateral stimulus trials (i.e. trials with no distractor) with no delay-epoch. 
+Mice were first trained on 10~Hz unilateral stimulus trials (i.e. trials with no distractor) with no delay-epoch. 
 During this phase, mice could lick the lickport(s) immediately following stimulus presentation. 
 Following learning, a motorised stage (XL-320 Dynamixel; Robitis) moved the lickport in/out to teach mice to withhold licking until cued. 
-The period between stimulus presentation and presentation of the lickport was incrementally increased across training up to a maximal 2 s (1 s stimulus presentation, 1 s delay). 
+The period between stimulus presentation and presentation of the lickport was incrementally increased across training up to a maximal 2~s (1~s stimulus presentation, 1~s delay). 
 Movement of the lickport stage provided a salient auditory sound to cue the onset of the response window.
 Following learning of the full delay task, bilateral stimulation trials were introduced. 
-During bilateral training, mice received 9 distinct types of sensory trials corresponding to a `3 x 3' combinatorial matrix of 0, 5 and 10 Hz left and right whisker stimuli.
+During bilateral training, mice received 9 distinct types of sensory trials corresponding to a `3 x 3' combinatorial matrix of 0, 5 and 10~Hz left and right whisker stimuli.
 The target lickport was cued by the whisker side receiving the faster stimulus sequence. 
 The rewarded side was randomised on trials where left and right stimulation was matched.
 Following learning mice underwent unilateral optogenetic perturbation experiments. 
@@ -44,7 +48,7 @@ Photostimulation (duration: 2.2~s; average power: 2~mW) was delivered on 33\% of
 
 
 \subsection{Visual change detection task for proof of principle experiments using Zapit}
-The design of the behavioural task was as previously described in \cite{Orsolic2021MesoscaleDecision-making.}. 
+The design of the behavioural task and stages of behavioural training were as previously described in \cite{Orsolic2021MesoscaleDecision-making.}. 
 
 Mice were head-fixed and placed on a polystyrene wheel. 
 Two monitors (21.5", 1920 x 1080, 60~Hz) were placed on each side of the mouse at approximately 20~cm from the mouse head. 
@@ -52,8 +56,8 @@ The monitors were gamma corrected to 40~cd/m\textsuperscript{2} of maximum lumin
 The stimulus presentation was controlled by custom written software in MATLAB utilizing PsychToolbox-3. 
 The visual stimulus was a sinusoidal grating with the spatial frequency of 0.04 cycles per degree resulting in 3 grating periods shown on a screen. 
 Each trial began with a presentation of a grey texture covering both screens. 
-After a randomized delay (at least 3~s plus a random sample from an exponential distribution with the mean of 0.5~s), the baseline stimulus appeared. 
-The temporal frequency (TF) of the grating was drawn every 50~ms (3 monitor frames) from a log-normal distribution, such that log\textsubscript{2}-transformed TF had the mean of 0 and standard deviation of 0.25 octaves and the geometric mean of 1~Hz. 
+After a randomized delay (at least 3~s plus a random sample from an exponential distribution with a mean of 0.5~s), the baseline stimulus appeared. 
+The temporal frequency (TF) of the grating was drawn every 50~ms (3 monitor frames) from a log-normal distribution, such that log\textsubscript{2}-transformed TF had the mean of 0 and standard deviation of 0.25 octaves and a geometric mean of 1~Hz. 
 The direction of drift was randomized trial to trial between upward or downward drift. 
 The sustained increase in TF, referred to in the text as change period, occurred after a randomized delay (3-15.5~s) from the start of baseline period and lasted for 2.15~s. 
 Random 15\% of trials were assigned as no-change trials and did not have a change period. 
@@ -63,10 +67,8 @@ Licks that occurred outside of the change period are referred in the text as ear
 If mice moved on the wheel (movement exceeding 2.5~mm in a 50~ms window) in either direction, the trial was aborted. 
 If mice did not lick within 2.15~s from the change onset, the trial was considered a miss trial. 
 
-The stages of behavioural training for mice on this task has previously been described in \cite{Orsolic2021MesoscaleDecision-making.}.
-
 \subsubsection{Behavioural setup and data acquisition}
 Reward delivery (soya milk) was controlled by a solenoid pinch valve (161P011, NResearch, USA) and delivered to the mouse via a spout positioned in front of it.
 Mouse licking the spout was measured by a piezo element (TDK PS1550L40N) coupled to the spout and amplified with a custom-made amplifier system. 
 Running wheel movement was measured with a rotary encoder (model K\"ubler) that was connected to the wheel axle. 
-All behavioural data and events, such as piezo voltage trace, valve or change period on/off state, etc, were acquired via analog and digital channels on an NI PCI-6320 acquisition card and processed and saved using custom written code in LabVIEW (NI) and MATLAB (The MathWorks).
+All behavioural data and events, such as piezo voltage trace, valve or change period on/off state, etc, were acquired via analog and digital channels on an NI PCI-6320 acquisition card and processed and saved using in LabVIEW (NI) and MATLAB (The MathWorks).

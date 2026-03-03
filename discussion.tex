@@ -1,64 +1,37 @@
 \section{Discussion}
 
-\subsection{Zapit is a complete and ready to use solution}
-Zapit is a complete and accessible solution for head-fixed scanner-based optogenetics. 
-The provided \href{https://github.com/Zapit-Optostim/zapit_CAD}{CAD models for the enclosure} are easy to machine and it is straightforward, even for a beginner, to build a system around this base. 
-Our \href{https://github.com/Zapit-Optostim/zapit}{software} is well-organised, well-documented, and tested. 
-There is \href{https://zapit.gitbook.io/user-guide/}{ample on-line documentation} for software install and usage. 
-Zapit has a multi-lab user-base, and will be maintained and updated by developers and experimentalists for the foreseeable future. 
-All work will be shared rapidly via GitHub.  
-We are not aware of any significant caveats to the system, beyond the obvious constraints imposed by  sequential, point-based stimulation. 
-In the interest of transparency, the software's GitHub page maintains \href{https://github.com/Zapit-Optostim/zapit/issues?q=is%3Aissue+is%3Aopen+label%3A%22Known+obvious+issue%22}{a list of known obvious issues with the software}. 
+Zapit is a complete and accessible solution for head-fixed scanner-based optogenetics. The components are commercially available, and the modular system is flexible enough to accommodate a diversity of experimental needs. The \href{https://github.com › Zapit-Optostim › zapit}{Github} repository contains complete build instructions, parts lists, and visual aids: no prior expertise is required for implementation. The  software is fully documented and will be continually maintained and updated by developers and experimentalists. Known software and hardware issues are actively raised and resolved through \href{https://github.com/Zapit-Optostim/zapit/issues}{Github} issues and community discussions. 
 
+Zapit produced robust behavioral effects across a variety of experimental protocols and brain regions with VGAT-ChR2 mice. We validated the efficacy of inactivation in this mouse strain with simultaneous electrophysiology recordings and demonstrate that the effective radius of inactivation depends on the laser power used, but was \textasciitilde{}1~mm at powers for which we observed significant behavioral perturbations. However, with finer spatial sampling and large trial numbers, it is possible to observe distinct behavioral effects at sites separated by less than 1 mm.
 
-\subsection{Comparison to other approaches}
-There are other effective approaches for rapid programmatic photostimulation in head-fixed behavioural tasks: those based on digital micro-mirror devices (DMDs) or spatial lights modulators (SLM).
-These approaches are capable of activating extended, arbitrarily-shaped areas  (\cite{Chong2020ManipulatingPerception}).
-DMD-based solutions, such as the \href{https://www.mightexbio.com/polygon/}{Mightex Polygon}, provide the fastest pattern-switching time but are very wasteful of light and so require a roughly 4~W laser to cover an area the size of mouse dorsal cortex. 
-SLM-based solutions are more light efficient, but devices with high resolution are very expensive and are are slower than DMDs.
-Whilst scanner-based systems restrict photostimulation to a small number of points, this scenario is sufficient to enable a wide variety of experiments. 
-Scanner-based approaches provide the most cost-effective and compact solution. 
- 
+There are other effective approaches for rapid programmatic photostimulation in head-fixed behavioral tasks: those based on digital micro-mirror devices (DMDs \cite{Chong2020ManipulatingPerception, Russell2022All-opticalMice, Gauld2024APerception}) or spatial lights modulators (SLM). DMD-based solutions, such as the \href{https://www.mightexbio.com/polygon/}{Mightex Polygon}, provide a faster pattern-switching time but due to light loss, these systems require \textit{\textasciitilde{}100 times} more laser power than Zapit to cover the mouse dorsal cortex. SLM-based solutions are more light efficient, but devices with high resolution are very expensive and are slower than DMDs. Therefore, Zapit's scanner-based approach provides the most cost-effective and compact solution for the majority of optogenetic experiments. 
 
-\subsection{Experimental considerations when using Zapit}
+\subsection{Practical considerations when using Zapit}
+\subsubsection{Surgical procedures} 
+To maximize targeting flexibility and accuracy, we recommend a head-fixation device that provides an unobstructed view of the entire dorsal surface of the skull, and marking structural reference points during surgery . We further recommend a thin layer of transparent glue (\cite{Zatka-Haas2021SensoryDecision, Coen2023MouseDecisions}) or `bone' cement (200-300~$\mu m$ thick) to protect the skull as thicker layers of cement (0.5-1~mm) may reduce the efficacy of behavioral effects. For general details of \textit{in vivo} surgical and behavioral procedures in head-fixed mice we direct the reader to existing resources (e.g. \cite{Guo2014FlowMice, Guo2014ProceduresMice} ). 
 
-\subsubsection{Clear skull cap preparation} 
-In order to clear the skull, a transparent glue or `bone' cement (we use Super-Bond C \& B) must be painted over the surface. Alternative methods have used UV glue (Zatka-Haas et al., 2021; Coen et al., 2023).
-We have not found it necessary to thin the skull of our mice, but simply apply this thin layer (about 200-300~$\mu m$) of transparent bone cement. 
-Unsurprisingly, we have anecdotally observed that when bone cement is thick (0.5-1~mm), then we only see robust behavioural effects at high light powers (4~mW). 
-Additionally, if the cement is too thin it can crack in a long term preparation. \cite{Guo2014FlowMice} indicate around a 50\% loss of light power as the laser passes through bone cement and skull. 
+\subsubsection{Laser and power selection}
+Zapit is compatible with any laser source with fast analog power modulation. Each setup will have unique experimental constraints but, as a guideline, we recommend using 1-2~mW time-averaged light power when using VGAT-ChR2 mice. We consistently see strong behavioral effects at these powers, and spatiotemporal resolution comparable with many other studies. Regular power measurements at the sample are critical to ensure stability and reproducibility. At 2~mW time-averaged power, and with expected light loss of around 50\% due to the skull and bone cement (\cite{Guo2014FlowMice}), heating of the neural tissue should be minimal (\cite{Stujenske2015ModelingOptogenetics}). Nevertheless, \textit{post-hoc} histological analysis is strongly recommended to confirm opsin expression and assess tissue integrity.
 
+\subsubsection{Targeting precision}
+With transgenic lines expressing opsin brain-wide (including VGAT-ChR2 mice), stimulation with high laser powers (e.g. 4~mW or above) may cause off-target behavioral effects due to light-scatter laterally and axially through cortex (\cite{Li2019SpatiotemporalCircuits,Babl2019TheInterneurons}). Ideally, laser parameters including power, duration and ramp-down should be informed by electrophysiological recordings and/or modeling of light propagation through biological medium (\cite{Yona2016RealisticApplications}). If limiting the impact of light dispersion is critical, opsins can be expressed via targeted viral injections. Under these conditions, expression can be restricted to highly localised circuits, genetically and anatomically defined subpopulations and sub-cellular compartments, and verified using \textit{post-hoc} histology.
 
+\subsubsection{Sensory confounds}
+Fast movements of galvo-mirrors generate auditory cues that can influence behavior, and we therefore recommend including moving the galvo-mirrors on all trials, including those where the laser power is 0~mW. The galvo drive waveforms are shaped to reduce noise emission, and the scanner unit can also be enclosed sound-attenuating housing to further mitigate these effects. To accurately interpret optogenetic behavioral effects, it is also critical to mask the mouse's ability to see the laser, whether through internal or external retinal stimulation \cite{Weiler}. We recommend masking laser-emitted light with color-matched LEDs placed above the mouse on every trial, matched to the stimulation profile of the laser (e.g., 40~Hz sinusoid). Extra caution should be taken when using longer wavelengths which easily propagate through brain tissue to the retina, and can be more difficult to mask (\cite{Danskin2015OptogeneticsArtifact}). Sensory confounds can also be addressed through repeated experiments and analyses in control animals that do not express the stimulated opsin (\cite{Gauld2025AActions}).
 
-\subsubsection{Light power selection}
-The light powers used for optogenetic stimulation vary considerably between studies - even studies stimulating the same region with the same opsin. 
-Although every experimental setup will be different and have different experimental constraints, we recommend that when using Zapit, to start at 1.5 - 2~mW time-averaged light power as a default (when using VGAT-ChR2 mice). 
-Behavioural effects can scale with light power (Figure~\ref{fig:ALM_behav_verification}F and \ref{fig:Scanning_setup_exp_verification_fig}C), and at 2~mW we consistently see strong behavioural effects when stimulating sensory areas like V1 (Figure~\ref{fig:Scanning_setup_exp_verification_fig}), or frontal areas like ALM (Figure~\ref{fig:ALM_behav_verification}) when using Zapit. 
-In testing Zapit, we have found anecdotal evidence that when using 2~mW stimulation, we can observe completely distinct behavioural affects in areas 1~mm apart. 
-Furthermore, at 2~mW average light power with a nominal 91~$\mu m$ X/Y PSF, and with an expected light loss of around 50\% as the light traverses the skull and bone cement, heating of the neural tissue as a result of the light stimulation will be minimal - even at long term stimulation (\cite{Stujenske2015ModelingOptogenetics}).
-When using transgenic lines expressing opsins brain wide (such as in VGAT-ChR2-eYFP mice), we note that stimulation with 4~mW or above should be used with caution, as it in some cases may cause off-target behavioural effects indicating either that the light scatters widely along cortex (\cite{Li2019SpatiotemporalCircuits}), or that light affects structures below cortex (\cite{Babl2019TheInterneurons}). 
-
-\subsubsection{Masking of laser stimulation trials}
-Masking the mouse's ability to see when the laser is on is paramount for the interpretation of the effects on behaviour caused by Zapit stimulation. 
-We recommend masking the laser by providing a color-matched light stimulation from LEDs above the mouse's head on every trial which matches the stimulation profile of the laser (e.g., 40~Hz sinusoid) together with keeping the box in which the mouse performs the task well-lit with an white LED strip.
-Zapit provides an analog signal suitable for driving a masking LED.
-Together, this masking approach appears to mask the ability of the mouse to see the laser stimulation with blue light. 
-Extra caution should be taken when using longer wavelengths, such as yellow or red light, as the longer wavelength more easily travels through the brain tissue and hits the back of the retina, and can in certain cases be more difficult to  mask (\cite{Danskin2015OptogeneticsArtifact}). 
+\subsubsection{Target region selection and interpretation} 
+A major advantage of Zapit is the capacity to perform unbiased sampling of causal effects across the entire dorsal cortex. However, skull curvature and thickness should be considered, particularly in more lateral cortical regions. Differences in opsin expression due to tropisms in viral vectors or transgenic lines can also influence results and further experiments are required to determine whether observed effects are a direct result of regional inactivation, or derive from downstream brain regions ( \cite{Wolff2018TheManipulations, Allen2017ApplicationSignaling} ).
 
 \subsection{Good practice: measures to report when using Zapit}
-We encourage people who use Zapit (and similar setups) to report a minimal set of standardised parameters to aid replication, comparability and consistency across experiments and laboratories:
+We encourage Zapit users to report a minimal set of standardized parameters to aid replication, comparability, and consistency across experiments and laboratories:
 
 \begin{itemize}
     \item Average light power
     \item Peak light power
-    \item Stimulation frequency and profile (e.g. 40~Hz sinusoid), and duty cycle.
-    \item Number of concurrent stimulation sites (i.e., number of stimulation sites effectively silenced simultaneously: single site bilaterally stimulated would be 2 in this case).
-    \item Laser stimulation duration
-    \item Laser ramp down duration (and whether this period is included in the  light duration, or follows it)
-    \item Whether or not a masking light was used, and if so the parameters (i.e. color, frequency, etc.)
-    \item Percentage of trials with stimulation per area, per light power, and total number of trials with stimulation.
+    \item Stimulation frequency and profile (e.g. 40~Hz sinusoid), and duty cycle
+    \item Laser stimulation and ramp-down duration
+    \item Color and frequency of masking light (if used)
 \end{itemize}
 
 \subsection{In Closing}
-We hope Zapit is a tool that will grow and find uses outside of our institute and specialities. 
-Potential new users are welcome to contact us for assistance in building or setting up the system. 
+We hope Zapit is a tool that will grow and find uses outside of our institute and specialties. Potential new users are welcome to contact us for assistance in building or setting up the system. 

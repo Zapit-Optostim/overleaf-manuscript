@@ -1,98 +1,84 @@
 \section{Author Contributions}
+\begin{center}
 \tikzset{
     tile/.style = {
-        align=center,
-        minimum size=6mm,
-        anchor=north west,
-    },
-    col header/.style={
-        tile,
-        anchor=north west,
-        yshift=-1mm,
-        rotate=45,
+        minimum size=4.5mm,
         inner sep=0,
         outer sep=0,
+        anchor=center,
     },
     row label/.style={
-        tile,
-        anchor=north east,
+        anchor=east,
         inner sep=0,
-        outer sep=0,
-        xshift=3mm,
-    },
-    legend line/.style={
-        anchor=north west,
-        inner xsep=0,
-        inner ysep=2mm,
-        outer sep=0,
+        outer sep=1mm,
+        font=\fontsize{8}{8}\selectfont,
     },
 }
-
-% define the intensity levels here
 \def\hi{100}
 \def\mid{50}
 \def\lo{20}
-
-% and the 100% intensity color here, which will blended to white
 \colorlet{tilecolor}{green!10!orange}
-
-\begin{tikzpicture}[scale=0.6]
-
-    % column labels
-    \foreach \a [count=\n] in {
-        M.L.,
-        O.M.G.,
-        M.S.,
-        A.M.,
-        C.B., 
-        J.L,
-        G.N.,
-        Q.PM.,
-        S.T.,
-        P.V.,
-        A.A.,
-        C.A.D.,
-        J.E.H.,
-        T.D.MF.,
-        P.C.,
-        R.A.A.C.,
+\begin{tikzpicture}[x=4.5mm, y=-4.5mm]
+\foreach \a [count=\n] in {
+        ML,
+        OMG,
+        MS,
+        AM,
+        CB,
+        JL,
+        NM,
+        GN,
+        QPM,
+        ST,
+        PV,
+        AY,
+        NZ,
+        AA,
+        CAD,
+        SBH,
+        JEH,
+        TDMF,
+        PC,
+        RAAC,
     } {
-        \node[col header] at (\n,0) {\a};
+        \node[anchor=south, inner sep=0, outer sep=2mm,
+              font=\fontsize{8}{8}\selectfont]
+            at (\n, 0) {\rotatebox{90}{\a}};
     }
-
-    % row labels
     \foreach \a [count=\i] in {
         Prototype hardware design,
         Prototype software design,
         Final hardware design,
         Final software design,
         CAD \& machining,
+        Benchmarking and testing,
+        Electrophysiological experiments,
         Behavioral validation experiments,
         Writing---Original Draft,
         Writing---Reviewing and Editing,
         Funding acquisition,
     } {
-        \node[row label] at (0,-\i) {\a};
+        \node[row label] at (0.5,\i) {\a};
     }
 
-    \foreach \y [count=\n] in {
-        {\mid,0,\hi,0,0,0,0,0,0,\hi},  %hardware prototype
-        {0,0,\hi,0,0,0,0,0,0,\hi},     %software prototype
-        {0,0,0,0,0,\lo,0,0,0,\hi},     %hardware
-        {0,0,0,\lo,\lo,0,0,0,0,\hi},   %software
-        {0,0,0,0,0,\hi,0,0,0,0},       %CAD
-        {\hi,\hi,\lo,0,0,0,0,0,0,0,0}, % Behav valid
-        {\hi,\hi,\mid,0,0,0,0,0,0,\hi}, %Writing: draft
-        {\mid,\mid,\mid,\mid,\mid,\mid,\mid,\mid,\mid,\mid}, %Writing: edits
-        {\hi,0,0,0,0,0,\hi,\hi,\hi,0},  % Funding
+
+    
+\foreach \y [count=\n] in {
+        {\mid,0,\hi,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\hi},        % 1  Prototype hardware design
+        {0,0,\hi,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\hi},           % 2  Prototype software design
+        {0,0,0,\hi,0,0,0,\mid,0,0,0,0,0,0,0,0,0,0,\hi,\hi},      % 3  Final hardware design
+        {0,0,0,0,0,0,0,0,\lo,0,\lo,0,0,0,0,0,0,0,0,},         % 4  Final software design
+        {0,0,0,\hi,0,0,0,0,0,\hi,0,0,0,0,0,0,0,0,\mid,0},           % 5  CAD & machining
+        {0,\hi,0,\hi,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\mid,\hi},       % 6  Benchmarking and testing
+        {0,\mid,0,0,\hi,\mid,0,0,0,0,0,0,0,0,\lo,0,0,0,0,0},     % 7  Electrophysiological experiments
+        {\hi,\hi,\lo,0,0,0,\hi,0,0,0,0,\mid,\mid,0,0,0,0,0,0,0},    % 8  Behavioral validation experiments
+        {\hi,\hi,\mid,\hi,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\hi,\hi},      % 9  Writing: Original Draft
+    {\mid,\mid,\mid,\mid,\mid,\mid,\mid,\mid,\mid,\mid,\mid,\mid,\mid,\mid,\mid,\mid,\mid,\mid,\mid,\mid}, % 10 Writing: Reviewing and Editing
+        {\hi,\hi,0,0,0,0,0,0,0,0,0,0,0,\hi,\hi,\hi,\hi,\hi,\hi,0},  % 11 Funding acquisition
     } {
-        % heatmap tiles
         \foreach \x [count=\m] in \y {
-            \node[fill=tilecolor!\x!white, tile, text=white] (tile) at (\m,-\n) {};
+            \node[fill=tilecolor!\x!white, tile] at (\m,\n) {};
         }
     }
-
-    % description below heatmap 
-    %\node [legend line] at (1, 0 |- tile.south) {*, $^\dagger$ these authors contributed equally};
-
 \end{tikzpicture}
+\end{center}
