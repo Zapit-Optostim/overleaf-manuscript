@@ -2,47 +2,53 @@
 
 \subsection{Recording and data acquisition for hardware characterization}
 Laser power output for all lasers was recorded using a Thorlabs Power Meter PM100D, and acquired with the associated Thorlabs Optical Power Meter Utility software. Samples for photostimulation reliability with the Obis 473~nm laser (Figure~\ref{fig:HardwareTriggering_01}) were recorded at 100~kS/s using an oscilloscope (PicoScope). Samples for photostimulation reliability for all other lasers were recorded at 100~kS/s using a NI-DAQ USB-6453 and acquired with LabVIEW software. In both cases, laser output was recorded using a photodiode from a programmed 800~ms stimulation period, following a 200~ms rampdown. 
-For users without a LabVIEW license who wish to acquire similar data we \href{https://github.com/Zapit-Optostim/zapit/blob/main/development/recordWaveforms/waveformRecorder.m}{provide example code} (derived from our \href{https://github.com/SWC-Advanced-Microscopy/MATLAB_DAQmx_examples}{MATLAB DAQmx examples package}) showing how to do so using NI DAQmx via MATLAB.
+For users without a LabVIEW license who wish to acquire similar data we \href{https://github.com/Zapit-Optostim/zapit/blob/main/development/recordWaveforms/waveformRecorder.m}{provide example code in Zapit} (derived from our \href{https://github.com/SWC-Advanced-Microscopy/MATLAB_DAQmx_examples}{MATLAB DAQmx examples package}) showing how to do so using NI DAQmx via MATLAB. \href{https://github.com/SWC-Advanced-Microscopy/Python_DAQmx_examples}{Python NI DAQmx examples are also available}.
 
 \subsection{Zapit configuration for experiments}
-We used a 473~nm, 75~mW Obis laser with a Thorlabs MD498 dichroic filter and an MF525-39 emission filter, and the system was housed in a custom enclosure. Zapit was controlled and data were acquired with an NI-DAQ USB-6363. 
+In all experiments presented here we used a 473~nm, 75~mW Obis laser with a Thorlabs MD498 dichroic filter and an MF525-39 emission filter. The system was housed in a custom enclosure. ScannerMax Saturn 5 mirrors (available from Edmund Optics) were used to direct the beam. However, we recommend the ThorLabs version presented in this paper for most users, as it is more cost effective and easier to build. 
+Zapit was controlled and data were acquired with an NI-DAQ USB-6363. 
 
 \subsection{Mice}
 All experiments were performed under the UK Animals (Scientific Procedures) Act of 1986 (PPL: PD867676F) following local ethical approval by the Sainsbury Wellcome Centre Animal Welfare Ethical Review Body. 
-We used VGAT-ChR2-YFP mice (Jackson Laboratories, USA) for Zapit experimental proof of principle experiments.
+We used VGAT-ChR2-YFP mice (Jackson Laboratories, USA) for all experiments.
 
-\subsection{Implantation of clear skull cap for optical access to the dorsal surface of the brain}
+\subsection{Surgical procedures}
 Implantation of a clear skull cap (i.e., thin layer of transparent bone cement (C \& B Superbond)) covering the dorsal surface of the brain together with a head plate placed over the cerebellum was carried out under 1.5\% isoflurane in O2, together with pre and post surgical administration of Meloxicam (5~mg/kg). 
-To ensure the skull is parallel to the objective, the skull should be aligned by checking  that bregma and lambda depths are even (i.e., <0.05-0.1~mm difference), as well as $\pm$~2mm lateral from midline is even (i.e., <0.05-0.1~mm difference). 
-This allowed optical access to the dorsal surface of the brain, while head-fixing the mice. 
-To allow calibration of Zapit two small dots were made over bregma and +3~mm AP from bregma. 
-Mice began habituation to the behavioral setup and water/food restriction >4 days after surgery.
+To ensure the skull is level under the objective, the skull should be aligned by checking that bregma and lambda depths are even (i.e., <0.05-0.1~mm difference), as well as $\pm$~2mm lateral from midline is even (i.e., <0.05-0.1~mm difference).  
+To allow calibration of the sample relative to stereotaxic space during Zapit experiments, two small dots should be made over bregma and +3~mm AP from bregma.
 
-\subsection{Bilateral whisker frequency discrimination delayed-response task}
+For electrophysiological validation of Zapit photoinhibition, craniotomies ($\sim$ 1.5 mm diameter) were made over secondary motor cortex  (AP $+$ 2.5 mm, ML $\pm$ 1.5 mm, from bregma) and visual cortex (AP -2.9 mm, ML 1.4 mm, from bregma). An additional cranial opening ($\sim$ 0.5 mm diameter) was drilled above the cerebellum to secure the ground wire to the skull. Then the craniotomy was covered with Dura-Gel (Cambridge NeuroTech), and a plastic protective cap was placed over the headplate to shield the exposed areas and maintain sterility between recording sessions.
 
-Mice were head-fixed and positioned in a perspex tube. 
-Bilateral somatosensory (whisker) stimuli were delivered using compressed air directed to the left and right whisker fields using two 3 mm air hose lines (121-6278; RS Components). 
-Air-puff stimulation was delivered in the dorsoventral axis. 
-The air pressure (2~bar) was maintained using a pressure regulator (703-6113; RS Components). 
-Left/right air flow was gated using two solenoid valves (EV-2-12; The West Group). 
-Air puff stimuli consisted of trains of regularly spaced pulse sequences (0 - 10~Hz). 
-Each pulse duration was 20~ms and stimuli were presented for 1~s. 
-The task (stimulus design, trial timing, lick detection, reward delivery etc.) was controlled using the MATLAB implementation of Bpod (Sanworks). 
 
-Mice were trained through operant conditioning to associate lateralized whisker stimulation with lateralized reward (e.g. stimulus left = lick left). 
-Water rewards (3~$\mu l$) were delivered to the target lickport on correct trials using a gravity fed water reservoir system, with left/right spout tubing gated via two solenoid pinch valves (161P011; NResearch).
-Mice were first trained on 10~Hz unilateral stimulus trials (i.e. trials with no distractor) with no delay-epoch. 
-During this phase, mice could lick the lickport(s) immediately following stimulus presentation. 
-Following learning, a motorized stage (XL-320 Dynamixel; Robitis) moved the lickport in/out to teach mice to withhold licking until cued. 
-The period between stimulus presentation and presentation of the lickport was incrementally increased across training up to a maximal 2~s (1~s stimulus presentation, 1~s delay). 
-Movement of the lickport stage provided a salient auditory sound to cue the onset of the response window.
-Following learning of the full delay task, bilateral stimulation trials were introduced. 
-During bilateral training, mice received 9 distinct types of sensory trials corresponding to a `3 x 3' combinatorial matrix of 0, 5 and 10~Hz left and right whisker stimuli.
-The target lickport was cued by the whisker side receiving the faster stimulus sequence. 
-The rewarded side was randomized on trials where left and right stimulation was matched.
-Following learning mice underwent unilateral optogenetic perturbation experiments. 
-Two unilateral stimulation locations were used, corresponding to anterolateral motor cortex (2.5~mm anterior, $\pm$1.5~mm lateral from bregma; \cite{Guo2014FlowMice}).
-Photostimulation (duration: 2.2~s; average power: 2~mW) was delivered on 33\% of trials and was randomized across left and right ALM.
+\subsection{Electrophysiological recordings}
+
+For electrophysiological validation experiments, neural activity was recorded using a 64-channel silicon probe (ASSY-236-H9, Cambridge NeuroTech) to minimize photoelectric artifacts. Signals were digitized at 30 kHz, amplified, and band-pass filtered (0.6–7500 Hz) using a 64-channel Intan Technologies headstage. Data were acquired, visualized, and stored using the \href{https://open-ephys.github.io/acq-board-docs/}{Open Ephys acquisition board} and GUI.
+During the recording, probes were lowered at 7 $\mu$m/s using programmed automatic micromanipulators (Sensapex), followed by a 10 minute settling period to minimize neural signal drift during recording. At the end of each trial, a serial TTL message encoding the current trial number was sent from behavioural control hardware to the acquisition system to synchronize the neural signal with the Zapit trigger signals.
+
+Offline spike sorting was performed with Kilosort v4 \citep{Pachitariu2024SpikeKilosort4}, followed by manual curation in \href{https://github.com/cortex-lab/phy}{Phy 2.0}. Units were classified as putative neurons only if their spike waveforms exhibited a clear spatial decay across adjacent probe channels. Both single and multi units that showed low percentage of missing spikes, low refractory period violations, and minimal drift across time were included in the analysis. Units exhibiting substantial drift that led to a clear loss of spikes over time were excluded from further analysis. Additional details can be found in \cite{Gauld2025AActions}.
+
+\subsection{Delayed-response somatosensory discrimination task}
+
+The task design and experimental set-up were based on previous work (\cite{Gauld2024APerception,Gauld2025AActions}). Briefly, mice were head-fixed in a perspex tube and air-puff stimuli (0 - 10~Hz; 20~ms pulse duration, 1 s sequence duration) were delivered to the left/right whiskers. Following a short delay period (1 s), mice reported their choice with directional licking to obtain water rewards (3~$\mu l$). The target response side was cued by the whisker side receiving the faster air-puff sequence, and randomized on trials with matched bilateral stimulation. 
+
+Following task learning, we surveyed 17 bilateral regions spanning the dorsal cortical surface (stereotaxic target coordinates in mm relative to bregma): (2.5 A ± 0.5 L), (2.5 A ± 1.75 L), (1.25 A ± 0.5 L), (1.25 A ± 1.75 L), (1.25 A ± 3 L), (0 A ± 0.5 L), (0 A ± 1.75 L), (0 A ± 3 L), (-1.45 A ± 0.5 L), (-1.25 A ± 1.75 L), (-1.25 A ± 3.5 L), (-2.7 A ± 0.5 L), (-2.5 A ± 1.75 L), (-2.5 A ± 3 L), (-2.5 A ± 4.25 L), (-3.75 A ± 1.75 L), and (-3.75 A ± 3 L). Laser stimulation (time-averaged power per site: 2~mW; duration: 800~ms + 200~ms linear rampdown) was delivered on 50\% of trials, with target-site and epoch (Stimulus vs Delay) fully randomised. During the optogenetic mapping experiment, mice received unilateral whisker stimulation trials (10 Hz).  
+
+To examine putative epoch- and site-specific effects of laser stimulation on task performance, 
+we compared Zapit trials for each bilateral target site with session-matched control trials 
+using generalized linear mixed models (GLMMs). Specifically, we compared the predictive performance of the following two models shown below in Wilkinson-Rogers notation:
+
+\[
+\begin{aligned}
+\text{Baseline model: } & \text{Correct choice} \sim 1 + (1 \mid \text{Mouse}) \\
+\text{Opto model: } & \text{Correct choice} \sim \text{opto} + (1 \mid \text{Mouse})
+\end{aligned}
+\]
+
+We performed 20-fold cross-validation to evaluate model predictive performance on out-of-sample 
+test data. Mean log-likelihoods across matched folds were compared using a paired $t$-test, 
+yielding a $P$-value for each cortical target site and each epoch. For analyses of reaction times (RTs), we compared Zapit and control trial RTs with a Wilcoxon rank-sum test. For performance and RT analyses, $P$-values were corrected for multiple comparisons across cortical locations using the Bonferroni--Holm method ($\alpha = 0.05$, 17 cortical locations).
+
+For choice-biasing experiments, we selectively targeted anterolateral motor cortex (``ALM'': $2.5\,\mathrm{A} \pm 1.75\,\mathrm{L}$) for unilateral photoinhibition. Laser stimulation (time-averaged power per site: $2\,\mathrm{mW}$; duration: $2000\,\mathrm{ms}$ + $200\,\mathrm{ms}$ linear rampdown) was delivered on $33\%$ of trials and randomized across hemispheres. During choice-biasing experiments, mice received nine sensory trial-types corresponding to a $3 \times 3$ combinatorial matrix of $0$, $5$, and $10~\mathrm{Hz}$ left and right stimuli. Trials were delivered in randomized order.
 
 
 
@@ -64,11 +70,21 @@ Random 15\% of trials were assigned as no-change trials and did not have a chang
 
 Mice were trained to report sustained increases in temporal frequency by licking the spout to trigger reward delivery (drop of soy milk). 
 Licks that occurred outside of the change period are referred in the text as early licks. 
-If mice moved on the wheel (movement exceeding 2.5~mm in a 50~ms window) in either direction, the trial was aborted. 
-If mice did not lick within 2.15~s from the change onset, the trial was considered a miss trial. 
+If mice moved on the running wheel (movement exceeding 2.5~mm in a 50~ms window) in either direction, the trial was aborted. 
+If mice did not lick within 2.15~s from the change onset, the trial was considered a miss trial.
 
-\subsubsection{Behavioral setup and data acquisition}
-Reward delivery (soya milk) was controlled by a solenoid pinch valve (161P011, NResearch, USA) and delivered to the mouse via a spout positioned in front of it.
-Mouse licking the spout was measured by a piezo element (TDK PS1550L40N) coupled to the spout and amplified with a custom-made amplifier system. 
-Running wheel movement was measured with a rotary encoder (model K\"ubler) that was connected to the wheel axle. 
-All behavioral data and events, such as piezo voltage trace, valve or change period on/off state, etc, were acquired via analog and digital channels on an NI PCI-6320 acquisition card and processed and saved using LabVIEW (NI) and MATLAB (The MathWorks).
+Optogenetic silencing commenced 0.25~s before visual stimulus onset using 40-Hz square-wave stimulation (50\% duty cycle) delivered bilaterally throughout each trial. Following trial completion, laser power ramped down linearly over 0.25~s to minimise rebound excitation. 
+To ensure mice could not distinguish laser from control trials based on visual cues, we combined two masking strategies. First, we illuminated the behavioural chamber with white LED strips throughout all sessions. Second, we delivered blue LED light from above the animal on every trial, matching the exact temporal profile of the optogenetic laser stimulation. This dual masking approach prevented mice from using visual detection of laser light to alter their behaviour.
+
+We silenced primary somatosensory cortex (S1: ML=±3.2, AP=-0.8~mm) and primary visual cortex (V1: ML=±2.7, AP=-3.8~mm). Each area was silenced bilaterally using either 2 or 4~mW average power with each power level applied on 3.6\% of trials per site. We also silenced five additional sites in these sessions not reported in this paper. 50\% of trials served as no silencing controls where the laser was either turned off or targeted away from the skull.
+
+Psychometric curves were calculated for each mouse by counting the number of hits relative to all trials where mice were presented with a change stimulus (i.e., did not early lick nor abort), across all sessions. Mean hit rates (performance) were calculated for each mouse (n = 5) per change size for either intact cortex (No area silenced) or for trials silencing each area with each light power. To ensure fair aggregation of trials across sessions, we only included sessions with performance above 80\% hits on largest change (2~Hz) in cortex intact trials. We plotted the mean and  95\% confidence intervals (i.e. standard error of the mean (s.e.m.) * 1.96) of hit rates across mice for each change size and each condition. We quantified differences between area silencing trials and intact cortex trials by performing paired t-tests (across mice) on the combined difference in performance for change sizes 1.25 and 1.5~Hz for intact cortex vs a specific area silenced (excluding 2~Hz to avoid potential statistical selection bias).
+
+
+\subsection{Visual discrimination task}
+
+Surgical procedures and behavioral training followed established protocols (\cite{InternationalBrainLaboratory2021StandardizedMice,InternationalBrainLaboratory2025ABehaviour}) with minor modifications. Mice were water-restricted and trained on the 2-AFC task using standardized training rigs. Mice were transitioned to the laser-scanning optogenetics (Zapit) rig upon reaching the "training 2b" performance criterion. The behavioral apparatus was adapted from the standard IBL electrophysiology rig design (\cite{InternationalBrainLaboratory2021StandardizedMice}).
+
+A grid of 52 bilateral stimulation sites was positioned at 0.5 mm intervals to cover secondary motor cortex, primary motor cortex, the upper limb region of somatosensory cortex as well as parts of anterior cingulate and prelimbic cortices.
+
+Laser stimulation was controlled via TTL signals generated by modified IBL training software. On stimulation trials, TTL signals were sent at quiescent period onset and trial end (reward, error, or timeout). On each trial, there was a 50–70\% probability that one bilateral site pair would be randomly selected for stimulation. Generally, the system was run with 2~mW laser power, with some exceptions for sessions in which 3~mW was used. To control for visual artifacts, a 473~nm LED masking light was positioned near the laser-scanning source and was activated on every trial coincident with the laser stimulation window, regardless of whether actual stimulation occurred.

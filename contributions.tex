@@ -22,7 +22,7 @@
 \foreach \a [count=\n] in {
         ML,
         OMG,
-        MS,
+        MTQ,
         AM,
         CB,
         JL,
@@ -31,13 +31,13 @@
         QPM,
         ST,
         PV,
-        AY,
+        AYY,
         NZ,
         AA,
         CAD,
         JCE,
-        SBH,
         TDMF,
+        SBH,
         PC,
         RAAC,
     } {
@@ -61,18 +61,16 @@
         \node[row label] at (0.5,\i) {\a};
     }
 
-
-    
 \foreach \y [count=\n] in {
         {\mid,0,\hi,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\hi},        % 1  Prototype hardware design
         {0,0,\hi,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\hi},           % 2  Prototype software design
-        {0,0,0,\hi,0,0,0,\mid,0,0,0,0,0,0,0,0,0,0,\hi,\hi},      % 3  Final hardware design
-        {0,0,0,0,0,0,0,0,\lo,0,\lo,0,0,0,0,0,0,0,0,0},         % 4  Final software design
-        {0,0,0,\hi,0,0,0,0,0,\hi,0,0,0,0,0,0,0,0,\mid,0},           % 5  CAD & machining
-        {0,\hi,0,\hi,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\mid,\hi},       % 6  Benchmarking and testing
-        {0,\mid,0,0,\hi,\mid,0,0,0,0,0,0,0,0,\lo,0,0,0,0,0},     % 7  Electrophysiological experiments
-        {\hi,\hi,\lo,0,0,0,\hi,0,0,0,0,\mid,\mid,0,0,0,0,0,0,0},    % 8  Behavioral validation experiments
-        {\hi,\hi,\mid,\hi,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\hi,\hi},      % 9  Writing: Original Draft
+        {0,0,0,\hi,0,0,0,\mid,0,0,0,0,0,0,0,0,0,0,\hi,\lo},      % 3  Final hardware design
+        {0,0,0,0,0,0,0,0,\lo,0,\lo,0,0,0,0,0,0,0,0,\hi},         % 4  Final software design
+        {0,0,0,\hi,0,0,0,0,0,\hi,0,0,0,0,0,0,0,0,\mid,0},        % 5  CAD & machining
+        {\hi,\hi,\hi,\hi,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\mid,\hi},  % 6  Benchmarking and testing
+        {0,\mid,0,0,\hi,\mid,\lo,0,0,0,0,0,0,0,\lo,0,0,0,0,0},      % 7  Electrophysiological experiments
+        {\hi,\hi,\lo,0,0,0,\hi,0,0,0,0,\mid,\mid,0,0,0,0,0,0,0},  % 8  Behavioral validation experiments
+        {\hi,\hi,\mid,\hi,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\hi,\hi},   % 9  Writing: Original Draft
     {\mid,\mid,\mid,\mid,\mid,\mid,\mid,\mid,\mid,\mid,\mid,\mid,\mid,\mid,\mid,\mid,\mid,\mid,\mid,\mid}, % 10 Writing: Reviewing and Editing
         {\hi,\hi,0,0,0,0,0,0,0,0,0,0,0,\hi,\hi,\hi,\hi,\hi,\hi,0},  % 11 Funding acquisition
     } {
