@@ -1,0 +1,43 @@
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{c|p{100mm}}
+        Paper & Software and Hardware  \\
+    \hline
+    
+    Guo, 2014 & \textbf{Code:} RTLinux. No code provided. \textbf{Hardware:} Somewhat complicated: 200~mW laser separate AOM, relay optics. 0.5–5 ms step time for step size 0.57–35 mm. 40~Hz sinusoid with 100~ms rampdown. They report time-averaged powers.  Photostimulation locations were chosen randomly but never twice in succession. Clear skull cap: 50\% transmission. Thor Galvos.\\ 
+
+    Li, 2016 & \textbf{Code:} RTLinux. No code provided. \textbf{Hardware:} Same setup as Guo. We used a 40~Hz photostimulus with a sinusoidal temporal profile (1,5~mW average power). They do multiple positions. When they do this it is 1 step every 5 ms s (step time: <0.2~ms; dwell time:>4.8~ms). Peak power was adjusted depending on the number of cortical locations to achieve 1.5~mW average power per location. They do not say, however, what is the modulation frequency at a given point, but they have 8 points max in Fig. 2. 
+    
+    They have ephys to demonstrate how many spikes are silenced at a given distance from an electrode. They have devoted a reasonable amount of space to characterising the inhibition.\\ 
+    
+    Heindorf 2018 & Code: Labview not public (?) I know it's not designed for general use. \textbf{Hardware:} 473 nm laser (Shanghai Laser \& Optics Century, BL473H-200) sinusoidally modulated at 40 Hz. Laser was directed at either two locations per hemisphereat 5 mW time averaged power per location (10 mW per hemisphere), or one location at 1 mW or 2 mW time averaged power per location/hemisphere. Full-width half maximum of the laser beam was 0.8 mm (pale blue dashed circle in Figure S1A) and power dropped to 1/e at a radius of 0.5 mm. Photostimulation was performed through a cranial window. We used a galvo-galvo scan head to either cycle between the target locations or between two blank locations on the head-bar during times of no stimulation. For stimulation, the laser cycled between each of the two (four) target locations for the duration of the stimulus with a dwell time of 40 ms (20 ms) per location.\\ 
+    
+    Inagaki, 2018  & \textbf{Code:} ? \textbf{Hardware:}  Photostimulated for 1.2~s, including the 200 ms ramp, starting at the beginning of the sample or delay epoch. 40~Hz sinusoidal temporal profile (1.5~mW average power) and a 200~ms linear ramp during laser offset. We used scanning Galvo mirrors to inactivate different locations of the cortex.\\
+
+    \hline
+    \end{tabular}
+    \caption{Brief summary of existing galvo-based solutions A}
+    \label{tab:system_summary A}
+\end{table}
+
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{c|p{100mm}}
+        Paper & Software and Hardware  \\
+    \hline
+    
+    Keller A, 2020 & \textbf{Code:} LabVIEW; not provided. \textbf{Hardware:} Pinhole to collimate the beam (?) then 300~mm achromat. 200~$\mu m$ spot. Thor Galvos. `[HVAs] were consecutively scanned in a circular manner with a dwell time of $\leq$ 1~ms per area (resulting in a frequency of 125~Hz for the whole cycle.' Spot size is roughly half the width of an HVA so it can just be passed over them with little actual scanning taking place.\\ 
+
+    Coen, 2022 & \textbf{Code:} MATLAB. Basic system is available but not linked to in manuscript. \textbf{Hardware:} Through the skull. Thor galvos. 40~Hz sine wave, 462~nm, 3~mW. No information on optics. Scanner enclosure, etc.\\ 
+        
+    Pinto, 2019 and 2022 & \textbf{Code:} MATLAB. Good quality code provided but not general purposed. Opto PC is a slave to another that handles the behavioral experiment \textbf{Hardware:}  CamTech scanners. 40~Hz square wave with an 80\% duty cycle and a power of 6 mW measured at the level of the skull.  This corresponds to an inactivation spread of about 2~mm. Spread depends on power. f = 160~mm, LINOS f-Theta scan lens. and a pellicle beamsplitter (CM1-BP108, Thorlabs) before reaching the cortical surface. The beamsplitter directed 8\% of the light to a camera (grasshopper3, Point Grey), allowing remote visualization of beam location.     The beam had a Gaussian profile with a diameter of 65~$\mu m$ measured as full width at half height. The system had a position accuracy of about 15~$\mu m$ (measured as the standard deviation of the distribution of the differences between target and actual beam location for 70 X-Y combinations). For bilateral inactivation, the galvanometers alternated between the two hemispheres at 200~Hz (20 mm travel time: about 250~$\mu s$).  \\ 
+    
+    Voitov, 2022 & \textbf{Code:} LabVIEW. No code provided. \textbf{Hardware:} Seems to copy Guo. The laser light was pulsed at 50~Hz, with a 50\% duty cycle. The laser power: 3~mW average (6~mW peak power) for the first 400~ms. Then 200~ms rampdown. Masking light with same dynamics as photostim. \\ 
+
+    \hline
+    \end{tabular}
+    \caption{Brief summary of existing galvo-based solutions B}
+    \label{tab:system_summary B}
+\end{table}

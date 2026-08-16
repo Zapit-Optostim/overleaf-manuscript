@@ -1,54 +1,42 @@
 \section{Discussion}
 
-\subsection{Comparison to other scanner based solutions}
+Zapit is a complete and accessible solution for laser-scanning optogenetics. The components are commercially available, and the modular system is uniquely flexible to accommodate a diversity of experimental needs. The \href{https://github.com/Zapit-Optostim/zapit}{Github repository} contains complete build instructions, parts lists, and visual aids: no prior expertise is required for implementation. The software is fully documented and will be continually maintained and updated by developers and experimentalists. Known software and hardware issues are actively raised and resolved through \href{https://github.com/Zapit-Optostim/zapit/issues}{Zapit's Github issues page}. 
 
-\begin{table}[h]
-    \centering
-    \begin{tabular}{c|p{100mm}}
-        Paper & Software and Hardware  \\
-    \hline
-    
-    Guo, 2014 & \textbf{Code:} RTLinux. No code provided. \textbf{Hardware:} Somewhat complicated: 200~mW laser separate AOM, relay optics. 0.5–5 ms step time for step size 0.57–35 mm. 40~Hz sinusoid with 100~ms rampdown. They report time-averaged powers.  Photostimulation locations were chosen randomly but never twice in succession. Clear skull cap: 50\% transmission. Thor Galvos.\\ 
+Zapit comprises several technical developments that make it more versatile and user-friendly than any previously published system. These include detailed configurations for multiple lasers and opsins, user-friendly GUIs for automated stereotaxic calibration and stimulus design, and a cross-platform API for integration into diverse behavioral and experimental protocols across laboratories. Additionally, the modular design facilitates future developments, such as multiplexing two lasers in one setup.
 
-    Li, 2016 & \textbf{Code:} RTLinux. No code provided. \textbf{Hardware:} Same setup as Guo. We used a 40~Hz photostimulus with a sinusoidal temporal profile (1,5~mW average power). They do multiple positions. When they do this it is 1 step every 5 ms s (step time: <0.2~ms; dwell time:>4.8~ms). Peak power was adjusted depending on the number of cortical locations to achieve 1.5~mW average power per location. They do not say, however, what is the modulation frequency at a given point, but they have 8 points max in Fig. 2. 
-    
-    They have ephys to demonstrate how many spikes are silenced at a given distance from an electrode. They have devoted a reasonable amount of space to characterising the inhibition.\\ 
-    
-    Heindorf 2018 & Code: Labview not public (?) I know it's not designed for general use. \textbf{Hardware:} 473 nm laser (Shanghai Laser \& Optics Century, BL473H-200) sinusoidally modulated at 40 Hz. Laser was directed at either two locations per hemisphereat 5 mW time averaged power per location (10 mW per hemisphere), or one location at 1 mW or 2 mW time averaged power per location/hemisphere. Full-width half maximum of the laser beam was 0.8 mm (pale blue dashed circle in Figure S1A) and power dropped to 1/e at a radius of 0.5 mm. Photostimulation was performed through a cranial window. We used a galvo-galvo scan head to either cycle between the target locations or between two blank locations on the head-bar during times of no stimulation. For stimulation, the laser cycled between each of the two (four) target locations for the duration of the stimulus with a dwell time of 40 ms (20 ms) per location.\\ 
-    
-    Inagaki, 2018  & \textbf{Code:} ? \textbf{Hardware:}  Photostimulated for 1.2~s, including the 200 ms ramp, starting at the beginning of the sample or delay epoch. 40~Hz sinusoidal temporal profile (1.5~mW average power) and a 200~ms linear ramp during laser offset. We used scanning Galvo mirrors to inactivate different locations of the cortex.\\
+Zapit produced robust behavioral effects across a variety of experimental protocols and brain regions with VGAT-ChR2 mice. We validated the efficacy of inactivation in this mouse strain with simultaneous electrophysiology recordings and demonstrate that the effective radius of inactivation depends on the laser power used, but was \textasciitilde{}1~mm at powers for which we observed significant behavioral perturbations. 
 
-    \hline
-    \end{tabular}
-    \caption{Brief summary of existing galvo-based solutions A}
-    \label{tab:system_summary A}
-\end{table}
+There are other effective approaches for rapid programmatic photostimulation in head-fixed behavioral tasks: those based on digital micro-mirror devices (DMDs -- \cite{Chong2020ManipulatingPerception}) or spatial lights modulators (SLMs --  \cite{Russell2022All-opticalMice, Gauld2024APerception}). DMD-based solutions, such as the \href{https://www.mightexbio.com/polygon/}{Mightex Polygon}, provide a faster pattern-switching time but due to light loss, these systems require \textit{\textasciitilde{}100 times} more laser power than Zapit to cover the mouse dorsal cortex. SLM-based solutions are more light efficient, but devices with high resolution are very expensive and are slower than DMDs. Therefore, Zapit's scanner-based approach provides the most cost-effective and compact solution for the majority of optogenetics experiments involving the dorsal cortex. 
 
+\subsection{Practical considerations when using Zapit}
+\subsubsection{Surgical procedures} 
+To maximize targeting flexibility and accuracy, we recommend a head-fixation device that provides an unobstructed view of the entire dorsal surface of the skull, and marking structural reference points during surgery. We further recommend a thin layer of transparent glue (\cite{Zatka-Haas2021SensoryDecision, Coen2023MouseDecisions}) or `bone' cement (200-300~$\mu m$ thick) to protect the skull, as thicker layers of cement (0.5-1~mm) may reduce stimulation efficacy. For general details of \textit{in vivo} surgical and behavioral procedures in head-fixed mice we direct the reader to existing resources (e.g. \cite{Guo2014FlowMice, Guo2014ProceduresMice} ). 
 
-\begin{table}[h]
-    \centering
-    \begin{tabular}{c|p{100mm}}
-        Paper & Software and Hardware  \\
-    \hline
-    
-    Keller A, 2020 & \textbf{Code:} LabVIEW; not provided. \textbf{Hardware:} Pinhole to collimate the beam (?) then 300~mm achromat. 200~$\mu m$ spot. Thor Galvos. `[HVAs] were consecutively scanned in a circular manner with a dwell time of $\leq$ 1~ms per area (resulting in a frequency of 125~Hz for the whole cycle.' Spot size is roughly half the width of an HVA so it can just be passed over them with little actual scanning taking place.\\ 
+\subsubsection{Laser and power selection}
+Zapit is compatible with any laser source with fast analog power modulation. As a guideline, we recommend using 1-2~mW time-averaged light power at the sample when using VGAT-ChR2 mice. We consistently see strong behavioral effects at these powers, and spatiotemporal resolution comparable with many other studies. Regular power measurements at the sample are critical to ensure stability and reproducibility. At 2~mW time-averaged power at the sample, and with expected light loss of around 50\% due to the skull and bone cement (\cite{Guo2014FlowMice}). Heating at this power is also minimal, preventing the potential for heat-induced excitation  (\cite{Stujenske2015ModelingOptogenetics}). Nevertheless, \textit{post-hoc} histological analysis is strongly recommended to confirm opsin expression and assess tissue integrity.
 
-    Coen, 2022 & \textbf{Code:} MATLAB. Basic system is available but not linked to in manuscript. \textbf{Hardware:} Through the skull. Thor galvos. 40~Hz sine wave, 462~nm, 3~mW. No information on optics. Scanner enclosure, etc.\\ 
-        
-    Pinto, 2019 and 2022 & \textbf{Code:} MATLAB. Good quality code provided but not general purposed. Opto PC is a slave to another that handles the behavioral experiment \textbf{Hardware:}  CamTech scanners. 40~Hz square wave with an 80\% duty cycle and a power of 6 mW measured at the level of the skull.  This corresponds to an inactivation spread of about 2~mm. Spread depends on power. f = 160~mm, LINOS f-Theta scan lens. and a pellicle beamsplitter (CM1-BP108, Thorlabs) before reaching the cortical surface. The beamsplitter directed 8\% of the light to a camera (grasshopper3, Point Grey), allowing remote visualization of beam location.     The beam had a Gaussian profile with a diameter of 65~$\mu m$ measured as full width at half height. The system had a position accuracy of about 15~$\mu m$ (measured as the standard deviation of the distribution of the differences between target and actual beam location for 70 X-Y combinations). For bilateral inactivation, the galvanometers alternated between the two hemispheres at 200~Hz (20 mm travel time: about 250~$\mu s$).  \\ 
-    
-    Voitov, 2022 & \textbf{Code:} LabVIEW. No code provided. \textbf{Hardware:} Seems to copy Guo. The laser light was pulsed at 50~Hz, with a 50\% duty cycle. The laser power: 3~mW average (6~mW peak power) for the first 400~ms. Then 200~ms rampdown. Masking light with same dynamics as photostim. \\ 
+\subsubsection{Targeting precision}
+With transgenic lines expressing opsin brain-wide (including VGAT-ChR2 mice), stimulation with high laser powers (e.g. 4~mW or above at the sample) may cause off-target behavioral effects due to light-scatter laterally and axially through cortex (\cite{Li2019SpatiotemporalCircuits,Babl2019TheInterneurons}). Ideally, laser parameters including power, duration and ramp-down should be informed by electrophysiological recordings and/or modeling of light propagation through the brain (\cite{Yona2016RealisticApplications}). If limiting the impact of light dispersion is critical, opsins can be expressed via targeted viral injections. Under these conditions, expression can be restricted to highly localized circuits, genetically and anatomically defined subpopulations and sub-cellular compartments, and verified using \textit{post-hoc} histology.
 
-    \hline
-    \end{tabular}
-    \caption{Brief summary of existing galvo-based solutions B}
-    \label{tab:system_summary B}
-\end{table}
-\subsection{Comparison to other approaches}
+\subsubsection{Sensory confounds}
+Fast movements of galvo-mirrors generate auditory cues that can influence behavior, and we therefore recommend moving the galvo-mirrors on all trials, including those where the laser power is 0~mW. 
+Zapit behaves this way by default.
+The galvo drive waveforms are shaped to reduce noise emission, and the scanner unit can also be enclosed in sound-attenuating housing to further mitigate these effects. To accurately interpret optogenetic behavioral effects, it is also critical to mask the mouse's ability to see the laser, whether through internal and/or external retinal stimulation (\cite{Danskin2015OptogeneticsArtifact, Weiler2026ProtocolVivo}). We recommend masking laser-emitted light with color-matched LEDs placed above the mouse on every trial, matched to the stimulation profile of the laser (e.g., 40~Hz), and using a well-lit setup. Extra caution should be taken when using longer wavelengths which easily propagate through brain tissue to the retina, and can be more difficult to mask (\cite{Danskin2015OptogeneticsArtifact, Weiler2026ProtocolVivo}). Sensory confounds can also be addressed through repeated experiments and analyses in control animals that do not express the opsin (\cite{Gauld2025AActions}).
 
-There are other effective approaches for rapid programmatic photostimulation in head-fixed behavioural tasks: those based on digital micro-mirror devices (DMDs) or spatial lights modulators (SLM).
-These approaches are capable of activating extended, arbitrarily-shaped areas  (\cite{Chong2020ManipulatingPerception}).
-DMD-based approaches provide the fastest pattern-switching time but are very wasteful of light and so require a roughly 4 W laser to cover an area the size of mouse dorsal cortex. 
-Whilst SLM-based solutions are more light efficient, devices with high resolution are very expensive and are slower than DMDs.
-Whilst scanner-based systems restrict photostimulation to a small number of points, this scenario is sufficient to enable a wide variety of interesting experiments. 
-Scanner-based approaches provide the most cost-effect and compact solution. 
+\subsubsection{Target region selection and interpretation} 
+A major advantage of Zapit is the capacity to rapidly survey causal effects across the entire dorsal cortex. However, skull curvature and thickness should be considered, particularly in more lateral cortical regions. Differences in opsin expression due to tropisms in viral vectors or transgenic lines can also influence results. Users may need to perform further experiments to determine whether observed effects are a direct result of regional inactivation, or derived from downstream brain regions (\cite{Wolff2018TheManipulations, Allen2017ApplicationSignaling}).
+
+\subsection{Good practice: measures to report when using Zapit}
+We encourage Zapit users to report a minimal set of standardized parameters to aid replication, comparability, and consistency across experiments and laboratories:
+
+\begin{itemize}
+    \item Average light power per site
+    \item Stimulation frequency and profile (e.g. 40~Hz sinusoid), and duty cycle
+    \item Laser stimulation and ramp-down duration
+    \item Specifications and duty cycle of any masking light
+    \item     Precise stimulation coordinates 
+
+\end{itemize}
+
+\subsection{In Closing}
+We hope Zapit is a tool that will grow and find a broad user base throughout the scientific community. Potential new users are welcome to contact us for assistance in building or setting up the system. 

@@ -1,0 +1,45 @@
+\documentclass[12pt]{letter}
+\usepackage{geometry}
+\geometry{margin=2.5cm}
+\usepackage{hyperref}
+\usepackage{parskip}
+\usepackage{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+\longindentation=0pt
+
+\address{Robert AA Campbell\\
+Sainsbury Wellcome Centre\\
+25 Howland Street\\
+London W1T 4JG\\
+\href{mailto:rob.campbell@ucl.ac.uk}{rob.campbell@ucl.ac.uk}}
+
+\date{\today}
+
+\begin{document}
+\textbf{Response to Reviewing Editors}
+
+
+We thank the reviewing editors for considering our manuscript, \textit{Zapit: Open Source Laser-Scanning Photostimulation For Neuroscience} (submission RP-TR-2026-111320). We appreciate that the editors described Zapit as \textit{a nicely developed hardware/software system for laser guided photostimulation}.
+
+We welcome being given the opportunity to improve and resubmit this manuscript to address the principal concern of the reviewing editors:
+
+\textit{\ldots the general consensus was that [laser scanning photostimulation] methods/approaches have been around for quite some time, and it was not clear at this point what the particular technical innovation or application might be for the new system that is not already handled by existing approaches.}
+
+We thank the reviewers for bringing this omission to our attention. In our original manuscript, we focused too heavily on the design and functionality of Zapit, and failed to properly characterize the potential impact for the neuroscientific community. We also failed to explain some of the innovations and improvements that make Zapit more versatile than any previously published tool.  We briefly discuss these below, followed by a list of locations in the manuscript where these are now addressed.
+
+\textbf{Impact:} While galvo-based laser-scanning photostimulation has been used by other groups, each implementation is uniquely built from scratch. Understandably, the subsequent publications have focused on experimental results rather than methodological implementation. As a result, this powerful technique remains under-utilized, and limited to a small number of technically sophisticated laboratories: \textit{No community-standard open-source implementation exists.} Zapit breaks this barrier, democratizing this technique with user-friendly interfaces, complete documentation, and commercially available hardware. 
+
+The impact of accessible open-source tools in experimental neuroscience is well established. For example, democratizing publications for widefield calcium imaging\footnote{\textit{Chronic, cortex-wide imaging of specific cell populations during behavior}, Couto, 2021} and two-photon all-optical interrogation\footnote{\textit{All-optical interrogation of neural circuits in behaving mice}, Russell, 2022} are highly cited and valued by the community, despite arriving several years after these techniques were first "established". We therefore anticipate that Zapit will have a major impact. It is the \textit{only fully open-sourced and documented implementation of laser-scanning photostimulation}, bringing this affordable and versatile technique to new laboratories that would otherwise never realize the experimental power of this approach, or the ease with which it can be implemented.
+
+\textbf{Innovation}: Zapit goes beyond the state-of-the-art in laser scanning photostimulation. It is the only system with a modular design allowing individual hardware components to be easily customized (e.g. sound-attenuating enclosure, different working distances, multiple lasers). It has been validated with multiple lasers, including wavelengths that have never (to our knowledge) been used with laser scanning photostimulation. Further, it is compatible with multiple coding languages to allow for ease of integration across a diversity of experimental setups. This software is the first implementation to fully automate calibration and enable stimulation sites to be specified directly in stereotaxic coordinates, with real time feedback on targeting accuracy. 
+
+As the reviewing editors observed, these points were either omitted, or under-emphasized in the previous manuscript. We have made the following changes to highlight both the impact and innovations of Zapit:
+
+\begin{itemize}
+    \item The abstract and introduction have been revised to highlight the absence of existing open-source tools, and the technical innovations of Zapit that extend beyond any previous implementation.
+    \item     A new supplementary table makes explicit how Zapit relates to existing published systems.
+    \item The discussion has been revised, with dedicated paragraphs detailing the specific technical developments that distinguish Zapit from other systems. We also highlight that the modular design opens the system to future community-driven developments, such as the dual-laser configuration described in Figure S3. 
+\end{itemize}
+
+These changes have significantly strengthened the publication, and thank the reviewing editors for their comments. We believe the revised manuscript makes a compelling case that Zapit has the potential to have a major impact in the field of experimental Neuroscience, both through democratization of a powerful technique, and through the expanded applications inherent in our design. 
+\end{document}

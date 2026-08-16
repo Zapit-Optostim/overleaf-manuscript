@@ -1,0 +1,82 @@
+\section{Author Contributions}
+\begin{center}
+\tikzset{
+    tile/.style = {
+        minimum size=4.5mm,
+        inner sep=0,
+        outer sep=0,
+        anchor=center,
+    },
+    row label/.style={
+        anchor=east,
+        inner sep=0,
+        outer sep=1mm,
+        font=\fontsize{8}{8}\selectfont,
+    },
+}
+\def\hi{100}
+\def\mid{50}
+\def\lo{20}
+\colorlet{tilecolor}{green!10!orange}
+\begin{tikzpicture}[x=4.5mm, y=-4.5mm]
+\foreach \a [count=\n] in {
+        ML,
+        OMG,
+        MTQ,
+        AM,
+        CB,
+        JL,
+        NM,
+        GN,
+        QPM,
+        ST,
+        PV,
+        AYY,
+        NZ,
+        AA,
+        CAD,
+        JCE,
+        TDMF,
+        SBH,
+        PC,
+        RAAC,
+    } {
+        \node[anchor=south, inner sep=0, outer sep=2mm,
+              font=\fontsize{8}{8}\selectfont]
+            at (\n, 0) {\rotatebox{90}{\a}};
+    }
+    \foreach \a [count=\i] in {
+        Prototype hardware design,
+        Prototype software design,
+        Final hardware design,
+        Final software design,
+        CAD \& machining,
+        Benchmarking and testing,
+        Electrophysiological experiments,
+        Behavioral validation experiments,
+        Writing---Original Draft,
+        Writing---Reviewing and Editing,
+        Funding acquisition,
+    } {
+        \node[row label] at (0.5,\i) {\a};
+    }
+
+\foreach \y [count=\n] in {
+        {\mid,0,\hi,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\hi},        % 1  Prototype hardware design
+        {0,0,\hi,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\hi},           % 2  Prototype software design
+        {0,0,0,\hi,0,0,0,\mid,0,0,0,0,0,0,0,0,0,0,\hi,\lo},      % 3  Final hardware design
+        {0,0,0,0,0,0,0,0,\lo,0,\lo,0,0,0,0,0,0,0,0,\hi},         % 4  Final software design
+        {0,0,0,\hi,0,0,0,0,0,\hi,0,0,0,0,0,0,0,0,\mid,0},        % 5  CAD & machining
+        {\hi,\hi,\hi,\hi,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\mid,\hi},  % 6  Benchmarking and testing
+        {0,\mid,0,0,\hi,\mid,\lo,0,0,0,0,0,0,0,\lo,0,0,0,0,0},      % 7  Electrophysiological experiments
+        {\hi,\hi,\lo,0,0,0,\hi,0,0,0,0,\mid,\mid,0,0,0,0,0,0,0},  % 8  Behavioral validation experiments
+        {\hi,\hi,\mid,\hi,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\hi,\hi},   % 9  Writing: Original Draft
+    {\mid,\mid,\mid,\mid,\mid,\mid,\mid,\mid,\mid,\mid,\mid,\mid,\mid,\mid,\mid,\mid,\mid,\mid,\mid,\mid}, % 10 Writing: Reviewing and Editing
+        {\hi,\hi,0,0,0,0,0,0,0,0,0,0,0,\hi,\hi,\hi,\hi,\hi,\hi,0},  % 11 Funding acquisition
+    } {
+        \foreach \x [count=\m] in \y {
+            \node[fill=tilecolor!\x!white, tile] at (\m,\n) {};
+        }
+    }
+\end{tikzpicture}
+\end{center}
