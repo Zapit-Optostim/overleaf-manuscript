@@ -1,5 +1,9 @@
 \documentclass{preprint-raac}
 
+
+\usepackage{pifont} % for fonts in final table of supp.tex
+\usepackage{makecell}
+
 % Define directories which contain figures
 \usepackage{graphicx} 
 \usepackage{marvosym}
@@ -24,7 +28,7 @@
 
 %%
 % Preamble: title and author details
-\title{Zapit: Open Source Random-Access Photostimulation For Neuroscience}
+\title{Zapit: Open Source Laser-Scanning Photostimulation For Neuroscience}
 
 
 \author[*1]{Michael Lohse\orcidlink{0000-0001-8864-0704}}
@@ -70,7 +74,9 @@ RAA Campbell \url{rob.campbell@ucl.ac.uk}}
 %%
 % Abstract and keywords
 \begin{abstract}
-Optogenetic tools are indispensable for understanding the causal neural mechanisms underlying animal behavior. Opsins provide millisecond-precision control over genetically defined neural populations, but this is critically dependent on associated hardware and software for targeted light delivery. Optic-fibres are suitable for certain experiments, but fiber implantation can be invasive and limits flexibility of spatial targeting. In contrast, random-access laser-scanning optogenetic systems provide far greater flexibility for targeting distributed cortical areas. However, these systems are more technically challenging to build, and at present no general-purpose open-source solution is available. Here we present ‘Zapit’, a complete open-source platform for spatio-temporally precise random-access laser-scanning optogenetic experiments in head-fixed mice. We describe the system, quantify its performance, validate its physiological effect on cortical activity, and show results from proof-of-principle cortical photoinhibition experiments in behaving mice.
+Optogenetic tools are indispensable for understanding the causal neural mechanisms underlying animal behavior, providing millisecond-precision control over genetically defined neural populations. Random-access laser-scanning optogenetics is a powerful and underutilized method for transiently manipulating cortical activity in mice. Despite the utility of this technique, no general-purpose open-source implementation currently exists, and potential users need expertise across optics, real-time hardware control, and programming. This represents a major barrier to adoption, particularly for newly established research groups. Here we present ‘Zapit’, the first open-source general-purpose platform for random-access laser-scanning optogenetic experiments in head-fixed mice. Zapit is fully documented, has a user-friendly GUI, works in stereotaxic coordinates, and comes with easy to build hardware options that extend functionality beyond any published system. We validate Zapit's performance through electrophysiological recordings and cortical photoinhibition in behaving mice. Zapit is a novel and innovative tool with the potential to democratize laser-scanning optogenetics and significantly increase uptake throughout the scientific community.
+
+
 
 \keywords{Optogenetics, Neuroscience, Software Tool, Optics, Open Source}
 \end{abstract}

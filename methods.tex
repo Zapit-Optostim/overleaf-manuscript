@@ -1,11 +1,17 @@
 \section{Methods}
 
+\subsection{Code}
+Zapit and its associated software tools were developed in the open, version controlled with Git, and hosted on GitHub. Most development was done using Sublime Text. Anthropic Claude (Fable 5 and Opus 4.7) was used to generate code reviews and identify bugs in Zapit's 1.0.4 release. 
+
 \subsection{Recording and data acquisition for hardware characterization}
 Laser power output for all lasers was recorded using a Thorlabs Power Meter PM100D, and acquired with the associated Thorlabs Optical Power Meter Utility software. Samples for photostimulation reliability with the Obis 473~nm laser (Figure~\ref{fig:HardwareTriggering_01}) were recorded at 100~kS/s using an oscilloscope (PicoScope). Samples for photostimulation reliability for all other lasers were recorded at 100~kS/s using a NI-DAQ USB-6453 and acquired with LabVIEW software. In both cases, laser output was recorded using a photodiode from a programmed 800~ms stimulation period, following a 200~ms rampdown. 
 For users without a LabVIEW license who wish to acquire similar data we \href{https://github.com/Zapit-Optostim/zapit/blob/main/development/recordWaveforms/waveformRecorder.m}{provide example code in Zapit} (derived from our \href{https://github.com/SWC-Advanced-Microscopy/MATLAB_DAQmx_examples}{MATLAB DAQmx examples package}) showing how to do so using NI DAQmx via MATLAB. \href{https://github.com/SWC-Advanced-Microscopy/Python_DAQmx_examples}{Python NI DAQmx examples are also available}.
 
 \subsection{Zapit configuration for experiments}
-In all experiments presented here we used a 473~nm, 75~mW Obis laser with a Thorlabs MD498 dichroic filter and an MF525-39 emission filter. The system was housed in a custom enclosure. ScannerMax Saturn 5 mirrors (available from Edmund Optics) were used to direct the beam. However, we recommend the ThorLabs version presented in this paper for most users, as it is more cost effective and easier to build. 
+In all experiments presented here we used a 473~nm, 75~mW Obis laser with a Thorlabs MD498 dichroic filter and an MF525-39 emission filter. 
+The system was housed in a custom enclosure. ScannerMax Saturn 5 mirrors (available from Edmund Optics) were used to direct the beam. 
+However, we recommend the ThorLabs version presented in this paper for most users, as it is more cost effective and easier to build. 
+Other scanners could also be substituted, as can other lasers, lens combinations, and laser wavelengths etc.
 Zapit was controlled and data were acquired with an NI-DAQ USB-6363. 
 
 \subsection{Mice}
@@ -31,7 +37,7 @@ Offline spike sorting was performed with Kilosort v4 \citep{Pachitariu2024SpikeK
 
 The task design and experimental set-up were based on previous work (\cite{Gauld2024APerception,Gauld2025AActions}). Briefly, mice were head-fixed in a perspex tube and air-puff stimuli (0 - 10~Hz; 20~ms pulse duration, 1 s sequence duration) were delivered to the left/right whiskers. Following a short delay period (1 s), mice reported their choice with directional licking to obtain water rewards (3~$\mu l$). The target response side was cued by the whisker side receiving the faster air-puff sequence, and randomized on trials with matched bilateral stimulation. 
 
-Following task learning, we surveyed 17 bilateral regions spanning the dorsal cortical surface (stereotaxic target coordinates in mm relative to bregma): (2.5 A ± 0.5 L), (2.5 A ± 1.75 L), (1.25 A ± 0.5 L), (1.25 A ± 1.75 L), (1.25 A ± 3 L), (0 A ± 0.5 L), (0 A ± 1.75 L), (0 A ± 3 L), (-1.45 A ± 0.5 L), (-1.25 A ± 1.75 L), (-1.25 A ± 3.5 L), (-2.7 A ± 0.5 L), (-2.5 A ± 1.75 L), (-2.5 A ± 3 L), (-2.5 A ± 4.25 L), (-3.75 A ± 1.75 L), and (-3.75 A ± 3 L). Laser stimulation (time-averaged power per site: 2~mW; duration: 800~ms + 200~ms linear rampdown) was delivered on 50\% of trials, with target-site and epoch (Stimulus vs Delay) fully randomised. During the optogenetic mapping experiment, mice received unilateral whisker stimulation trials (10 Hz).  
+Following task learning, we surveyed 17 bilateral regions spanning the dorsal cortical surface (stereotaxic target coordinates in mm relative to bregma): (2.5 A ± 0.5 L), (2.5 A ± 1.75 L), (1.25 A ± 0.5 L), (1.25 A ± 1.75 L), (1.25 A ± 3 L), (0 A ± 0.5 L), (0 A ± 1.75 L), (0 A ± 3 L), (-1.45 A ± 0.5 L), (-1.25 A ± 1.75 L), (-1.25 A ± 3.5 L), (-2.7 A ± 0.5 L), (-2.5 A ± 1.75 L), (-2.5 A ± 3 L), (-2.5 A ± 4.25 L), (-3.75 A ± 1.75 L), and (-3.75 A ± 3 L). Laser stimulation (time-averaged power per site: 2~mW (at the sample); duration: 800~ms + 200~ms linear rampdown) was delivered on 50\% of trials, with target-site and epoch (Stimulus vs Delay) fully randomised. During the optogenetic mapping experiment, mice received unilateral whisker stimulation trials (10 Hz).  
 
 To examine putative epoch- and site-specific effects of laser stimulation on task performance, 
 we compared Zapit trials for each bilateral target site with session-matched control trials 
@@ -48,7 +54,7 @@ We performed 20-fold cross-validation to evaluate model predictive performance o
 test data. Mean log-likelihoods across matched folds were compared using a paired $t$-test, 
 yielding a $P$-value for each cortical target site and each epoch. For analyses of reaction times (RTs), we compared Zapit and control trial RTs with a Wilcoxon rank-sum test. For performance and RT analyses, $P$-values were corrected for multiple comparisons across cortical locations using the Bonferroni--Holm method ($\alpha = 0.05$, 17 cortical locations).
 
-For choice-biasing experiments, we selectively targeted anterolateral motor cortex (``ALM'': $2.5\,\mathrm{A} \pm 1.75\,\mathrm{L}$) for unilateral photoinhibition. Laser stimulation (time-averaged power per site: $2\,\mathrm{mW}$; duration: $2000\,\mathrm{ms}$ + $200\,\mathrm{ms}$ linear rampdown) was delivered on $33\%$ of trials and randomized across hemispheres. During choice-biasing experiments, mice received nine sensory trial-types corresponding to a $3 \times 3$ combinatorial matrix of $0$, $5$, and $10~\mathrm{Hz}$ left and right stimuli. Trials were delivered in randomized order.
+For choice-biasing experiments, we selectively targeted anterolateral motor cortex (``ALM'': $2.5\,\mathrm{A} \pm 1.75\,\mathrm{L}$) for unilateral photoinhibition. Laser stimulation (time-averaged power per site: $2\,\mathrm{mW}$ (at the sample); duration: $2000\,\mathrm{ms}$ + $200\,\mathrm{ms}$ linear rampdown) was delivered on $33\%$ of trials and randomized across hemispheres. During choice-biasing experiments, mice received nine sensory trial-types corresponding to a $3 \times 3$ combinatorial matrix of $0$, $5$, and $10~\mathrm{Hz}$ left and right stimuli. Trials were delivered in randomized order.
 
 
 
