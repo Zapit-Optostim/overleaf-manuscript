@@ -30,7 +30,7 @@ For a setup with a 473~nm laser (we used a Coherent Obis) targeting Channelrhodo
 An MF525-39 emission filter in front of the camera allows visualization of autofluorescence from the target location without contamination from the excitation laser. 
 We modelled a Zapit variant with an f=150~mm objective in Zemax and calculated the theoretical laser spot as having a PSF with a FWHM of 74~\textmu m. 
 We measured the true PSF full width half max as 91~\textmu m (Supplemental Fig.~\ref{fig:Fig2_supp}). 
-Spot size scales linearly with focal length and so the f=200~mm lens described above would have a PSF of \textasciitilde{}120~µm. Nonetheless, due to scattering, resolution is limited by scattering which creates a much larger spot size within the brain (\textasciitilde{}1~mm radius, (\cite{Li2019SpatiotemporalCircuits})). 
+Spot size scales linearly with focal length and so the f=200~mm lens described above would have a PSF of \textasciitilde{}120~µm. Nonetheless, resolution is limited by scattering which creates a much larger spot size within the brain (\textasciitilde{}1~mm radius, (\cite{Li2019SpatiotemporalCircuits})). 
 Since the beam diameter entering the scan lens is \textasciitilde{}0.8~mm, an f=200~mm objective will yield an excitation NA of about 0.002, meaning the beam is always in focus over the curved skull. The Rayleigh range ($Z_R$) defines the axial distance from focus where the beam diameter doubles; in our system $Z_R=37.6~mm$.
 
 The modular and open-source nature of Zapit means that new configurations can be constructed, such as employing two lasers in one experiment to stimulate different opsins within one mouse (Supplemental Fig.~\ref{fig:Dual_laser}). Future developments to Zapit's control code will facilitate this use-case. 
