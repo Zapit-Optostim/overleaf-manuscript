@@ -4,13 +4,24 @@
 \newcommand{\xmark}{\textcolor{red}{\ding{55}}}   % cross
 \newcommand{\bdot}{\Large $\bullet$}
 
-\renewcommand{\thefigure}{S\arabic{figure}}
-\setcounter{figure}{0}
+% eLife figure supplements are numbered after their parent figure, e.g. "Figure 2---figure supplement 1".
+% Call \figsupp{<parent figure>}{<supplement>} before each supplement's figure environment.
+\newcommand{\figsupp}[2]{\renewcommand{\thefigure}{#1---figure supplement #2}}
 \clearpage
 
-\section{Supplementary Figures}
-\begin{figure}[H]
+\section{Table and figure supplements}
+\begin{table}[H]
     \centering
+\caption{\textbf{Comparison of Zapit to related systems.}
+`\textit{Code available}' indicates whether readers can easily download code capable of running the author's random-access optostimulation paradigm.
+Only \cite{Pinto2019Task-DependentRegions} provide a \href{https://github.com/BrainCOGS/laserGalvoControl}{clear standalone codebase} for running their optogenetic system.
+Heindorf, et al. have shared their code embedded within their LabVIEW-based multiphoton scanning software, \href{https://sourceforge.net/projects/iris-scanning/}{Iris}, but this is not documented.
+Also, while all previous systems are of high quality, they are very specific to the published experimental protocol and so do not have a `\textit{Flexible configuration}'.
+No published study has an associated \textit{CAD model} or build instructions.
+Not all studies specify coordinates to be stimulated in stereotaxic space.
+As far as we know, only Zapit has a GUI for building stimulus sets in sterotaxic space.
+}
+\label{tab:paper_comparison}
 \resizebox{\textwidth}{!}{%
 \begin{tabular}{|l||c|c|c|c|c|}
 \hline
@@ -34,18 +45,9 @@ Study & \makecell{Code \\ available} & \makecell{CAD \\ model} & \makecell{Stere
 \hline
 \end{tabular}%
 }
-\caption{\textbf{Comparison of Zapit to related systems.} 
-`\textit{Code available}' indicates whether readers can easily download code capable of running the author's random-access optostimulation paradigm. 
-Only \cite{Pinto2019Task-DependentRegions} provide a \href{https://github.com/BrainCOGS/laserGalvoControl}{clear standalone codebase} for running their optogenetic system. 
-Heindorf, et al. have shared their code embedded within their LabVIEW-based multiphoton scanning software, \href{https://sourceforge.net/projects/iris-scanning/}{Iris}, but this is not documented. 
-Also, while all previous systems are of high quality, they are very specific to the published experimental protocol and so do not have a `\textit{Flexible configuration}'. 
-No published study has an associated \textit{CAD model} or build instructions.
-Not all studies specify coordinates to be stimulated in stereotaxic space. 
-As far as we know, only Zapit has a GUI for building stimulus sets in sterotaxic space.
-}
-\label{fig:paper_comparison}
-\end{figure}
+\end{table}
 
+\figsupp{2}{1}
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.9\linewidth]{Figures/Supplementary_Figs/figS2_Optical_Design/fig10_Optical_design_and_measurements.png}
@@ -67,6 +69,7 @@ The size and shape of the beam is very similar across all positions, showing the
 
 
 
+\figsupp{2}{2}
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\linewidth]{Figures/Supplementary_Figs/figS3_Dual_Laser/Dual-laser setup.png}
@@ -76,6 +79,7 @@ The size and shape of the beam is very similar across all positions, showing the
 
 
 
+\figsupp{4}{1}
 \begin{figure}[H]
     \centering
     \includegraphics[width=1\linewidth]{Figures/Supplementary_Figs/figS4_Surgery/surgery.png}
@@ -83,6 +87,7 @@ The size and shape of the beam is very similar across all positions, showing the
     \label{fig:Fig4_supp}
 \end{figure}
 
+\figsupp{7}{1}
 \begin{figure}[H]
     \centering
     \includegraphics[width=1\linewidth]{Figures/Supplementary_Figs/figS5_Laser_Comparisons/Fig5_supp.png}

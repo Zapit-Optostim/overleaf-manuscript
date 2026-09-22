@@ -29,11 +29,11 @@ A variety of lasers, dichroics, and emission filters can be chosen to support di
 For a setup with a 473~nm laser (we used a Coherent Obis) targeting Channelrhodopsin-2 (ChR2), we recommend a ThorLabs MD498 dichroic to direct the light to the sample and allow reflected light to reach the camera.
 An MF525-39 emission filter in front of the camera allows visualization of autofluorescence from the target location without contamination from the excitation laser.
 We modelled a Zapit variant with an f=150~mm objective in Zemax and calculated the theoretical laser spot as having a PSF with a FWHM of 74~\textmu m.
-We measured the true PSF full width half max as 91~\textmu m (Supplemental Fig.~\ref{fig:Fig2_supp}).
+We measured the true PSF full width half max as 91~\textmu m (Figure~\ref{fig:Fig2_supp}).
 Spot size scales linearly with focal length and so the f=200~mm lens described above would have a PSF of \textasciitilde{}120~µm. Nonetheless, resolution is limited by scattering which creates a much larger spot size within the brain (\textasciitilde{}1~mm radius, (\cite{Li2019SpatiotemporalCircuits})).
 Since the beam diameter entering the scan lens is \textasciitilde{}0.8~mm, an f=200~mm objective will yield an excitation NA of about 0.002, meaning the beam is always in focus over the curved skull. The Rayleigh range ($Z_R$) defines the axial distance from focus where the beam diameter doubles; in our system $Z_R=37.6~mm$.
 
-The modular and open-source nature of Zapit means that new configurations can be constructed, such as employing two lasers in one experiment to stimulate different opsins within one mouse (Supplemental Fig.~\ref{fig:Dual_laser}). Future developments to Zapit's control code will facilitate this use-case.
+The modular and open-source nature of Zapit means that new configurations can be constructed, such as employing two lasers in one experiment to stimulate different opsins within one mouse (Figure~\ref{fig:Dual_laser}). Future developments to Zapit's control code will facilitate this use-case.
 
 \clearpage
 
@@ -65,9 +65,9 @@ Zapit systematically moves the beam over a grid of points and conducts an affine
 \label{fig:scanner_calib_01}
 \end{figure}
 
-Following scanner calibration, the user calibrates the sample to brain atlas space by defining the position of the skull in the FoV using two landmarks, such as bregma and bregma +3~mm AP. These two landmarks are marked onto the skull during surgery (Supplemental Fig.~\ref{fig:Fig4_supp}).
+Following scanner calibration, the user calibrates the sample to brain atlas space by defining the position of the skull in the FoV using two landmarks, such as bregma and bregma +3~mm AP. These two landmarks are marked onto the skull during surgery (Figure~\ref{fig:Fig4_supp}).
 Whilst clicking these coordinates, a brain outline is dynamically positioned, scaled, and rotated, providing instant feedback on the calibration (Figure~\ref{fig:sample_calib_01}A-i-iii).
-This process assumes the skull is level under the objective, which should be considered during headplate implantation (Supplemental Fig.~\ref{fig:Fig4_supp}, and Methods). Once stimulus calibration is complete, photostimulation target locations can be specified in stereotaxic coordinates, relative to bregma (Figure~\ref{fig:sample_calib_01}A-iv).
+This process assumes the skull is level under the objective, which should be considered during headplate implantation (Figure~\ref{fig:Fig4_supp}, and Methods). Once stimulus calibration is complete, photostimulation target locations can be specified in stereotaxic coordinates, relative to bregma (Figure~\ref{fig:sample_calib_01}A-iv).
 
 \begin{figure}[h]
 \centering
@@ -147,7 +147,7 @@ The Obis has sufficient power to maintain an effective average power across many
 External EOMs and AOMs are supported, via Zapit's sigmoidal calibration curve option (see \href{https://zapit.gitbook.io/user-guide/installation-and-setup/configuring-zapit/laser-power-calibration}{Laser Power Calibrations} in the GitBook user guide).
 Even with a sinusoidal stimulation waveform, this discontinuity can create photoelectric artifacts with some electrodes, but does not have a significant physiological impact.
 
-For comparison, we characterized reliability, stability and linear power-voltage output of other lasers (Supplemental Fig.~\ref{fig:Fig5_supp}), as researchers requiring a smaller number of laser spots per trial could use a cheaper option. When considering the maximal laser power required for an experiment, it is worth keeping in mind losses along the optical path, which can be high in certain circumstances (e.g. some scan mirrors have 20\% to 30\% losses at 488~nm).
+For comparison, we characterized reliability, stability and linear power-voltage output of other lasers (Figure~\ref{fig:Fig5_supp}), as researchers requiring a smaller number of laser spots per trial could use a cheaper option. When considering the maximal laser power required for an experiment, it is worth keeping in mind losses along the optical path, which can be high in certain circumstances (e.g. some scan mirrors have 20\% to 30\% losses at 488~nm).
 
 \begin{figure}[H]
 \centering
