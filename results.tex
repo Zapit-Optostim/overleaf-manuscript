@@ -33,7 +33,7 @@ The software guides the user through sequential scanner and sample calibration s
 From here, the user can define stimulus locations (bottom right), to then deliver stimulation (bottom left) to said locations.
 The end result is that calibrated stimuli are projected onto the imaged brain surface for real-time visualization.
 \textbf{D.} Full usage documentation and troubleshoot support.
-A dedicated website (\href{https://zapit.gitbook.io}{zapit.gitbook.io}) is available for setting up Zapit hardware and software, usage instructions and troubleshooting steps.
+A dedicated website (\href{https://zapit.swcmicroscopy.com}{zapit.swcmicroscopy.com}) is available for setting up Zapit hardware and software, usage instructions and troubleshooting steps.
 Further support is available from the creators and wider community for user-specific implementation needs and issues.}
 
 \label{fig:operating_principle_01}
@@ -180,7 +180,7 @@ Photostimulation ends with a gradual ramp-down in power (by default over a 250~m
 This limits large rebounds in activity, which are common following photoinhibition cessation with light-sensitive opsins (\cite{Li2019SpatiotemporalCircuits}).
 
 Zapit supports open-ended and duration-specific stimulation, with controllable stimulus features including stimulus duration, delay, and laser power.
-Usage of the API is \href{https://zapit.gitbook.io/user-guide/running-experiments/matlab/basic-api-usage-in-matlab}{documented on GitHub} and \href{https://github.com/Zapit-Optostim/zapit/tree/main/examples}{examples are provided}.
+Usage of the API is \href{https://zapit.swcmicroscopy.com/running-experiments/matlab/running-an-experiment-in-matlab}{documented on GitBook} and \href{https://github.com/Zapit-Optostim/zapit/tree/main/examples}{examples are provided}.
 Stimulation can be initiated immediately or deferred until a TTL trigger is received, which maximizes timing precision (0.5~ms onset latency and near zero jitter, Figure~\ref{fig:HardwareTriggering_01}E).
 Stimuli can also be presented with a fixed delay following the TTL pulse, allowing for precise stimulus alignment with different temporal epochs of a behavioral task (Figure~\ref{fig:HardwareTriggering_01}F).
 Zapit has the capacity to write a log file listing each stimulus presentation, so the order of events can be reconstructed \textit{post-hoc}.
@@ -228,7 +228,7 @@ We chose the Obis laser for its reliability, rise/fall times of \textmu s, and l
 The Obis has sufficient power to maintain an effective average power across many (e.g. 20) sequentially targeted locations.
 We  implemented blanking and power control directly using the Obis laser's analog control input.
 This removes the added cost and complexity of an external modulator at the cost of a small non-linearity around 0~mW (Figure~\ref{fig:beam_pos_01}F).
-External EOMs and AOMs are supported, via Zapit's sigmoidal calibration curve option (see \href{https://zapit.gitbook.io/user-guide/installation-and-setup/configuring-zapit/laser-power-calibration}{Laser Power Calibrations} in the GitBook user guide).
+External EOMs and AOMs are supported, via Zapit's sigmoidal calibration curve option (see \href{https://zapit.swcmicroscopy.com/installation-and-setup/configuring-zapit/laser-power-calibration}{Laser Power Calibrations} in the GitBook user guide).
 Even with a sinusoidal stimulation waveform, this discontinuity can create photoelectric artifacts with some electrodes, but does not have a significant physiological impact.
 
 For comparison, we characterized reliability, stability and linear power-voltage output of other lasers (Figure~\ref{fig:Fig5_supp}), as researchers requiring a smaller number of laser spots per trial could use a cheaper option.
